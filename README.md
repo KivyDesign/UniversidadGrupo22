@@ -49,8 +49,41 @@ Como se puede observar en el diagrama UML cada clase entidad tiene los mismos at
 Dentro de nuestro proyecto crearemos una clase especial que será no sólo la responsable de cargar los drivers de conexión al gestor de base de datos MySQL, sino también la de establecer la conexión a la base de datos que vamos a utilizar; empleando las clases vistas en la guía anterior.
 Se muestra a continuación el código de la clase “Conexión.java” y la explicación.
 
-<code>
-</code>
+<code>package UniversidadGrupo22.accesoADatos;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+public class miConexion {
+
+    private String url;
+    private String usuario;
+    private String password;
+    private static Connection conexion = null;
+
+    public miConexion(String url, String usario, String Password) {
+        this.url = url;
+        this.usuario = usario;
+        this.password = password;
+    }
+
+    public Connection buscarConexion() {
+        if (conexion == null) {
+            try {
+                Class.forName("org.mariadb.jdbc.Driver");
+                conexion = DriverManager.getConnection(url, usuario, password);
+
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error al cargar el Driver" + ex.getMessage());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al conectarse" + ex.getMessage());
+            }
+        }
+        return conexion;
+    }
+}</code>
 
 Como se en la imagen, desde la línea 15 hasta las 18, están declaradas una serie de constantes de tipo String con información que utilizaremos para la conexión.
 
