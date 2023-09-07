@@ -1,5 +1,5 @@
 
-package UniversidadGrupo22.datos;
+package UniversidadGrupo22.accesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
