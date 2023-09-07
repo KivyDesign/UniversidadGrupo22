@@ -108,7 +108,7 @@ usted observar en la línea 118.
 <code>
 String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ?";
 
-SELECT inscripción.idMateria, nombre, año
+SELECT inscripción.idMateria, nombre, anio
 </code>
 
 En la cláusula SELECT indicamos que vamos a proyectar los campos de la tabla Materia: idMateria, nombre y año; como en la cláusula FROM vamos a reunir dos tablas: INSCRIPCION y MATERIA tendríamos un inconveniente con aquellos campos que tenga el mismo nombre, como ocurre con idMateria, que figura tanto en la tabla INSCIPCION como MATERIA; por lo tanto en el SELECT nos vemos obligados para evitar un error de ambigüedad de nombre cualificar el campo idMateria con alguna de las tablas, en este caso elegía INSCRIPCION, es por ello que figura en el SELECT como inscripción.idMateria, aunque también podría haberlo escrito materia.idMateria.
@@ -135,4 +135,15 @@ Una vez seteado el parámetro dinámico, enviaremos la sentencia a la base de da
 
 ResultSet rs = ps.executeQuery();
 
+## VISTAS SUGERIDAS:
+
+Menú Principal: Construido con un JFrame, JMenuBar, JMenu y JDesktopPane dentro del cual se visualizaran las JInternalFrame que corresponda a cada vista elegida por el usuario.
+
+A continuación se detallan cada una de las vistas y la clase de acceso a datos vinculada a dicha vista.
+
+## Gestión de Alumnos
+## Gestión de Materias:
+## Inscripciones:
+## Actualización de notas:
+## Consulta de Alumnos por materia.
 
