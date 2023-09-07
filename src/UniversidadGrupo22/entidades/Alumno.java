@@ -1,5 +1,5 @@
 
-package universidadejemplo.Entidades;
+package UniversidadGrupo22.entidades;
 
 import java.sql.Date;
 
