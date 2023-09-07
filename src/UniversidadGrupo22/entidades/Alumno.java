@@ -1,10 +1,9 @@
-
 package UniversidadGrupo22.entidades;
 
 import java.sql.Date;
 
-
 public class Alumno {
+
     private int idAlumno;
     private int dni;
     private String apellido;
@@ -84,5 +83,5 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
     }
-    
+
 }

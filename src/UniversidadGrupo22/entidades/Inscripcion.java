@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UniversidadGrupo22.entidades;
 
-/**
- *
- * @author german
- */
 public class Inscripcion {
-   private int idInscripto;
+
+    private int idInscripto;
     private int idAlumno;
     private String alumno;
     private int idMateria;
-    private String materia;private int nota;
+    private String materia;
+    private int nota;
 
     public Inscripcion(int idInscripto, int idAlumno, String alumno, int idMateria, String materia, int nota) {
         this.idInscripto = idInscripto;
@@ -24,15 +17,13 @@ public class Inscripcion {
         this.materia = materia;
         this.nota = nota;
     }
-    
-    
 
     public Inscripcion(int idInscripto, int idAlumno, int idMateria, int nota) {
         this.idInscripto = idInscripto;
         this.idAlumno = idAlumno;
         this.idMateria = idMateria;
         this.nota = nota;
-        
+
     }
 
     public Inscripcion(int idAlumno, int idMateria, int nota) {
@@ -44,10 +35,6 @@ public class Inscripcion {
     public Inscripcion(String alumno) {
         this.alumno = alumno;
     }
-
- 
-    
-    
 
     public Inscripcion() {
     }
@@ -105,11 +92,8 @@ public class Inscripcion {
         return "Inscripcion{" + "idInscripto=" + idInscripto + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
     }
 
-      public String listarNotasMayores() {
+    public String listarNotasMayores() {
         return alumno;
     }
 
-    
 }
- 
-
