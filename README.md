@@ -22,14 +22,7 @@ Ilustración 1 Modelo Relacional Universidad
 
 ## DESARROLLO
 
-Para implementar la solución a esta problemática, en primer lugar, utilizaremos el mismo proyecto
-creado en la sección anterior “universidadEjemplo” y vamos a aplicar el patrón MVC (Modelo-
-Vista- Controlador) en dónde agruparemos las clases que vamos a utilizar en paquetes de acuerdo
-a su responsabilidad (tarea), es decir, por un lado las clases que van a representar a nuestro modelo
-de datos, por otro, las clases que van a actuar como intermediarias entre el Modelo y la Vista,
-gestionando el flujo de información entre ellos y las transformaciones para adaptar los datos a las
-necesidades de cada uno y por último, las clases que representarán las interfaz gráfica a través de
-las cuales los usuarios interactuaran con nuestra aplicación como: menús, formularios, entre otros.
+Para implementar la solución a esta problemática, en primer lugar, utilizaremos el mismo proyecto creado en la sección anterior “universidadEjemplo” y vamos a aplicar el patrón MVC (Modelo-Vista-Controlador) en dónde agruparemos las clases que vamos a utilizar en paquetes de acuerdo a su responsabilidad (tarea), es decir, por un lado las clases que van a representar a nuestro modelo de datos, por otro, las clases que van a actuar como intermediarias entre el Modelo y la Vista, gestionando el flujo de información entre ellos y las transformaciones para adaptar los datos a las necesidades de cada uno y por último, las clases que representarán las interfaz gráfica a través de las cuales los usuarios interactuaran con nuestra aplicación como: menús, formularios, entre otros.
 
 ## Estructura del Proyecto:
 
@@ -42,5 +35,34 @@ Dentro del paquete principal de nuestro proyecto, crearemos 3(tres) paquetes de 
 -vistas
 
 Como se muestra en la “ilustración 2”.
+
+## CLASES ENTIDAD:
+
+Para que desde el lenguaje de programación Java se pueda tratar cada registro o fila de las tablas como un objeto Java, se debe crear una clase asociada a cada tabla de la base de datos y las relaciones entre ellas. A ese tipo de clases se las conoce como Clases Entidad (Entity Classes).
+
+Ilustración 3 Clases entidades
+
+Como se puede observar en el diagrama UML cada clase entidad tiene los mismos atributos que las tablas de la base de datos, y 3 constructores: uno vacío, uno con todos los atributos incluido el id y otro con todos los atributos sin incluir el id; otros miembros adicionales de las clases serán los métodos getter y setter; además de las relaciones entre ellas plasmadas como asociaciones, es decir, la tabla Inscripción tendrá un atributo de tipo Materia y otro de tipo Alumno; lo que en la base de datos eran claves foráneas, aquí son asociaciones.
+
+## ESTABLECIENDO LA CONEXIÓN A LA BASE DE DATOS:
+
+Dentro de nuestro proyecto crearemos una clase especial que será no sólo la responsable de cargar los drivers de conexión al gestor de base de datos MySQL, sino también la de establecer la conexión a la base de datos que vamos a utilizar; empleando las clases vistas en la guía anterior.
+Se muestra a continuación el código de la clase “Conexión.java” y la explicación.
+
+<code>
+</code>
+
+Como se en la imagen, desde la línea 15 hasta las 18, están declaradas una serie de constantes de tipo String con información que utilizaremos para la conexión.
+
+En la constante URL la cadena establece que utilizaremos un conexión utilizando jdbc a una base de datos MySql y que se encuentra disponible en la misma PC (localhost); si la base de datos se encontrara en otro host, reemplazaríamos localhost por el ip o nombre del equipo en dónde se encuentra.
+
+La constante DB contiene el nombre de la base de datos a la que vamos a querer acceder.
+
+Cuando instalamos XAMPP, al agregarnos el gestor MYSQL, establece una configuración por defecto, en donde el usuario de acceso a la base de datos es “root” sin contraseña. Eso es lo que está definido en las constantes USUARIO y PASSWORD.
+
+En la línea 20, la constante “connection” representará a un objeto de tipo Connection a través del cual podremos enviar nuestras peticiones a la Base de Datos.
+
+La Clase Conexion, tiene un único constructor, pero es privado, como se observa en la línea 25.
+La consecuencia de tener un único constructor y encima privado, es que no nos permitirá crear instancias de la clase Conexion. Esto nos posibilitará como lo van a ver más adelante en el código, tener un único objeto Connection activo durante la ejecución de nuestra aplicación.
 
 
