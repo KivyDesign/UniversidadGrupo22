@@ -188,25 +188,35 @@ ResultSet rs = ps.executeQuery();
 
 Menú Principal: Construido con un JFrame, JMenuBar, JMenu y JDesktopPane dentro del cual se visualizaran las JInternalFrame que corresponda a cada vista elegida por el usuario.
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/10.jpg)
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/11.jpg)
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/12.jpg)
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/13.jpg)
+
 A continuación se detallan cada una de las vistas y la clase de acceso a datos vinculada a dicha vista.
 
 ## Gestión de Alumnos
 
-
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/14.jpg)
 
 ## Gestión de Materias:
 
-
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/15.jpg)
 
 ## Inscripciones:
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/16.jpg)
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/17.jpg)
 
 ## Actualización de notas:
 
-
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/18.jpg)
 
 ## Consulta de Alumnos por materia.
 
-
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/19.jpg)
 
