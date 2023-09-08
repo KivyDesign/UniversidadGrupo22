@@ -231,7 +231,9 @@ A continuación se detallan cada una de las vistas y la clase de acceso a datos 
 
 # Miembros del Equipo 22
 
-@germanesalvatierra
-@KivyDesign
-@arielMilton
+@https://github.com/germanesalvatierra
+
+@https://github.com/KivyDesign
+
+@https://github.com/arielMilton
 
