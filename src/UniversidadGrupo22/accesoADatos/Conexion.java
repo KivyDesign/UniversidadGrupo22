@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class miConexion {
+public class Conexion {
 
     private String url;
     private String usuario;
     private String password;
     private static Connection conexion = null;
 
-    public miConexion(String url, String usuario, String Password) {
+    public Conexion(String url, String usuario, String Password) {
         this.url = url;
         this.usuario = usuario;
         this.password = password;
