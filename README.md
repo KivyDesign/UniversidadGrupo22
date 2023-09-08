@@ -18,7 +18,7 @@ La Universidad de La Punta cree necesario utilizar un sistema para poder llevar 
 
 ## Modelo de BD sugerido.
 
-![image](IMGs/01.png)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/01.jpg)
 
 Ilustración 1 Modelo Relacional Universidad
 
