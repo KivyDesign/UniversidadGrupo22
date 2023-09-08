@@ -63,7 +63,9 @@ Como se puede observar en el diagrama UML cada clase entidad tiene los mismos at
 Dentro de nuestro proyecto crearemos una clase especial que será no sólo la responsable de cargar los drivers de conexión al gestor de base de datos MySQL, sino también la de establecer la conexión a la base de datos que vamos a utilizar; empleando las clases vistas en la guía anterior.
 Se muestra a continuación el código de la clase “Conexión.java” y la explicación.
 
-<code>package UniversidadGrupo22.accesoADatos;
+
+```java
+package UniversidadGrupo22.accesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,7 +99,8 @@ public class miConexion {
         }
         return conexion;
     }
-}</code>
+}
+```
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/04.jpg)
 
