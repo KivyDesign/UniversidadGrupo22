@@ -1,12 +1,10 @@
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/00.jpg)
 
-## Desarrollo de aplicaciones JAVA
+# Desarrollo de aplicaciones JAVA
 
 ## Guía V
-
 ## “Proyecto Transversal: Gestión Universidad”
-
-# UniversidadGrupo22
+## UniversidadGrupo22
 
 En la guía anterior, aprendimos cómo establecer una conexión desde una aplicación Java hacia una base de datos relacional utilizando el framework JDBC, y realizar operaciones sobre ella.
 Ahora, en esta nueva guía, daremos un paso más allá al explorar las mejores prácticas de la programación orientada a objetos para estructurar nuestro proyecto. Construiremos una aplicación completa en la cual el usuario interactuará a través de una interfaz gráfica, brindándole una experiencia más intuitiva y amigable.
