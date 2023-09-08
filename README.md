@@ -26,7 +26,7 @@ La Universidad de La Punta cree necesario utilizar un sistema para poder llevar 
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/01.jpg)
 
-<center>'Ilustración 1 Modelo Relacional Universidad'</center>
+<p align="center">Ilustración 1 Modelo Relacional Universidad</p>
 
 ## DESARROLLO
 
@@ -36,7 +36,7 @@ Para implementar la solución a esta problemática, en primer lugar, utilizaremo
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/02.jpg)
 
-Ilustración 2 “Estructura de proyecto java”
+<p align="center">Ilustración 2 “Estructura de proyecto java”</p>
 
 Dentro del paquete principal de nuestro proyecto, crearemos 3(tres) paquetes de nombre:
 
@@ -52,7 +52,7 @@ Para que desde el lenguaje de programación Java se pueda tratar cada registro o
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/03.jpg)
 
-Ilustración 3 Clases entidades
+<p align="center">Ilustración 3 Clases entidades</p>
 
 Como se puede observar en el diagrama UML cada clase entidad tiene los mismos atributos que las tablas de la base de datos, y 3 constructores: uno vacío, uno con todos los atributos incluido el id y otro con todos los atributos sin incluir el id; otros miembros adicionales de las clases serán los métodos getter y setter; además de las relaciones entre ellas plasmadas como asociaciones, es decir, la tabla Inscripción tendrá un atributo de tipo Materia y otro de tipo Alumno; lo que en la base de datos eran claves foráneas, aquí son asociaciones.
 
@@ -60,7 +60,6 @@ Como se puede observar en el diagrama UML cada clase entidad tiene los mismos at
 
 Dentro de nuestro proyecto crearemos una clase especial que será no sólo la responsable de cargar los drivers de conexión al gestor de base de datos MySQL, sino también la de establecer la conexión a la base de datos que vamos a utilizar; empleando las clases vistas en la guía anterior.
 Se muestra a continuación el código de la clase “Conexión.java” y la explicación.
-
 
 ```java
 package UniversidadGrupo22.accesoADatos;
@@ -127,7 +126,9 @@ En la línea 32 se cargan los driver de conexión al gestor de base de datos; pr
 
 En la línea 34 se establece la conexión a la base de datos invocando al método getConnection() de la clase DriverManager pasando por parámetro un String que contiene la URL de la base de datos, PASSWORD y CONTRASEÑA como se indica a continuación.
 
-DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + "&user=" + USUARIO + "&password=" + PASSWORD);
+```java
+DriverManager.getConnection(URL + DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + "&user=" + USUARIO + "&password=" + PASSWORD);
+```
 
 El método getConnection() puede lanzar la SQLException si la cadena que le pasamos como parámetro es incorrecta, por ejemplo el nombre de la base de datos no existe; excepción que capturamos en la línea 38, que de producirse se informará a través de un diálogo al usuario.
 
@@ -147,8 +148,8 @@ Como mencionamos anteriormente, estas clases se van encargar tanto de la persist
 
 # Implementación sugerida para AlumnoData
 
-<code>
-</code>
+```java
+```
 
 ## CLASE DE ACCESO A DATOS DE INSCRIPCIONES
 (InscripcionData)
@@ -163,35 +164,47 @@ Como podemos observar en la declaración del método en la línea 114, recibe co
 
 La sentencia que enviaremos a la base de datos será un SELECT en el que solicitaremos los datos de las materias en las que está inscripto el alumno cuyo id recibimos por parámetro; como puede usted observar en la línea 118.
 
-<code>
+```java
 String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ?";
+```
 
+```sql
 SELECT inscripción.idMateria, nombre, anio
-</code>
+```
 
 En la cláusula SELECT indicamos que vamos a proyectar los campos de la tabla Materia: idMateria, nombre y año; como en la cláusula FROM vamos a reunir dos tablas: INSCRIPCION y MATERIA tendríamos un inconveniente con aquellos campos que tenga el mismo nombre, como ocurre con idMateria, que figura tanto en la tabla INSCIPCION como MATERIA; por lo tanto en el SELECT nos vemos obligados para evitar un error de ambigüedad de nombre cualificar el campo idMateria con alguna de las tablas, en este caso elegía INSCRIPCION, es por ello que figura en el SELECT como inscripción.idMateria, aunque también podría haberlo escrito materia.idMateria.
 
+```sql
 FROM inscripción JOIN materia ON (inscripción.idMateria=materia.idMateria)
+```
 
 Para poder proyectar en la cláusula SELECT los datos de las materias, pero sólo de aquellas en las que está inscripto un determinado alumno, y sabemos que en la tabla inscripción solo tenemos el id del alumno y el id de la materia en el que éste está inscripto, por lo tanto si necesito completar la información con el resto de los datos de la materia que se corresponden con ese id, debo reunir (JOIN) las tablas INSCRIPCION y MATERIA, a través de clave primaria de Materia con la clave foránea idMateria en Inscripcion; es lo que indicamos en la cláusula ON(inscripción.idMateria=materia.idMateri).
 
+```sql
 WHERE inscripción.idAlumno = ?
+```
 
 En la cláusula Where colocaremos como condición de filtrado que solo queremos las filas en las que el idAlumno de la tabla Inscripcion sea un dato que reemplazaremos dinámicamente (?).
 
 Ahora, para poder enviar esta sentencia a la base de datos, creamos un objeto del tipo PreparedStatement utilizando el objeto Connection (referenciado con la variable atributo con).
 
+```java
 PreparedStatement ps = con.prepareStatement(sql);
+```
 
 Como la sentencia que pretendemos enviar, tiene un parámetro dinámico (?) después de la cláusula Where, que representa el valor entero del id de un alumno, lo setearemos de la siguiente forma.
 
+```java
 ps.setInt(1, id);
+```
 
 Indicando al objeto PreparedStatement referenciado por la variable ps, a través del método setInt que el primer y único parámetro dinámico que tenemos en la sentencia sql, es un entero y que vamos a reemplazar ese signo ? por el id del alumno guardado en la variable entera id.
 
 Una vez seteado el parámetro dinámico, enviaremos la sentencia a la base de datos utilizando el método executeQuery que nos devolverá un ResultSet que contendrá las Materias en las que el alumno está inscripto. En la guía anterior se explicó que representa un ResultSet, si no lo recuerda puede volver a leer dicha explicación.
 
+```java
 ResultSet rs = ps.executeQuery();
+```
 
 ## VISTAS SUGERIDAS:
 
@@ -231,9 +244,8 @@ A continuación se detallan cada una de las vistas y la clase de acceso a datos 
 
 # Miembros del Equipo 22
 
-@https://github.com/germanesalvatierra
-
-@https://github.com/KivyDesign
-
-@https://github.com/arielMilton
+<p align="center">© 2023 Creative Guido, all rights reserved. Made with ❤️ for a better web.</p>
+<p align="center">@https://github.com/germanesalvatierra</p>
+<p align="center">@https://github.com/KivyDesign</p>
+<p align="center">@https://github.com/arielMilton</p>
 
