@@ -1,4 +1,3 @@
-
 package UniversidadGrupo22.accesoADatos;
 
 import UniversidadGrupo22.entidades.Alumno;
@@ -37,11 +36,11 @@ public class AlumnoData {
 
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
-                JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
+                JOptionPane.showMessageDialog(null, "Alumno añadido con exito");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
     }
 
@@ -68,7 +67,7 @@ public class AlumnoData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
         return alumno;
     }
@@ -96,7 +95,7 @@ public class AlumnoData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
         return alumno;
     }
@@ -105,7 +104,7 @@ public class AlumnoData {
         List<Alumno> alumnos = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+            String sql = "SELECT * FROM alumno WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -121,7 +120,7 @@ public class AlumnoData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
         return alumnos;
     }
@@ -140,28 +139,28 @@ public class AlumnoData {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
     }
 
     public void eliminarAlumno(int id) {
         try {
-            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? ";
+            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, " Se eliminó el alumno.");
+                JOptionPane.showMessageDialog(null, "Se eliminó el alumno");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno");
         }
     }
 }
