@@ -7,22 +7,19 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private String url;
-    private String usuario;
-    private String password;
+    private static final String url="jdbc:mariadb://localhost/";
+    private static final String db="universidadulp";
+    private static final String usuario="root";
+    private static final String password="";
     private static Connection conexion = null;
 
-    public Conexion(String url, String usuario, String Password) {
-        this.url = url;
-        this.usuario = usuario;
-        this.password = password;
-    }
+    
 
-    public Connection buscarConexion() {
+    public static Connection getConexion() {
         if (conexion == null) {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
-                conexion = DriverManager.getConnection(url, usuario, password);
+                conexion = DriverManager.getConnection(url+db, usuario, password);
 
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error al cargar el Driver" + ex.getMessage());
@@ -33,3 +30,5 @@ public class Conexion {
         return conexion;
     }
 }
+
+

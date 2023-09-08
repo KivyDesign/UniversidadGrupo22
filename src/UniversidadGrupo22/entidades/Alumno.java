@@ -1,6 +1,6 @@
 package UniversidadGrupo22.entidades;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Alumno {
 
@@ -8,13 +8,13 @@ public class Alumno {
     private int dni;
     private String apellido;
     private String nombre;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private boolean estado;
 
     public Alumno() {
     }
 
-    public Alumno(int idAlumno, int dni, String apellido, String nombre, Date fechaNacimiento, boolean estado) {
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
         this.idAlumno = idAlumno;
         this.dni = dni;
         this.apellido = apellido;
@@ -23,7 +23,7 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public Alumno(int dni, String apellido, String nombre, Date fechaNacimiento, boolean estado) {
+    public Alumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -63,11 +63,11 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
