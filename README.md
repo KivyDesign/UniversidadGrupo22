@@ -1,3 +1,11 @@
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/00.jpg)
+
+## Desarrollo de aplicaciones JAVA
+
+## Guía V
+
+## “Proyecto Transversal: Gestión Universidad”
+
 # UniversidadGrupo22
 
 En la guía anterior, aprendimos cómo establecer una conexión desde una aplicación Java hacia una base de datos relacional utilizando el framework JDBC, y realizar operaciones sobre ella.
