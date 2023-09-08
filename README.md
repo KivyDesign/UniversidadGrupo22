@@ -26,7 +26,7 @@ La Universidad de La Punta cree necesario utilizar un sistema para poder llevar 
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/01.jpg)
 
-<center>`#0969DA`Ilustración 1 Modelo Relacional Universidad`#0969DA`</center>
+<center>`#0969DAIlustración 1 Modelo Relacional Universidad`</center>
 
 ## DESARROLLO
 
