@@ -28,6 +28,8 @@ Para implementar la solución a esta problemática, en primer lugar, utilizaremo
 
 ## Estructura del Proyecto:
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/02.jpg)
+
 Ilustración 2 “Estructura de proyecto java”
 
 Dentro del paquete principal de nuestro proyecto, crearemos 3(tres) paquetes de nombre:
@@ -41,6 +43,8 @@ Como se muestra en la “ilustración 2”.
 ## CLASES ENTIDAD:
 
 Para que desde el lenguaje de programación Java se pueda tratar cada registro o fila de las tablas como un objeto Java, se debe crear una clase asociada a cada tabla de la base de datos y las relaciones entre ellas. A ese tipo de clases se las conoce como Clases Entidad (Entity Classes).
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/03.jpg)
 
 Ilustración 3 Clases entidades
 
@@ -87,7 +91,9 @@ public class miConexion {
     }
 }</code>
 
-Como se en la imagen, desde la línea 15 hasta las 18, están declaradas una serie de constantes de tipo String con información que utilizaremos para la conexión.
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/04.jpg)
+
+Como se ve en la imagen, desde la línea 15 hasta las 18, están declaradas una serie de constantes de tipo String con información que utilizaremos para la conexión.
 
 En la constante URL la cadena establece que utilizaremos un conexión utilizando jdbc a una base de datos MySql y que se encuentra disponible en la misma PC (localhost); si la base de datos se encontrara en otro host, reemplazaríamos localhost por el ip o nombre del equipo en dónde se encuentra.
 
@@ -97,8 +103,12 @@ Cuando instalamos XAMPP, al agregarnos el gestor MYSQL, establece una configurac
 
 En la línea 20, la constante “connection” representará a un objeto de tipo Connection a través del cual podremos enviar nuestras peticiones a la Base de Datos.
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/05.jpg)
+
 La Clase Conexion, tiene un único constructor, pero es privado, como se observa en la línea 25.
 La consecuencia de tener un único constructor y encima privado, es que no nos permitirá crear instancias de la clase Conexion. Esto nos posibilitará como lo van a ver más adelante en el código, tener un único objeto Connection activo durante la ejecución de nuestra aplicación.
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/06.jpg)
 
 La Clase Conexión tiene un único método público encargado de retornar un objeto de tipo Connection, este método tiene que ser static para que pueda ser invocado desde afuera de la clase sin necesitad crear una instancia de la misma, ya que no podríamos por el hecho de que tiene un único constructor privado.
 
@@ -121,6 +131,8 @@ Quiero aclarar, que la forma en como está implementada la clase Conexión es un
 Estas clases se encargan de la persistencia de los datos y su acceso. En este proyecto utilizando tecnología JDBC (Java Database Connectivity) para interactuar con la base de datos. Proporcionan métodos para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en la base de datos.
 Estas clases son: ‘AlumnoData’, ‘MateriaData’ e ‘InscripcionData’ y podríamos incluir aquí también una clase adicional que se encargue de cargar los driver y conexión a la base de datos.
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/07.jpg)
+
 A continuación detallaremos la implementación de AlumnoData para que en base a este ejemplo usted pueda implementar MateriaData y CursadaData; obviamente con ayuda de sus compañeros de equipo, los videos de soporte y aporte de su docente tutor.
 Como mencionamos anteriormente, estas clases se van encargar tanto de la persistencia de datos como del acceso a los mismos; por lo tanto, en sus métodos valiéndonos de una Connection vamos a generar los PreparedStatement con las sentencias SQL que vamos a necesitar enviar al gestor de Bases de Datos.
 
@@ -132,13 +144,15 @@ Como mencionamos anteriormente, estas clases se van encargar tanto de la persist
 ## CLASE DE ACCESO A DATOS DE INSCRIPCIONES
 (InscripcionData)
 
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/08.jpg)
+
 Esta clase además de poseer los métodos que permitirán hacer un CRUD sobre la tabla Inscripcion, tiene métodos que permiten hacer operaciones un poco más complejas como el método “obtenerMateriasCursadas”, que recibiendo el id del alumno, nos retornará las materias en las que este está inscripto. La elección de mostrar en detalle la implementación de este método en particular es la suposición de que explicando cómo está construido, usted será capaz de implementar el resto de los métodos de la clase InscripcionData, con ayuda de este material escrito, los videos, debate entre los compañeros de equipo y por supuesto la colaboración de su tutor de clase.
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/09.jpg)
 
 Como podemos observar en la declaración del método en la línea 114, recibe como parámetro el id de un alumno y retornará una lista de las materias en las que está inscripto (List<Materia>). Por lo tanto, en la línea 115 creamos una lista vacía de materias que luego iremos llenando.
 
-La sentencia que enviaremos a la base de datos será un select en el que solicitaremos los datos de
-las materias en las que está inscripto el alumno cuyo id recibimos por parámetro; como puede
-usted observar en la línea 118.
+La sentencia que enviaremos a la base de datos será un SELECT en el que solicitaremos los datos de las materias en las que está inscripto el alumno cuyo id recibimos por parámetro; como puede usted observar en la línea 118.
 
 <code>
 String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ?";
@@ -177,8 +191,22 @@ Menú Principal: Construido con un JFrame, JMenuBar, JMenu y JDesktopPane dentro
 A continuación se detallan cada una de las vistas y la clase de acceso a datos vinculada a dicha vista.
 
 ## Gestión de Alumnos
+
+
+
 ## Gestión de Materias:
+
+
+
 ## Inscripciones:
+
+
+
 ## Actualización de notas:
+
+
+
 ## Consulta de Alumnos por materia.
+
+
 
