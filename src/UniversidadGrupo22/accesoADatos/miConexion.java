@@ -12,9 +12,9 @@ public class miConexion {
     private String password;
     private static Connection conexion = null;
 
-    public miConexion(String url, String usario, String Password) {
+    public miConexion(String url, String usuario, String Password) {
         this.url = url;
-        this.usuario = usario;
+        this.usuario = usuario;
         this.password = password;
     }
 

@@ -18,6 +18,8 @@ La Universidad de La Punta cree necesario utilizar un sistema para poder llevar 
 
 ## Modelo de BD sugerido.
 
+![image](IMGs/01.png)
+
 Ilustración 1 Modelo Relacional Universidad
 
 ## DESARROLLO
