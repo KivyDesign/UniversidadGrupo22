@@ -2,98 +2,66 @@ package UniversidadGrupo22.entidades;
 
 public class Inscripcion {
 
-    private int idInscripto;
-    private int idAlumno;
-    private String alumno;
-    private int idMateria;
-    private String materia;
-    private int nota;
+    private int idInscripcion;
+    private Alumno alumno;
+    private Materia materia;
+    private double nota;
 
-    public Inscripcion(int idInscripto, int idAlumno, String alumno, int idMateria, String materia, int nota) {
-        this.idInscripto = idInscripto;
-        this.idAlumno = idAlumno;
+    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
+        this.idInscripcion = idInscripcion;
         this.alumno = alumno;
-        this.idMateria = idMateria;
         this.materia = materia;
         this.nota = nota;
     }
 
-    public Inscripcion(int idInscripto, int idAlumno, int idMateria, int nota) {
-        this.idInscripto = idInscripto;
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
-        this.nota = nota;
-
-    }
-
-    public Inscripcion(int idAlumno, int idMateria, int nota) {
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
-        this.nota = nota;
-    }
-
-    public Inscripcion(String alumno) {
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
         this.alumno = alumno;
+        this.materia = materia;
+        this.nota = nota;
     }
 
     public Inscripcion() {
     }
 
-    public int getIdInscripto() {
-        return idInscripto;
-    }
-
-    public void setIdInscripto(int idInscripto) {
-        this.idInscripto = idInscripto;
-    }
-
-    public int getIdAlumno() {
-        return idAlumno;
-    }
-
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
-    }
-
-    public int getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
-    }
-
-    public int getNota() {
-        return nota;
-    }
-
-    public void setNota(int nota) {
+    public Inscripcion(double nota) {
         this.nota = nota;
     }
 
-    public String getAlumno() {
+    public int getIdInscripcion() {
+        return idInscripcion;
+    }
+
+    public void setIdInscripcion(int idInscripcion) {
+        this.idInscripcion = idInscripcion;
+    }
+
+    public Alumno getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(String alumno) {
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    public String getMateria() {
+    public Materia getMateria() {
         return materia;
     }
 
-    public void setMateria(String materia) {
+    public void setMateria(Materia materia) {
         this.materia = materia;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
     }
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "idInscripto=" + idInscripto + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
-    }
-
-    public String listarNotasMayores() {
-        return alumno;
+        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
     }
 
 }
