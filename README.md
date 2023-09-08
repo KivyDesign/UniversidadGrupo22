@@ -2,8 +2,8 @@
 
 # Desarrollo de aplicaciones JAVA
 
-## Guía V
-## “Proyecto Transversal: Gestión Universidad”
+## Guía V - “Proyecto Transversal: Gestión Universidad”
+
 ## UniversidadGrupo22
 
 En la guía anterior, aprendimos cómo establecer una conexión desde una aplicación Java hacia una base de datos relacional utilizando el framework JDBC, y realizar operaciones sobre ella.
@@ -26,7 +26,7 @@ La Universidad de La Punta cree necesario utilizar un sistema para poder llevar 
 
 ![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/01.jpg)
 
-Ilustración 1 Modelo Relacional Universidad
+<center>'Ilustración 1 Modelo Relacional Universidad'</center>
 
 ## DESARROLLO
 
