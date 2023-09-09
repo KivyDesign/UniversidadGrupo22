@@ -9,12 +9,12 @@ package UniversidadGrupo22.vistas;
  *
  * @author javier
  */
-public class AlumnoView extends javax.swing.JInternalFrame {
+public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form AlumnoView
+     * Creates new form ActualizacionDeNotasView
      */
-    public AlumnoView() {
+    public ActualizacionDeNotasView() {
         initComponents();
     }
 
