@@ -41,7 +41,7 @@ public class MateriaData {
 
     public Materia buscarMateria(int id) {
         Materia materia = null;
-        String sql = "SELECT nombre, anio FROM materia WHERE idMateria =  ? AND  estado = 1";
+        String sql = "SELECT nombre, anio FROM materia WHERE idMateria = ? AND estado = 1";
         PreparedStatement ps = null;
 
         try {
@@ -89,7 +89,7 @@ public class MateriaData {
     }
 
     public void modificarMateria(Materia materia) {
-        String sql = "UPDATE materia SET nombre = ? , anio = ?, estado = ? WHERE idMateria = ?";
+        String sql = "UPDATE materia SET nombre = ?, anio = ?, estado = ? WHERE idMateria = ?";
         PreparedStatement ps = null;
 
         try {
