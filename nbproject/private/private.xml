@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/javier/Documentos/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/entidades/Inscripcion.java</file>
-            <file>file:/home/javier/Documentos/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/vistas/UniversidadGrupo22.java</file>
-            <file>file:/home/javier/Documentos/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/entidades/Materia.java</file>
-            <file>file:/home/javier/Documentos/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/accesoADatos/miConexion.java</file>
-            <file>file:/home/javier/Documentos/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/entidades/Alumno.java</file>
+            <file>file:/C:/Users/german/Documents/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/vistas/UniversidadGrupo22.java</file>
+            <file>file:/C:/Users/german/Documents/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/accesoADatos/AlumnoData.java</file>
+            <file>file:/C:/Users/german/Documents/GitHub/UniversidadGrupo22/src/UniversidadGrupo22/accesoADatos/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
