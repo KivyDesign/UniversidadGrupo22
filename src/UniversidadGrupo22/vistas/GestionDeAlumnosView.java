@@ -36,13 +36,12 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jTdni = new javax.swing.JTextField();
         jTapellido = new javax.swing.JTextField();
         jTnombre = new javax.swing.JTextField();
-        jDfechaNac = new com.toedter.calendar.JDateChooser();
         jRestado = new javax.swing.JRadioButton();
-        jBbuscar = new javax.swing.JButton();
-        jBnuevo = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
-        jBguardar = new javax.swing.JButton();
-        jBsalir = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 155, 255));
 
@@ -70,15 +69,15 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha de Nacimiento");
 
-        jBbuscar.setText("Buscar");
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
 
-        jBnuevo.setText("Nuevo");
+        jbNuevo.setText("Nuevo");
 
-        jBeliminar.setText("Eliminar");
+        jbEliminar.setText("Eliminar");
 
-        jBguardar.setText("Guardar");
+        jbGuardar.setText("Guardar");
 
-        jBsalir.setText("Salir");
+        jbSalir.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,8 +90,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
-                        .addGap(31, 31, 31)
-                        .addComponent(jDfechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(118, 118, 118))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -107,7 +105,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                                 .addComponent(jTapellido)
                                 .addComponent(jTdni)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(jBbuscar)
+                .addComponent(jbBuscar)
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addGap(180, 180, 180)
@@ -115,50 +113,45 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jBnuevo)
+                .addComponent(jbNuevo)
                 .addGap(43, 43, 43)
-                .addComponent(jBeliminar)
+                .addComponent(jbEliminar)
                 .addGap(61, 61, 61)
-                .addComponent(jBguardar)
+                .addComponent(jbGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBsalir)
+                .addComponent(jbSalir)
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1)
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBbuscar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jRestado))
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDfechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jRestado))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel6)
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBnuevo)
-                    .addComponent(jBeliminar)
-                    .addComponent(jBguardar)
-                    .addComponent(jBsalir))
+                    .addComponent(jbNuevo)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbSalir))
                 .addGap(38, 38, 38))
         );
 
@@ -167,12 +160,6 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBbuscar;
-    private javax.swing.JButton jBeliminar;
-    private javax.swing.JButton jBguardar;
-    private javax.swing.JButton jBnuevo;
-    private javax.swing.JButton jBsalir;
-    private com.toedter.calendar.JDateChooser jDfechaNac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -183,5 +170,10 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTapellido;
     private javax.swing.JTextField jTdni;
     private javax.swing.JTextField jTnombre;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
 }
