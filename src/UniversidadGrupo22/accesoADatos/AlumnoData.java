@@ -23,24 +23,36 @@ public class AlumnoData {
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
 
         try {
+            // Obtengo la clave del ID generada de la posicion 0 del DB
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            // Cargo dni, apellido y nombre de las posiciones 1, 2 y 3 respectivamente
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
-            // localDate a Date
+            
+            // localDate a Date en posicion 4
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            // if reducido
+            
+            // if reducido en posicion 5
             ps.setBoolean(5, alumno.isEstado());
+            
+            // Ejecuto el INSERT y almaceno la consulta en la DB
             ps.executeUpdate();
+            
+            // Obtengo el ID y actualizo el rs
             ResultSet rs = ps.getGeneratedKeys();
 
+            // Verifico que exista el ID que insertamos
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Alumno añadido con exito");
             }
+            
+            // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Alumno: " + ex.getMessage());
         }
     }
 
