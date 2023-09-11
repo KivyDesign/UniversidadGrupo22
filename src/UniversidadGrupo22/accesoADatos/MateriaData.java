@@ -41,7 +41,7 @@ public class MateriaData {
 
     public Materia buscarMateria(int id) {
         Materia materia = null;
-        String sql = "SELECT nombre,anio FROM materia WHERE idMateria =  ? AND  estado = 1";
+        String sql = "SELECT nombre, anio FROM materia WHERE idMateria =  ? AND  estado = 1";
         PreparedStatement ps = null;
 
         try {
@@ -121,8 +121,8 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "Se eliminó la Materia");
             }
             ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia" + ex.getMessage());
         }
     }
 }
