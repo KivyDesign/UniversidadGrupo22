@@ -24,6 +24,7 @@ public class AlumnoData {
 
         try {
             // Obtengo la clave del ID generada de la posicion 0 del DB
+            // Esto es necesario por que aún no existe el ID que se crea en la DB
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             // Cargo dni, apellido y nombre de las posiciones 1, 2 y 3 respectivamente
@@ -40,7 +41,7 @@ public class AlumnoData {
             // Ejecuto el INSERT y almaceno la consulta en la DB
             ps.executeUpdate();
             
-            // Obtengo el ID y actualizo el rs
+            // Obtengo el ID de la clave primaria y actualizo el rs
             ResultSet rs = ps.getGeneratedKeys();
 
             // Verifico que exista el ID que insertamos
