@@ -278,6 +278,9 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         GestionDeAlumnosView gdav=new GestionDeAlumnosView();
         gdav.setVisible(true);
         escritorio.add(gdav);
+        Dimension desktopSize = escritorio.getSize();
+        Dimension FrameSize = gdav.getSize();
+        gdav.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         escritorio.moveToFront(gdav);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
