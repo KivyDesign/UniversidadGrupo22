@@ -1,4 +1,3 @@
-
 package UniversidadGrupo22.accesoADatos;
 
 import UniversidadGrupo22.entidades.Materia;
@@ -11,27 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class MateriaData {
-  private Connection con = null;
+
+    private Connection con = null;
+
     public MateriaData() {
         con = Conexion.getConexion();
     }
 
     public void guardarMateria(Materia materia) {
-        String sql = "INSERT INTO materia ( nombre,anio, estado) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO materia (nombre, anio, estado) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-             ps.setString(1, materia.getNombre());
+            ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnioMateria());
-           ps.setBoolean(3, materia.isActivo());
+            ps.setBoolean(3, materia.isActivo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            
-            
-           
-            
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
@@ -68,8 +64,6 @@ public class MateriaData {
         return materia;
     }
 
-   
-
     public List<Materia> listarMaterias() {
         List<Materia> materias = new ArrayList<>();
 
@@ -82,27 +76,27 @@ public class MateriaData {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setAnioMateria(rs.getInt("anio"));
-                 materia.setNombre(rs.getString("nombre"));
-       
+                materia.setNombre(rs.getString("nombre"));
+
                 materia.setActivo(rs.getBoolean("estado"));
                 materias.add(materia);
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Materia: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia: " + ex.getMessage());
         }
         return materias;
     }
 
     public void modificarMateria(Materia materia) {
-        String sql = "UPDATE materia SET nombre = ? , anio = ?,estado=? WHERE idMateria = ?";
+        String sql = "UPDATE materia SET nombre = ? , anio = ?, estado = ? WHERE idMateria = ?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnioMateria());
-           ps.setBoolean(3, true);
+            ps.setBoolean(3, true);
             ps.setInt(4, materia.getIdMateria());
             int exito = ps.executeUpdate();
 
@@ -130,5 +124,5 @@ public class MateriaData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
-    }  
+    }
 }
