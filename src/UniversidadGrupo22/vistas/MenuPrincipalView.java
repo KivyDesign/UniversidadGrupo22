@@ -232,6 +232,10 @@ public class MenuPrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        // Cierro el "Sistema de Gestión para la Universidad de La Punta"
+
+        // Código para cerrar todo el programa
+        System.exit(0);
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked

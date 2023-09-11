@@ -19,7 +19,11 @@ public class Conexion {
         if (conexion == null) {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
-                conexion = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
+                conexion = DriverManager.getConnection(
+                        URL + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + DB,
+                        USUARIO,
+                        PASSWORD
+                );
                 
                 JOptionPane.showMessageDialog(null, "Conectado");
 
