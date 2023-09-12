@@ -9,9 +9,10 @@ import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Alumno;
-import java.util.Collections;
-import java.util.Comparator;
+import UniversidadGrupo22.entidades.Materia;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +39,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         cargarAlumnos();
         modelo = new DefaultTableModel();
         armarCabeceraDeLaTabla();
+        inscripcionData = new InscripcionData();
     }
 
     /**
@@ -261,30 +263,67 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarInscriptos() {
+        // Primero me aseguro de que esten limpias las filas de la tabla
+        borrarFilasTabla();
         
+        Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        if (seleccionado != null) {
+            ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriasInscriptas(seleccionado);
+            
+            for (Materia mat : lista) {
+                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+        }
     }
         
     public void cargarNoInscriptos() {
+        // Primero me aseguro de que esten limpias las filas de la tabla
+        borrarFilasTabla();
         
+        Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        if (seleccionado != null) {
+            ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
+            
+            for (Materia mat : lista) {
+                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+        }
     }
     
     public void cargarAlumnos() {
         // Cargamos los alumnos en el ComboBox
-//        Collections.sort(listarAlumnos, new Comparator<Alumno>(){
-//            @Override
-//            public int compare(Alumno a1, Alumno a2){
-//                return a1.getApellido().compareTo(a2.getApellido());
-//            }
-//        });
-        
         for (Alumno listarAlumno : listarAlumnos) {
             jcbSeleccioneAlumno.addItem(listarAlumno);
         }
-        
     }
         
     public void armarCabeceraDeLaTabla() {
-        
+        // Al modelo le agregamos las siguientes columnas:
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+
+        // Y a nuestra Tabla le seteamos el modelo
+        jtMaterias.setModel(modelo);
+
+        // Ajusto el tamaño de las columnas de la tabla
+        jtMaterias.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jtMaterias.getColumnModel().getColumn(1).setPreferredWidth(220);
+        jtMaterias.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
 
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrerla el modelo
+        if (modelo != null) {
+            int a = modelo.getColumnCount() - 1;
+            
+            for (int i = a; i >= 0; i--) {
+                modelo.removeRow(i);
+            }
+        }
+    }
 }

@@ -48,7 +48,7 @@ public class AlumnoData {
             if (rs.next()) {
                 // Actualizo el ID de alumno
                 alumno.setIdAlumno(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alumno añadido con exito");
+                JOptionPane.showMessageDialog(null, "Alumno agregado de forma exitosa");
             }
 
             // Cierro la consulta
