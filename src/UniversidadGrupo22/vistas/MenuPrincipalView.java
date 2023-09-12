@@ -5,7 +5,9 @@
  */
 package UniversidadGrupo22.vistas;
 
+import UniversidadGrupo22.accesoADatos.Conexion;
 import java.awt.Dimension;
+import java.sql.Connection;
 
 /**
  *
@@ -21,6 +23,12 @@ public class MenuPrincipalView extends javax.swing.JFrame {
 
         // Centro la ventana en la pantalla
         this.setLocationRelativeTo(this);
+        
+        // Realizo la coneccion a la DB, si fue exitosa agrego al titulo
+        // conectado para no tener ese molesto dialogo de conexion ;)
+        Connection con = Conexion.getConexion();
+        // Si la conexion fue exitosa cambio el titulo del Frame del menu
+        this.setTitle("Sistema de Gestión para la Universidad de La Punta - Estado: Conectado");
     }
 
     /**

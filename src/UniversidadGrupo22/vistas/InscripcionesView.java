@@ -68,7 +68,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         setTitle("Formulario de Inscripciones");
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(56, 113, 140));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,6 +85,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de Materias");
 
+        jrbMateriasInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jrbMateriasInscriptas.setText("Materias Inscriptas");
         jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +93,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             }
         });
 
+        jrbMateriasNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jrbMateriasNoInscriptas.setText("Materias No Inscriptas");
         jrbMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
