@@ -64,9 +64,11 @@ public class InscripcionData {
         ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<Materia>();
         Materia mat;
             
-        String sql = "SELECT * FROM materia WHERE idMateria NO IN(SELECT idMateria FROM inscripto"
-                + "AND materia.estado = true";
-            
+//        String sql = "SELECT * FROM materia WHERE idMateria NO IN(SELECT idMateria FROM inscripto"
+//                + "AND materia.estado = true";
+        
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getIdAlumno());
@@ -77,20 +79,25 @@ public class InscripcionData {
                 
                 mat.setIdMateria(rs.getInt("idMateria"));
                 mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("anio"));
                 
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
         }
+        return listaDeMateriasInscripto;
     }
     
     public ArrayList<Materia> obtenerMateriaNoInscriptas(Alumno alumno) {
         ArrayList<Materia> listaDeMateriasNoInscripto = new ArrayList<Materia>();
         Materia mat;
             
-        String sql = "SELECT * FROM materia WHERE idMateria NO IN(SELECT idMateria FROM inscripto"
-                + "AND materia.estado = false";
-            
+//        String sql = "SELECT * FROM materia WHERE idMateria NO IN(SELECT idMateria FROM inscripto"
+//                + "AND materia.estado = false";
+        
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getIdAlumno());
@@ -101,10 +108,13 @@ public class InscripcionData {
                 
                 mat.setIdMateria(rs.getInt("idMateria"));
                 mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("anio"));
                 
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
         }
+        return listaDeMateriasNoInscripto;
     }
 }
