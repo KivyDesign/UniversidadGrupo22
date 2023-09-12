@@ -60,7 +60,27 @@ public class InscripcionData {
         }
     }
     
-    
+    public void borrarInscripcion(int idAlumno, int idMateria) {
+        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            
+            int rs = ps.executeUpdate();
+            
+            if (rs > 0) {
+                JOptionPane.showMessageDialog(null, "Inscripción borrada");
+            } else {
+                JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
+            }
+            ps.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+        }
+    }
     
     public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
         ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<Materia>();

@@ -132,6 +132,11 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         jbAnularInscripcion.setText("Anular Inscripción");
         jbAnularInscripcion.setEnabled(false);
+        jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularInscripcionActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +279,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             Materia mat = new Materia(idMateria, nombreMateria, anio, true);
 
             // Compongo el Object inscribir con los objetos alumno y materia
-            Inscripcion inscribir = new Inscripcion(alu, mat, 0);
+            // El valor -1 significa que aún no tiene nota en esa materia
+            // en la que se inscribe el alumno
+            Inscripcion inscribir = new Inscripcion(alu, mat, -1);
 
             // Por fin lo inscribo al alumno en la materia seleccionada
             inscripcionData.guardarInscripcion(inscribir);
@@ -285,6 +292,40 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
+        // Quiero el alumno seleccionado en el ComboBox
+        Alumno alu = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        
+        // Cargo la fila que seleccione
+        int filaSeleccionada = jtMaterias.getSelectedRow();
+
+        // Aqui quiero saber si hay una fila seleccionada y si el ComboBox no
+        // esta vacio que seria null si esta vacio
+        if (filaSeleccionada != -1 && alu != null) {
+            // Extraigo del modelo con getValueAt los datos que me interesan
+            // y los casteo al tipo de dato que necesito
+            int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+//            String nombreMateria = (String) modelo.getValueAt(filaSeleccionada, 1);
+//            int anio = (Integer) modelo.getValueAt(filaSeleccionada, 2);
+//
+//            // Compongo el Object mat con los datos de la materia
+//            Materia mat = new Materia(idMateria, nombreMateria, anio, true);
+//
+//            // Compongo el Object inscribir con los objetos alumno y materia
+//            // El valor -1 significa que aún no tiene nota en esa materia
+//            // en la que se inscribe el alumno
+//            Inscripcion inscribir = new Inscripcion(alu, mat, -1);
+//
+            // Por fin lo Des(inscribo) al alumno en la materia seleccionada
+            inscripcionData.borrarInscripcion(alu.getIdAlumno(), idMateria);
+            
+            // Limpio el desastre
+            borrarFilasTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+        }
+    }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
