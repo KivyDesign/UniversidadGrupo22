@@ -9,6 +9,7 @@ import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Alumno;
+import UniversidadGrupo22.entidades.Inscripcion;
 import UniversidadGrupo22.entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,17 @@ import javax.swing.table.DefaultTableModel;
 public class InscripcionesView extends javax.swing.JInternalFrame {
 
     private AlumnoData alumnoData;
-    private List <Alumno> listarAlumnos;
+    private List<Alumno> listarAlumnos;
     private DefaultTableModel modelo;
     private MateriaData materiaData;
     private InscripcionData inscripcionData;
+
     /**
      * Creates new form InscripcionesView
      */
     public InscripcionesView() {
         initComponents();
-        
+
         // Inicializo el acceso a los datos de las tablas alumno e inscripcion
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
@@ -122,6 +124,11 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         jbInscribir.setText("Inscribir");
         jbInscribir.setEnabled(false);
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnularInscripcion.setText("Anular Inscripción");
         jbAnularInscripcion.setEnabled(false);
@@ -215,13 +222,13 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
         // Deselecciono el jrbMateriasNoInscriptas
         jrbMateriasInscriptas.setSelected(false);
-        
+
         // Activo el boton Inscribir
         jbInscribir.setEnabled(true);
-        
+
         // desactivo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(false);
-        
+
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
         cargarNoInscriptos();
@@ -235,17 +242,49 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private void jrbMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasInscriptasActionPerformed
         // Deselecciono el jrbMateriasNoInscriptas
         jrbMateriasNoInscriptas.setSelected(false);
-        
+
         // Desactivo el boton Inscribir
         jbInscribir.setEnabled(false);
-        
+
         // Activo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(true);
-        
+
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
         cargarInscriptos();
     }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // Quiero el alumno seleccionado en el ComboBox
+        Alumno alu = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        
+        // Cargo la fila que seleccione
+        int filaSeleccionada = jtMaterias.getSelectedRow();
+
+        // Aqui quiero saber si hay una fila seleccionada y si el ComboBox no
+        // esta vacio que seria null si esta vacio
+        if (filaSeleccionada != -1 && alu != null) {
+            // Extraigo del modelo con getValueAt los datos que me interesan
+            // y los casteo al tipo de dato que necesito
+            int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+            String nombreMateria = (String) modelo.getValueAt(filaSeleccionada, 1);
+            int anio = (Integer) modelo.getValueAt(filaSeleccionada, 2);
+
+            // Compongo el Object mat con los datos de la materia
+            Materia mat = new Materia(idMateria, nombreMateria, anio, true);
+
+            // Compongo el Object inscribir con los objetos alumno y materia
+            Inscripcion inscribir = new Inscripcion(alu, mat, 0);
+
+            // Por fin lo inscribo al alumno en la materia seleccionada
+            inscripcionData.guardarInscripcion(inscribir);
+            
+            // Limpio el desastre
+            borrarFilasTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+        }
+    }//GEN-LAST:event_jbInscribirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -267,11 +306,11 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     public void cargarInscriptos() {
         // Primero me aseguro de que esten limpias las filas de la tabla
         borrarFilasTabla();
-        
+
         Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
         if (seleccionado != null) {
             ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriasInscriptas(seleccionado);
-            
+
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
             }
@@ -279,15 +318,15 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }
     }
-        
+
     public void cargarNoInscriptos() {
         // Primero me aseguro de que esten limpias las filas de la tabla
         borrarFilasTabla();
-        
+
         Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
         if (seleccionado != null) {
             ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
-            
+
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
             }
@@ -295,14 +334,14 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }
     }
-    
+
     public void cargarAlumnos() {
         // Cargamos los alumnos en el ComboBox
         for (Alumno listarAlumno : listarAlumnos) {
             jcbSeleccioneAlumno.addItem(listarAlumno);
         }
     }
-        
+
     public void armarCabeceraDeLaTabla() {
         // Al modelo le agregamos las siguientes columnas:
         modelo.addColumn("ID");
@@ -322,7 +361,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Con este metodo puedo borrar una fila especifica al recorrerla el modelo
         if (modelo != null) {
             int a = modelo.getColumnCount() - 1;
-            
+
             for (int i = a; i >= 0; i--) {
                 modelo.removeRow(i);
             }
