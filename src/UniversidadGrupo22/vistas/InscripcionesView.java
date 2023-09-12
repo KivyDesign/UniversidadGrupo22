@@ -32,17 +32,17 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jcSeleccioneAlumno = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jcbSeleccioneAlumno = new javax.swing.JComboBox<>();
+        jrbMateriasInscriptas = new javax.swing.JRadioButton();
+        jrbMateriasNoInscriptas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtMaterias = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbInscribir = new javax.swing.JButton();
+        jbAnularInscripcion = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
-        setTitle("Inscripciones");
+        setTitle("Formulario de Inscripciones");
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -61,18 +61,23 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de Materias");
 
-        jcSeleccioneAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbSeleccioneAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jRadioButton1.setText("Materias Inscriptas");
-
-        jRadioButton2.setText("Materias No Inscriptas");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jrbMateriasInscriptas.setText("Materias Inscriptas");
+        jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jrbMateriasInscriptasActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jrbMateriasNoInscriptas.setText("Materias No Inscriptas");
+        jrbMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMateriasNoInscriptasActionPerformed(evt);
+            }
+        });
+
+        jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -86,19 +91,21 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 "ID", "Nombre", "Año"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtMaterias);
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Inscribir");
+        jbInscribir.setText("Inscribir");
+        jbInscribir.setEnabled(false);
 
-        jButton2.setText("Anular Inscripción");
+        jbAnularInscripcion.setText("Anular Inscripción");
+        jbAnularInscripcion.setEnabled(false);
 
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -114,19 +121,19 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                         .addGap(55, 55, 55)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jcSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addComponent(jRadioButton1)
+                        .addComponent(jrbMateriasInscriptas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2)
+                        .addComponent(jrbMateriasNoInscriptas)
                         .addGap(57, 57, 57))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbInscribir)
                         .addGap(126, 126, 126)
-                        .addComponent(jButton2)
+                        .addComponent(jbAnularInscripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                        .addComponent(jbSalir))
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
                     .addComponent(jScrollPane1))
@@ -146,22 +153,22 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jcSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel4)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jrbMateriasInscriptas)
+                    .addComponent(jrbMateriasNoInscriptas))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jbInscribir)
+                    .addComponent(jbAnularInscripcion)
+                    .addComponent(jbSalir))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -181,30 +188,64 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
+        // Deselecciono el jrbMateriasNoInscriptas
+        jrbMateriasInscriptas.setSelected(false);
+        
+        // Activo el boton Inscribir
+        jbInscribir.setEnabled(true);
+        
+        // desactivo el boton Anular Inscripción
+        jbAnularInscripcion.setEnabled(false);
+        
+        // Cargo la jTable jtMaterias con las materias en las que el alumno no
+        // se inscribio utilizando el metodo:
+        cargarNoInscriptos();
+    }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // Código para cerrar una ventana
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jrbMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasInscriptasActionPerformed
+        // Deselecciono el jrbMateriasNoInscriptas
+        jrbMateriasNoInscriptas.setSelected(false);
+        
+        // Desactivo el boton Inscribir
+        jbInscribir.setEnabled(false);
+        
+        // Activo el boton Anular Inscripción
+        jbAnularInscripcion.setEnabled(true);
+        
+        // Cargo la jTable jtMaterias con las materias en las que el alumno se
+        // inscribio utilizando el metodo:
+        cargarInscriptos();
+    }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> jcSeleccioneAlumno;
+    private javax.swing.JButton jbAnularInscripcion;
+    private javax.swing.JButton jbInscribir;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbSeleccioneAlumno;
+    private javax.swing.JRadioButton jrbMateriasInscriptas;
+    private javax.swing.JRadioButton jrbMateriasNoInscriptas;
+    private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarInscriptos() {
+        
+    }
+        
+    public void cargarNoInscriptos() {
+        
+    }
+
 }
