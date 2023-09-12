@@ -306,17 +306,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // Extraigo del modelo con getValueAt los datos que me interesan
             // y los casteo al tipo de dato que necesito
             int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-//            String nombreMateria = (String) modelo.getValueAt(filaSeleccionada, 1);
-//            int anio = (Integer) modelo.getValueAt(filaSeleccionada, 2);
-//
-//            // Compongo el Object mat con los datos de la materia
-//            Materia mat = new Materia(idMateria, nombreMateria, anio, true);
-//
-//            // Compongo el Object inscribir con los objetos alumno y materia
-//            // El valor -1 significa que aún no tiene nota en esa materia
-//            // en la que se inscribe el alumno
-//            Inscripcion inscribir = new Inscripcion(alu, mat, -1);
-//
+            
             // Por fin lo Des(inscribo) al alumno en la materia seleccionada
             inscripcionData.borrarInscripcion(alu.getIdAlumno(), idMateria);
             
