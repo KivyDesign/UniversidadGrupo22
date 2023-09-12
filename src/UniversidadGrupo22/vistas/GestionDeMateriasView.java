@@ -38,10 +38,10 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jBsalir = new javax.swing.JButton();
-        jBguardar = new javax.swing.JButton();
-        jBeliminar = new javax.swing.JButton();
-        jBnuevo = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
 
@@ -73,13 +73,13 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estado:");
 
-        jBsalir.setText("Salir");
+        jbSalir.setText("Salir");
 
-        jBguardar.setText("Guardar");
+        jbGuardar.setText("Guardar");
 
-        jBeliminar.setText("Eliminar");
+        jbEliminar.setText("Eliminar");
 
-        jBnuevo.setText("Nuevo");
+        jbNuevo.setText("Nuevo");
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -110,17 +110,17 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBsalir))
+                    .addComponent(jbSalir))
                 .addGap(72, 72, 72))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jBnuevo)
+                        .addComponent(jbNuevo)
                         .addGap(46, 46, 46)
-                        .addComponent(jBeliminar)
+                        .addComponent(jbEliminar)
                         .addGap(54, 54, 54)
-                        .addComponent(jBguardar))
+                        .addComponent(jbGuardar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,10 +170,10 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBeliminar)
-                            .addComponent(jBguardar)
-                            .addComponent(jBsalir)
-                            .addComponent(jBnuevo))
+                            .addComponent(jbEliminar)
+                            .addComponent(jbGuardar)
+                            .addComponent(jbSalir)
+                            .addComponent(jbNuevo))
                         .addContainerGap())))
         );
 
@@ -194,10 +194,6 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
-    private javax.swing.JButton jBeliminar;
-    private javax.swing.JButton jBguardar;
-    private javax.swing.JButton jBnuevo;
-    private javax.swing.JButton jBsalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -210,5 +206,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTanio;
     private javax.swing.JTextField jTcodigo;
     private javax.swing.JTextField jTnombre;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
     // End of variables declaration//GEN-END:variables
 }
