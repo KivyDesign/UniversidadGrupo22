@@ -60,6 +60,8 @@ public class InscripcionData {
         }
     }
     
+    
+    
     public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
         ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<Materia>();
         Materia mat;
@@ -75,12 +77,13 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                mat = new Materia();
+//                mat = new Materia();
+//                
+//                mat.setIdMateria(rs.getInt("idMateria"));
+//                mat.setNombre(rs.getString("nombre"));
+//                mat.setAnioMateria(rs.getInt("anio"));
                 
-                mat.setIdMateria(rs.getInt("idMateria"));
-                mat.setNombre(rs.getString("nombre"));
-                mat.setAnioMateria(rs.getInt("anio"));
-                
+//                listaDeMateriasInscripto.add(mat.obtenerMateriaPorId(rs.getInt("idMateria")));
             }
             ps.close();
         } catch (SQLException ex) {

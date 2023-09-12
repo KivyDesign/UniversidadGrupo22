@@ -58,5 +58,9 @@ public class Materia {
     public String toString() {
         return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", activo=" + activo + '}';
     }
+
+    public Materia obtenerMateriaPorId(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
