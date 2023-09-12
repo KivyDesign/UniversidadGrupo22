@@ -5,17 +5,39 @@
  */
 package UniversidadGrupo22.vistas;
 
+import UniversidadGrupo22.accesoADatos.AlumnoData;
+import UniversidadGrupo22.accesoADatos.InscripcionData;
+import UniversidadGrupo22.accesoADatos.MateriaData;
+import UniversidadGrupo22.entidades.Alumno;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author javier
  */
 public class InscripcionesView extends javax.swing.JInternalFrame {
 
+    private AlumnoData alumnoData;
+    private List <Alumno> listarAlumnos;
+    private DefaultTableModel modelo;
+    private MateriaData materiaData;
+    private InscripcionData inscripcionData;
     /**
      * Creates new form InscripcionesView
      */
     public InscripcionesView() {
         initComponents();
+        
+        // Inicializo el acceso a los datos de las tablas alumno e inscripcion
+        // que se utilizan en este Frame interno
+        alumnoData = new AlumnoData();
+        listarAlumnos = alumnoData.listarAlumnos();
+        cargarAlumnos();
+        modelo = new DefaultTableModel();
+        armarCabeceraDeLaTabla();
     }
 
     /**
@@ -60,8 +82,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Lucida Sans", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de Materias");
-
-        jcbSeleccioneAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jrbMateriasInscriptas.setText("Materias Inscriptas");
         jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +254,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbSeleccioneAlumno;
+    private javax.swing.JComboBox<Alumno> jcbSeleccioneAlumno;
     private javax.swing.JRadioButton jrbMateriasInscriptas;
     private javax.swing.JRadioButton jrbMateriasNoInscriptas;
     private javax.swing.JTable jtMaterias;
@@ -245,6 +265,25 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     }
         
     public void cargarNoInscriptos() {
+        
+    }
+    
+    public void cargarAlumnos() {
+        // Cargamos los alumnos en el ComboBox
+//        Collections.sort(listarAlumnos, new Comparator<Alumno>(){
+//            @Override
+//            public int compare(Alumno a1, Alumno a2){
+//                return a1.getApellido().compareTo(a2.getApellido());
+//            }
+//        });
+        
+        for (Alumno listarAlumno : listarAlumnos) {
+            jcbSeleccioneAlumno.addItem(listarAlumno);
+        }
+        
+    }
+        
+    public void armarCabeceraDeLaTabla() {
         
     }
 
