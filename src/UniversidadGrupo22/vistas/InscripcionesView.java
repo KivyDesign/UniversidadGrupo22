@@ -45,6 +45,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 //        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 //        this.setBorder(null);
+
         // Inicializo el acceso a los datos de las tablas alumno e inscripcion
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
