@@ -286,6 +286,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jlStatusBar.setForeground(new Color(153, 51, 0));
         System.out.println("¿Cambio el color?");
         // ---------------------------------------------------------------------
+        // ---------------------------------------------------------------------
         
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
