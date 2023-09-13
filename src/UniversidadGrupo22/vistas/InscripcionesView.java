@@ -301,7 +301,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         int filaSeleccionada = jtMaterias.getSelectedRow();
 
         // Aqui quiero saber si hay una fila seleccionada y si el ComboBox no
-        // esta vacio que seria null si esta vacio
+        // esta vacio, que seria null si esta vacio (O)bvio
         if (filaSeleccionada != -1 && alu != null) {
             // Extraigo del modelo con getValueAt los datos que me interesan
             // y los casteo al tipo de dato que necesito
@@ -312,7 +312,18 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             
             // Limpio el desastre
             borrarFilasTabla();
+            
+            // Aqui deberia aprovechar y cargar una nueva lista de matrias en
+            // la que el alumno aún no se Des(inscribo). De esta forma no
+            // quedaria el jTable vacio, que es poco profesional de nuestra
+            // parte obligar al DataEntry a alegir al alumno en el ComboBox
+            // para refrescar las materias en las que sigue inscripto
+            
         } else {
+            // En caso de que no este seleccionado un alumno y una materia,
+            // entonces muestro este molesto dialogo para que se acuerden de
+            // nosotros. La idea de una barra de estado seria muy bien apreciada
+            // a la altura del desarrollo de este proyecto
             JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
         }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
