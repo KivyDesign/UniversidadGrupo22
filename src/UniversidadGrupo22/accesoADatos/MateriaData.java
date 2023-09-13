@@ -54,6 +54,11 @@ public class MateriaData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);
+                
+                System.out.println("\n------------------------------------------");
+                System.out.println("Buscar en MateriaData");
+                System.out.println(rs.getString("nombre") + " - " + rs.getInt("anio"));
+                System.out.println("\n------------------------------------------");
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la Materia");
             }
