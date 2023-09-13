@@ -280,11 +280,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // desactivo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(false);
 
-        // Prueba de concepto StatusBar
+        // Prueba de concepto StatusBar ----------------------------------------
         jlStatusBar.setText("Se selecciono jrbMateriasNoInscriptasActionPerformed");
         // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
         jlStatusBar.setForeground(new Color(153, 51, 0));
         System.out.println("¿Cambio el color?");
+        // ---------------------------------------------------------------------
         
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
@@ -306,11 +307,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Activo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(true);
 
-        // Prueba de concepto StatusBar
+        // Prueba de concepto StatusBar ----------------------------------------
         jlStatusBar.setText("Se selecciono jrbMateriasInscriptasActionPerformed");
         // Los valores pueden variar de 0 a 255. En este caso Red = 0, Green = 153, Blue = 102.
         jlStatusBar.setForeground(new Color(0, 153, 102));
         System.out.println("¿Cambio el color?");
+        // ---------------------------------------------------------------------
         
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
