@@ -11,9 +11,12 @@ import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Alumno;
 import UniversidadGrupo22.entidades.Inscripcion;
 import UniversidadGrupo22.entidades.Materia;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +37,14 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     public InscripcionesView() {
         initComponents();
 
+        // Quito la barra de titulo del JInternalFrame
+        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        // Quito los bordes de la ventana
+        //this.setBorder(null);
+//        putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
+//        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+//        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+//        this.setBorder(null);
         // Inicializo el acceso a los datos de las tablas alumno e inscripcion
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
@@ -67,6 +78,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jbInscribir = new javax.swing.JButton();
         jbAnularInscripcion = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
+        jlStatusBar = new javax.swing.JLabel();
 
         setTitle("Formulario de Inscripciones");
 
@@ -145,39 +159,69 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             }
         });
 
+        jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
+        jlStatusBar.setText("Barra de estado");
+        jlStatusBar.setToolTipText("zxy");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlStatusBar)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jrbMateriasInscriptas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(jrbMateriasNoInscriptas)
-                        .addGap(57, 57, 57))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbInscribir)
-                        .addGap(126, 126, 126)
-                        .addComponent(jbAnularInscripcion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbSalir))
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
-                    .addComponent(jScrollPane1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addGap(189, 189, 189))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jrbMateriasInscriptas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jrbMateriasNoInscriptas)
+                                .addGap(57, 57, 57))
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(97, 97, 97))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbInscribir)
+                                .addGap(109, 109, 109)
+                                .addComponent(jbAnularInscripcion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbSalir))))
+                    .addComponent(jLabel1))
                 .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(220, 220, 220))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +230,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,25 +244,27 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbInscribir)
                     .addComponent(jbAnularInscripcion)
                     .addComponent(jbSalir))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -234,6 +280,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // desactivo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(false);
 
+        // Prueba de concepto StatusBar
+        jlStatusBar.setText("Se selecciono jrbMateriasNoInscriptasActionPerformed");
+        // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+        jlStatusBar.setForeground(new Color(153, 51, 0));
+        System.out.println("¿Cambio el color?");
+        
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
         cargarNoInscriptos();
@@ -254,6 +306,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Activo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(true);
 
+        // Prueba de concepto StatusBar
+        jlStatusBar.setText("Se selecciono jrbMateriasInscriptasActionPerformed");
+        // Los valores pueden variar de 0 a 255. En este caso Red = 0, Green = 153, Blue = 102.
+        jlStatusBar.setForeground(new Color(0, 153, 102));
+        System.out.println("¿Cambio el color?");
+        
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
         cargarInscriptos();
@@ -262,7 +320,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         // Quiero el alumno seleccionado en el ComboBox
         Alumno alu = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
-        
+
         // Cargo la fila que seleccione
         int filaSeleccionada = jtMaterias.getSelectedRow();
 
@@ -285,7 +343,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
             // Por fin lo inscribo al alumno en la materia seleccionada
             inscripcionData.guardarInscripcion(inscribir);
-            
+
             // Limpio el desastre
             borrarFilasTabla();
         } else {
@@ -296,7 +354,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
         // Quiero el alumno seleccionado en el ComboBox
         Alumno alu = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
-        
+
         // Cargo la fila que seleccione
         int filaSeleccionada = jtMaterias.getSelectedRow();
 
@@ -306,19 +364,18 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // Extraigo del modelo con getValueAt los datos que me interesan
             // y los casteo al tipo de dato que necesito
             int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-            
+
             // Por fin lo Des(inscribo) al alumno en la materia seleccionada
             inscripcionData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMateria);
-            
+
             // Limpio el desastre
             borrarFilasTabla();
-            
+
             // Aqui deberia aprovechar y cargar una nueva lista de matrias en
             // la que el alumno aún no se Des(inscribo). De esta forma no
             // quedaria el jTable vacio, que es poco profesional de nuestra
             // parte obligar al DataEntry a alegir al alumno en el ComboBox
             // para refrescar las materias en las que sigue inscripto
-            
         } else {
             // En caso de que no este seleccionado un alumno y una materia,
             // entonces muestro este molesto dialogo para que se acuerden de
@@ -333,13 +390,16 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbSeleccioneAlumno;
+    private javax.swing.JLabel jlStatusBar;
     private javax.swing.JRadioButton jrbMateriasInscriptas;
     private javax.swing.JRadioButton jrbMateriasNoInscriptas;
     private javax.swing.JTable jtMaterias;
