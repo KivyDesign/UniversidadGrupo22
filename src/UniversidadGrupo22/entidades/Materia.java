@@ -56,7 +56,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return idMateria + " - " + nombre + " (" + anioMateria + "°)";
+        return idMateria + " - " + nombre + " (" + anioMateria + ")";
     }
 
     public Materia obtenerMateriaPorId(int aInt) {
