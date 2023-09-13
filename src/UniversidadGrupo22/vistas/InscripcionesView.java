@@ -308,7 +308,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
             
             // Por fin lo Des(inscribo) al alumno en la materia seleccionada
-            inscripcionData.borrarInscripcion(alu.getIdAlumno(), idMateria);
+            inscripcionData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMateria);
             
             // Limpio el desastre
             borrarFilasTabla();
@@ -390,7 +390,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     }
 
     public void borrarFilasTabla() {
-        // Con este metodo puedo borrar una fila especifica al recorrerla el modelo
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         if (modelo != null) {
             int a = modelo.getColumnCount() - 1;
 
