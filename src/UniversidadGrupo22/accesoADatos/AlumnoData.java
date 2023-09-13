@@ -124,12 +124,14 @@ public class AlumnoData {
 
             while (rs.next()) {
                 Alumno alumno = new Alumno();
+                
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(rs.getBoolean("estado"));
+                
                 alumnos.add(alumno);
             }
             ps.close();

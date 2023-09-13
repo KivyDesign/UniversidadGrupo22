@@ -369,6 +369,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     public void cargarAlumnos() {
         // Cargamos los alumnos en el ComboBox
         for (Alumno listarAlumno : listarAlumnos) {
+            System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
             jcbSeleccioneAlumno.addItem(listarAlumno);
         }
     }
