@@ -103,7 +103,7 @@ public class InscripcionData {
                 mat.setAnioMateria(rs.getInt("anio"));
 
                 // Los agrego a los valores a la lista utilizando el metodo
-                // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
+                // obtenerMateriaPorId que el nuevo objeto matData hereda de Materia
                 listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
             }
 

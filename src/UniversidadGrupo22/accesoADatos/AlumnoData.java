@@ -15,6 +15,10 @@ public class AlumnoData {
 
     private Connection con = null;
 
+    // Creo los atributos aluData y matData para acceder mas comodamente a
+    // los metodos de los paquetes entidades AlumnoData
+    private AlumnoData aluData;
+    
     public AlumnoData() {
         con = Conexion.getConexion();
     }

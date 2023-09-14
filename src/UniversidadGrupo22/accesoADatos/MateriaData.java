@@ -14,6 +14,10 @@ public class MateriaData {
 
     private Connection con = null;
 
+    // Creo los atributos aluData y matData para acceder mas comodamente a
+    // los metodos de los paquetes entidades y MateriaData
+    private MateriaData matData;
+    
     public MateriaData() {
         con = Conexion.getConexion();
     }
@@ -55,11 +59,6 @@ public class MateriaData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);
-                
-//                System.out.println("\n------------------------------------------");
-//                System.out.println("Buscar en MateriaData");
-//                System.out.println(idMateria + " - " + rs.getString("nombre") + " - " + rs.getInt("anio") + " - " + rs.getBoolean("estado"));
-//                System.out.println("\n------------------------------------------");
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la Materia");
             }
