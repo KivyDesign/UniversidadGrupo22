@@ -16,14 +16,11 @@ public class UniversidadGrupo22 {
         InscripcionData id = new InscripcionData();
 
         // Busco el alumno por su ID 8
-        Alumno alu = ad.buscarAlumnoPorID(8);
+        Alumno alu = ad.buscarAlumno(8);
 
         // Busco la materia por su ID 3
-        Materia mat = md.buscarMateriaPorID(3);
+        Materia mat = md.buscarMateria(3);
 
-//        int aluID = alu.getIdAlumno();
-//        int matID = mat.getIdMateria();
-        
         // Preparo la inscripcion con los datos del alumno, materia y le asigno
         // la nota 9
         // 

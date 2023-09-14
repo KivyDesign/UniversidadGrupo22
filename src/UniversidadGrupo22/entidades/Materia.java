@@ -1,6 +1,7 @@
 package UniversidadGrupo22.entidades;
 
 public class Materia {
+
     private int idMateria = -1;
     private String nombre;
     private int anioMateria;
@@ -56,11 +57,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return idMateria + " - " + nombre + " (" + anioMateria + ")";
+        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", activo=" + activo + '}';
     }
 
-    public Materia obtenerMateriaPorId(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

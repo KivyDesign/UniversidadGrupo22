@@ -39,55 +39,25 @@ public class MateriaData {
         }
     }
 
-    public Materia buscarMateria(int id) {
+    public Materia buscarMateria(int idMateria) {
         Materia materia = null;
         String sql = "SELECT nombre, anio FROM materia WHERE idMateria = ? AND estado = 1";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 materia = new Materia();
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
-                materia.setActivo(true);
+                //materia.setActivo(true);
                 
                 System.out.println("\n------------------------------------------");
                 System.out.println("Buscar en MateriaData");
                 System.out.println(rs.getString("nombre") + " - " + rs.getInt("anio"));
-                System.out.println("\n------------------------------------------");
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe la Materia");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia: " + ex.getMessage());
-        }
-        return materia;
-    }
-    
-    public Materia buscarMateriaPorID(int id) {
-        Materia materia = null;
-        String sql = "SELECT idMateria, nombre, anio FROM materia WHERE idMateria = ? AND estado = 1";
-        PreparedStatement ps = null;
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                materia = new Materia();
-                materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("anio"));
-                materia.setActivo(true);
-                
-                System.out.println("\n------------------------------------------");
-                System.out.println("Buscar en MateriaData por ID");
-                System.out.println(rs.getInt("idMateria") + " - " + rs.getString("nombre") + " - " + rs.getInt("anio"));
                 System.out.println("\n------------------------------------------");
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la Materia");

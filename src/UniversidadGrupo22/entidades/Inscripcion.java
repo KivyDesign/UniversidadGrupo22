@@ -3,15 +3,15 @@ package UniversidadGrupo22.entidades;
 public class Inscripcion {
 
     private int idInscripcion = -1;
+    private double nota;
     private Alumno alumno;
     private Materia materia;
-    private double nota;
 
-    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
+    public Inscripcion(int idInscripcion, double nota, Alumno alumno, Materia materia) {
         this.idInscripcion = idInscripcion;
+        this.nota = nota;
         this.alumno = alumno;
         this.materia = materia;
-        this.nota = nota;
     }
 
     public Inscripcion(double nota, Alumno alumno, Materia materia) {
