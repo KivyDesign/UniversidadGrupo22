@@ -11,21 +11,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author german
- */
 public class InscripcionData {
 
+    // Creo el atributo (con) de tipo Connection y  lo inicializo a null para
+    // poder verificar si se pudo o no conectar a la DB
     private Connection con = null;
-    private MateriaData matData;
+    
+    // Creo los atributos aluData y matData para acceder mas comodamente a
+    // los metodos de los paquetes entidades AlumnoData y MateriaData
     private AlumnoData aluData;
+    private MateriaData matData;
 
     public InscripcionData() {
+        // Creo el objeto (con) que hereda de la Clase Conexion.java y es el que
+        // realiza toda la magia de la conexión
         con = Conexion.getConexion();
     }
 
     public void guardarInscripcion(Inscripcion ins) {
+        // Preparo la consulta a la DB
         String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?, ?, ?)";
 
         try {
@@ -34,9 +38,9 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Cargo idAlumno, idMateria y nota de las posiciones 1, 2 y 3 respectivamente
-            ps.setInt(1, ins.getAlumno().getIdAlumno());
-            ps.setInt(2, ins.getMateria().getIdMateria());
-            ps.setDouble(3, ins.getNota());
+            ps.setDouble(1, ins.getNota());
+            ps.setInt(2, ins.getAlumno().getIdAlumno());
+            ps.setInt(3, ins.getMateria().getIdMateria());
 
             // Ejecuto el INSERT y almaceno la consulta en la DB
             ps.executeUpdate();
@@ -48,14 +52,22 @@ public class InscripcionData {
             if (rs.next()) {
                 // Actualizo el ID de la inscripcion
                 ins.setIdInscripcion(rs.getInt(1));
+                
+                // Hay que ver si le hacemos una barra de status para informar
+                // de estos casos al operador y no detenerlo a cada rato con
+                // mensajitos de dialogo emergentes que son bastante molestos
                 JOptionPane.showMessageDialog(null, "Inscripción agregada de forma exitosa");
             }
 
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción: " + ex.getMessage());
         }
+        
+        // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
 
     public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
@@ -112,7 +124,7 @@ public class InscripcionData {
         // Creo una lista listaDeMateriasInscripto para almacenar los resultados
         // en memoria temporalmente para trabajar
         ArrayList<Materia> listaDeMateriasNoInscripto = new ArrayList<Materia>();
-        
+
         // Declaro mat para utilizarlo para crear una nueva materia
         Materia mat;
 
@@ -123,10 +135,10 @@ public class InscripcionData {
         try {
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             // Para obtener el ID del alumno
             ps.setInt(1, alumno.getIdAlumno());
-            
+
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
 
@@ -144,7 +156,7 @@ public class InscripcionData {
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
                 listaDeMateriasNoInscripto.add(mat.obtenerMateriaPorId(rs.getInt("idMateria")));
             }
-            
+
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
@@ -152,7 +164,7 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
         }
-        
+
         // Si todo salio bien, entonces retorno la lista con las materias que
         // no posea la tabla materia en la DB universidadulp
         return listaDeMateriasNoInscripto;
@@ -161,7 +173,7 @@ public class InscripcionData {
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
         // Este metodo recibe los IDs de alumno y materia, debera encontrarlos
         // en la tabla para borrar la inscripcion correcta
-        
+
         // Preparo la consulta a la DB
         String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
 
@@ -188,7 +200,7 @@ public class InscripcionData {
             } else {
                 JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
             }
-            
+
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
@@ -196,14 +208,14 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
-        
+
         // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
-    
+
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
         // Preparo la consulta a la DB
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-        
+
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
             // Preparo la consulta
@@ -228,7 +240,7 @@ public class InscripcionData {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido encontrar el alumno para actulizar la nota");
             }
-            
+
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
@@ -236,17 +248,17 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
-        
+
         // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
-    
+
     public Inscripcion obtenerInscripcion(int idAlumno, int idMateria) {
         // Preparo la consulta a la DB
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-        
+
         // Declaro a (i) y lo inicializo a null por las dudas
         Inscripcion i = null;
-        
+
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
             // Preparo la consulta
@@ -266,22 +278,22 @@ public class InscripcionData {
             while (rs.next()) {
                 // Creo el famoso objeto (i)
                 i = new Inscripcion();
-                
+
                 // Le agrego la ID de la inscripcion
                 i.setIdInscripcion(rs.getInt("idInscripcion"));
-                
+
                 // Aqui buscamos el Alumno por su ID
                 Alumno a = aluData.buscarAlumno(idAlumno);
-                
+
                 // Se lo cargo al objeto (i)
                 i.setAlumno(a);
-                
+
                 // Realizo la misma operacion para materia y nota
                 Materia m = matData.buscarMateria(idMateria);
                 i.setMateria(m);
                 i.setNota(rs.getDouble("nota"));
             }
-            
+
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
@@ -289,7 +301,7 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
-        
+
         // Si todo salio bien, entonces retorno la inscripcion que obtuve
         return i;
     }

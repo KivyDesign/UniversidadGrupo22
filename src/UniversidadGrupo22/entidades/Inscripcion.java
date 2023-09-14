@@ -2,7 +2,7 @@ package UniversidadGrupo22.entidades;
 
 public class Inscripcion {
 
-    private int idInscripcion=-1;
+    private int idInscripcion = -1;
     private Alumno alumno;
     private Materia materia;
     private double nota;
