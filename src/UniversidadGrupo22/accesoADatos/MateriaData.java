@@ -53,7 +53,7 @@ public class MateriaData {
                 materia = new Materia();
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
-                //materia.setActivo(true);
+                materia.setActivo(true);
                 
                 System.out.println("\n------------------------------------------");
                 System.out.println("Buscar en MateriaData");
