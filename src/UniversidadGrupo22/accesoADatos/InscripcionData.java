@@ -305,4 +305,24 @@ public class InscripcionData {
         // Si todo salio bien, entonces retorno la inscripcion que obtuve
         return i;
     }
+    
+    public ArrayList<Alumno> obtenerAlumnoXMateria(Materia materia){
+        ArrayList<Alumno> listaAlumnoXMateria = new ArrayList<Alumno>();
+        Alumno alu;
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, materia.getIdMateria());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                alu = new Alumno();
+                alu.setNombre(rs.getString("nombre"));
+                alu.setApellido(rs.getString("apellido"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos: " + ex.getMessage());
+        }
+        return listaAlumnoXMateria;
+    }
 }
