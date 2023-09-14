@@ -343,7 +343,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // Compongo el Object inscribir con los objetos alumno y materia
             // El valor -1 significa que aún no tiene nota en esa materia
             // en la que se inscribe el alumno
-            Inscripcion inscribir = new Inscripcion(alu, mat, -1);
+            Inscripcion inscribir = new Inscripcion(-1, alu, mat);
 
             // Por fin lo inscribo al alumno en la materia seleccionada
             inscripcionData.guardarInscripcion(inscribir);

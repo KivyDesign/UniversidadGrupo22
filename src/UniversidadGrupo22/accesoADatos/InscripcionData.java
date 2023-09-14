@@ -26,7 +26,7 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion ins) {
-        String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?, ?, ?)";
 
         try {
             // Obtengo la clave del ID generada de la posicion 0 del DB
