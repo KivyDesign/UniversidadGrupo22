@@ -272,8 +272,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jlStatusBar.setText("Se selecciono jrbMateriasNoInscriptasActionPerformed");
         // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
         jlStatusBar.setForeground(new Color(153, 51, 0));
-        System.out.println("¿Cambio el color?");
-        // ---------------------------------------------------------------------
         // ---------------------------------------------------------------------
         
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
@@ -300,7 +298,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jlStatusBar.setText("Se selecciono jrbMateriasInscriptasActionPerformed");
         // Los valores pueden variar de 0 a 255. En este caso Red = 0, Green = 153, Blue = 102.
         jlStatusBar.setForeground(new Color(0, 153, 102));
-        System.out.println("¿Cambio el color?");
         // ---------------------------------------------------------------------
         
         // Cargo la jTable jtMaterias con las materias en las que el alumno se

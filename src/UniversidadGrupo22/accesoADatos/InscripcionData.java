@@ -104,7 +104,7 @@ public class InscripcionData {
 
                 // Los agrego a los valores a la lista utilizando el metodo
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
-                //listaDeMateriasInscripto.add(mat.buscarMateria(rs.getInt("idMateria")));
+//                listaDeMateriasInscripto.add(mat.buscarMateria(rs.getInt("idMateria")));
             }
 
             // Cierro la consulta
