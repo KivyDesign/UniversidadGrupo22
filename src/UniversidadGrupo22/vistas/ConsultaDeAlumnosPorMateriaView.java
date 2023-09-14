@@ -8,6 +8,7 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Materia;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +17,7 @@ import java.util.List;
 public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame {
     private MateriaData materiaData;
     private List<Materia> listarMaterias;
+    private DefaultTableModel modelo;
     /**
      * Creates new form ConsultaDeAlumnosPorMateriaView
      */
@@ -24,6 +26,8 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         materiaData = new MateriaData();
         listarMaterias = materiaData.listarMaterias();
         cargarMaterias();
+        modelo = new DefaultTableModel();
+        armarCabecera();
         
     }
 
@@ -76,6 +80,12 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+
+        jcbMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbMateriaItemStateChanged(evt);
+            }
+        });
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +156,10 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jcbMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMateriaItemStateChanged
+        
+    }//GEN-LAST:event_jcbMateriaItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -164,5 +178,16 @@ private void cargarMaterias(){
         }
 }
  
+private void armarCabecera(){
+    modelo.addColumn("ID");
+    modelo.addColumn("DNI");
+    modelo.addColumn("Apellido");
+    modelo.addColumn("Nombre");
+    jtAlumnos.setModel(modelo);
+}
+
+public void cargarAlumnos(){
+    Materia seleccionada = (Materia)jcbMateria.getSelectedItem();
+}
 
 }
