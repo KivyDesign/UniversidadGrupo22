@@ -33,7 +33,7 @@ public class UniversidadGrupo22 {
         InscripcionData insData = new InscripcionData();
 
         // Busco el alumno por su ID 8
-        Alumno alu = aluData.buscarAlumno(8);
+        Alumno alu = aluData.buscarAlumno(2);
 
         // Busco la materia por su ID 3
         Materia mat = matData.buscarMateria(3);
@@ -51,7 +51,7 @@ public class UniversidadGrupo22 {
         //     4 - Parece ser mala idea por que carga duplicados los datos
         // Otro error que se presenta: mat devuelve -1, llamar un Profe
         // ¡¡¡AIUDA!!!
-        Inscripcion ins = new Inscripcion(9, alu, mat);
+        Inscripcion ins = new Inscripcion(7, alu, mat);
 
         // Guardo la inscipcion con el metodo guardarInscripcion de InscripcionData
         insData.guardarInscripcion(ins);
