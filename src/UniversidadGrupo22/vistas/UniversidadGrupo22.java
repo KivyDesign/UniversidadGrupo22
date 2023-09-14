@@ -45,6 +45,7 @@ public class UniversidadGrupo22 {
         // La instruccion en MySQL funciona bien manualmente
         // INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (9, 8, 3)
         // Resolver: Parece ser mala idea por que carga duplicados los datos
+        // Resolveeremos desde codigo verificando si ya existe  primero
         Inscripcion ins = new Inscripcion(7, alu, mat);
 
         // Guardo la inscipcion con el metodo guardarInscripcion de InscripcionData

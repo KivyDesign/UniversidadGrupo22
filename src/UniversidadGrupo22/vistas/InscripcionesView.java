@@ -45,7 +45,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 //        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 //        this.setBorder(null);
-
         // Inicializo el acceso a los datos de las tablas alumno e inscripcion
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
@@ -273,7 +272,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
         jlStatusBar.setForeground(new Color(153, 51, 0));
         // ---------------------------------------------------------------------
-        
+
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
         cargarNoInscriptos();
@@ -299,7 +298,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Los valores pueden variar de 0 a 255. En este caso Red = 0, Green = 153, Blue = 102.
         jlStatusBar.setForeground(new Color(0, 153, 102));
         // ---------------------------------------------------------------------
-        
+
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
         cargarInscriptos();
@@ -449,12 +448,24 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Cottrolar que no este vacio o cargarlo desde comienzo
         if (modelo != null) {
-            int a = modelo.getColumnCount() - 1;
+            if (modelo.getRowCount() > 0) {
+                int a = modelo.getRowCount() - 1;
 
-            for (int i = a; i >= 0; i--) {
-                modelo.removeRow(i);
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
             }
+
+        }
+    }
+
+    public void borrarFilasTablaEze() {
+        int nFilas = modelo.getRowCount() - 1;
+
+        for (int i = nFilas; i >= 0; i--) {
+            modelo.removeRow(i);
         }
     }
 }

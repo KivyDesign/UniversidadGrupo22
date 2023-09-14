@@ -56,10 +56,10 @@ public class MateriaData {
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);
                 
-                System.out.println("\n------------------------------------------");
-                System.out.println("Buscar en MateriaData");
-                System.out.println(idMateria + " - " + rs.getString("nombre") + " - " + rs.getInt("anio") + " - " + rs.getBoolean("estado"));
-                System.out.println("\n------------------------------------------");
+//                System.out.println("\n------------------------------------------");
+//                System.out.println("Buscar en MateriaData");
+//                System.out.println(idMateria + " - " + rs.getString("nombre") + " - " + rs.getInt("anio") + " - " + rs.getBoolean("estado"));
+//                System.out.println("\n------------------------------------------");
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la Materia");
             }
