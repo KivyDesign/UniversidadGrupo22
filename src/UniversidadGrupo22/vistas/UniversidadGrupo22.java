@@ -41,16 +41,10 @@ public class UniversidadGrupo22 {
         // Preparo la inscripcion con los datos del alumno, materia y le asigno
         // la nota 9
         // 
-        // ERROR de tipos de datos. Clave Foranea - Resolver
+        // Resolver: Carga datos duplicados si se ejecuta mas de una vez
         // La instruccion en MySQL funciona bien manualmente
         // INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (9, 8, 3)
-        // Posible solución:
-        //     1 - Desactivar las claves foraneas
-        //     2 - Insertar los datos
-        //     3 - Reactivar las claves foraneas.
-        //     4 - Parece ser mala idea por que carga duplicados los datos
-        // Otro error que se presenta: mat devuelve -1, llamar un Profe
-        // ¡¡¡AIUDA!!!
+        // Resolver: Parece ser mala idea por que carga duplicados los datos
         Inscripcion ins = new Inscripcion(7, alu, mat);
 
         // Guardo la inscipcion con el metodo guardarInscripcion de InscripcionData
