@@ -53,6 +53,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         armarCabeceraDeLaTabla();
         inscripcionData = new InscripcionData();
+        
+        // Defino el jrbMateriasNoInscriptas como seleccionado y cargo los
+        // datos de las materias en las que el alumno que este seleccionado en
+        // el ComboBox no es inscripto aún
+        //jrbMateriasNoInscriptas.setSelected(true);
+        RadioButtonNoInscriptos();
     }
 
     /**
@@ -255,7 +261,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jcbSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -298,24 +304,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
-        // Deselecciono el jrbMateriasNoInscriptas
-        jrbMateriasInscriptas.setSelected(false);
-
-        // Activo el boton Inscribir
-        jbInscribir.setEnabled(true);
-
-        // Desactivo el boton Anular Inscripción
-        jbAnularInscripcion.setEnabled(false);
-
-        // Prueba de concepto StatusBar ----------------------------------------
-        jlStatusBar.setText("Se selecciono jrbMateriasNoInscriptasActionPerformed");
-        // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
-        jlStatusBar.setForeground(new Color(255, 50, 0));
-        // ---------------------------------------------------------------------
-
-        // Cargo la jTable jtMaterias con las materias en las que el alumno no
-        // se inscribio utilizando el metodo:
-        cargarNoInscriptos();
+        // Ejecuto todo en un metodo para mejorar la logica y poder reutilizar
+        // el codigo desde varios eventos
+        RadioButtonNoInscriptos();
     }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -324,24 +315,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jrbMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasInscriptasActionPerformed
-        // Deselecciono el jrbMateriasNoInscriptas
-        jrbMateriasNoInscriptas.setSelected(false);
-
-        // Desactivo el boton Inscribir
-        jbInscribir.setEnabled(false);
-
-        // Activo el boton Anular Inscripción
-        jbAnularInscripcion.setEnabled(true);
-
-        // Prueba de concepto StatusBar ----------------------------------------
-        jlStatusBar.setText("Se selecciono jrbMateriasInscriptasActionPerformed");
-        // Los valores pueden variar de 0 a 255. En este caso Red = 0, Green = 153, Blue = 102.
-        jlStatusBar.setForeground(new Color(0, 153, 102));
-        // ---------------------------------------------------------------------
-
-        // Cargo la jTable jtMaterias con las materias en las que el alumno se
-        // inscribio utilizando el metodo:
-        cargarInscriptos();
+        // Ejecuto todo en un metodo para mejorar la logica y poder reutilizar
+        // el codigo desde varios eventos
+        RadioButtonInscriptos();
     }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
@@ -378,7 +354,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // jtMaterias para que refleje al usuario las materias en las que
             // aún no se inscribio
         } else {
-            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+//            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
+            // ---------------------------------------------------------------------
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
 
@@ -412,7 +391,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // entonces muestro este molesto dialogo para que se acuerden de
             // nosotros. La idea de una barra de estado seria muy bien apreciada
             // a la altura del desarrollo de este proyecto
-            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+//            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
+            // ---------------------------------------------------------------------
         }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
@@ -450,7 +432,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Seleccione primero un alumno");
+            // ---------------------------------------------------------------------
+//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }
     }
 
@@ -466,14 +451,17 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Seleccione primero un alumno");
+            // ---------------------------------------------------------------------
+//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }
     }
 
     public void cargarAlumnos() {
         // Cargamos los alumnos en el ComboBox
         for (Alumno listarAlumno : listarAlumnos) {
-            System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
+            //System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
             jcbSeleccioneAlumno.addItem(listarAlumno);
         }
     }
@@ -514,5 +502,72 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         for (int i = nFilas; i >= 0; i--) {
             modelo.removeRow(i);
         }
+    }
+    
+    // /////////////////////////////////////////////////////////////////////////
+    // Aqui centralizo el manejo de los botones de radio, bien lejos de los
+    // ActionPerformed
+    // /////////////////////////////////////////////////////////////////////////
+    public void RadioButtonNoInscriptos() {
+        // Deselecciono el jrbMateriasInscriptas
+        jrbMateriasInscriptas.setSelected(false);
+        
+        // Selecciono el jrbMateriasNoInscriptas
+        jrbMateriasNoInscriptas.setSelected(true);
+
+        // Activo el boton Inscribir
+        jbInscribir.setEnabled(true);
+
+        // Desactivo el boton Anular Inscripción
+        jbAnularInscripcion.setEnabled(false);
+
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(2,"Se selecciono jrbMateriasNoInscriptasActionPerformed");
+        // ---------------------------------------------------------------------
+
+        // Cargo la jTable jtMaterias con las materias en las que el alumno no
+        // se inscribio utilizando el metodo:
+        cargarNoInscriptos();
+    }
+    
+    public void RadioButtonInscriptos() {
+        // Deselecciono el jrbMateriasNoInscriptas
+        jrbMateriasNoInscriptas.setSelected(false);
+        
+        // Selecciono el jrbMateriasInscriptas
+        jrbMateriasInscriptas.setSelected(true);
+
+        // Desactivo el boton Inscribir
+        jbInscribir.setEnabled(false);
+
+        // Activo el boton Anular Inscripción
+        jbAnularInscripcion.setEnabled(true);
+
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(1, "Se selecciono jrbMateriasInscriptasActionPerformed");
+        // ---------------------------------------------------------------------
+
+        // Cargo la jTable jtMaterias con las materias en las que el alumno se
+        // inscribio utilizando el metodo:
+        cargarInscriptos();
+    }
+    
+    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+        // Prueba de concepto StatusBar ----------------------------------------
+        
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlStatusBar.setForeground(new Color(0, 153, 102));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlStatusBar.setForeground(new Color(255, 50, 0));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlStatusBar.setText(mensaje);
     }
 }
