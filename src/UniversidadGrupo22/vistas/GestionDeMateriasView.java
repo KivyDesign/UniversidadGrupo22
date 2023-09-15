@@ -254,28 +254,40 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         try {
 
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
-            materiaData.modificarMateria(materia);
+            if (materia != null) {
+                materiaData.modificarMateria(materia);
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
+        jtNombre.setText("");
+        jTanio.setText("");
+        jtCodigo.setText("");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         try {
 
             MateriaData materiaData = new MateriaData();
-            jtNombre.setText(materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).getNombre());
-           // materiaData.buscarMateria(Integer.parseInt("1"));
-            jTanio.setText(materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).getAnioMateria() +"");
-            if (materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).isActivo() == true) {
-                jRestadoMat.setSelected(true);
+            Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
+            if (materia != null) {
+                jtNombre.setText(materia.getNombre());
+                jTanio.setText(materia.getAnioMateria() + "");
 
+                if (materia.isActivo() == true) {
+                    jRestadoMat.setSelected(true);
+                }
+            } else {
+                jtNombre.setText("");
+                jTanio.setText("");
+                jtCodigo.setText("");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
+
     }//GEN-LAST:event_jBbuscarActionPerformed
 
 
