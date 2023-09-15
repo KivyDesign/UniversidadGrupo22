@@ -51,7 +51,6 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jDateNacimiento = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 0, 51));
         setTitle("Gestion de Alumno");
@@ -138,10 +137,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jRestado)
-                                                .addGap(45, 45, 45)
-                                                .addComponent(jDateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jRestado))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbNuevo)
@@ -176,7 +172,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
@@ -190,13 +186,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jRestado)))
@@ -255,11 +246,11 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         } else {
             try {
 
-                LocalDate fechan = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Alumno alumno = new Alumno(Integer.parseInt(jTdni.getText()), jTapellido.getText(),
-                        jTnombre.getText(), fechan, true);
-                AlumnoData aluD = new AlumnoData();
-                aluD.guardarAlumno(alumno);
+//                LocalDate fechan = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//                Alumno alumno = new Alumno(Integer.parseInt(jTdni.getText()), jTapellido.getText(),
+//                        jTnombre.getText(), fechan, true);
+//                AlumnoData aluD = new AlumnoData();
+//                aluD.guardarAlumno(alumno);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "el dni debe ser un numero");
             }
@@ -306,7 +297,6 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
