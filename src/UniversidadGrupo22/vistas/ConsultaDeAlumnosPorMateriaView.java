@@ -53,7 +53,7 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         setBackground(new java.awt.Color(102, 155, 255));
         setPreferredSize(new java.awt.Dimension(500, 504));
 
-        jPanel1.setBackground(new java.awt.Color(102, 155, 255));
+        jPanel1.setBackground(new java.awt.Color(36, 86, 109));
         jPanel1.setPreferredSize(new java.awt.Dimension(484, 470));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
