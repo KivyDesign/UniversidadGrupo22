@@ -226,12 +226,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         AlumnoData alumnoData = new AlumnoData();
         try {
 
-            Alumno alum = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText()));
-            alumnoData.modificarAlumno(alum);
-        } catch (NumberFormatException e) {
+            Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText()));
+            if (alumno != null) {
+
+                alumnoData.modificarAlumno(alumno);
+            }
+            }catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el dni debe ser un numero");
             jTdni.setText("");
         }
+            jTdni.setText("");
+            jTapellido.setText("");
+            jTnombre.setText("");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
@@ -267,11 +273,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         try {
 
             AlumnoData alumnoData = new AlumnoData();
-            jTapellido.setText(alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).getApellido());
-            jTnombre.setText(alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).getNombre());
-            // jDateNacimiento.setDate( alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).getFechaNacimiento());
-            if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).isEstado() == true) {
-                jRestado.setSelected(true);
+            Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText()));
+            if (alumno != null) {
+                jTapellido.setText(alumno.getApellido());
+                jTnombre.setText(alumno.getNombre());
+                // jDateNacimiento.setDate( alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).getFechaNacimiento());
+                if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).isEstado() == true) {
+                    jRestado.setSelected(true);
+                }
+            } else {
+                jTdni.setText("");
+                jTapellido.setText("");
+                jTnombre.setText("");
 
             }
         } catch (NumberFormatException e) {
