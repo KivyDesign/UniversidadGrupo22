@@ -154,7 +154,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel8.setText("jLabel8");
+        jLabel8.setText("Texto de prueba");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
