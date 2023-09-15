@@ -235,7 +235,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        /*if (jTdni.getText().equals("") || jTapellido.getText().equals("") || jTnombre.getText().equals("")) {
+        /*if (jTdni.getText().isEmpty() || jTapellido.getText().isEmpty() || jTnombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "los campos deben ser completados");
         } else {
             try {
