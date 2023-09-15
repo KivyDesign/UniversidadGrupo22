@@ -287,7 +287,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             if (alumno != null) {
                 jTapellido.setText(alumno.getApellido());
                 jTnombre.setText(alumno.getNombre());
-                // jDateNacimiento.setDate( alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).getFechaNacimiento());
+                // jDateNacimiento.setDate(alumno.getFechaNacimiento());
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jTdni.getText())).isEstado() == true) {
                     jRestado.setSelected(true);
                 }
