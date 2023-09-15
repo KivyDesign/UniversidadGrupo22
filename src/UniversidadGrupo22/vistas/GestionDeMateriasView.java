@@ -144,9 +144,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTanio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jRestadoMat))
-                            .addGap(172, 172, 172))
+                                .addComponent(jRestadoMat)
+                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(119, 119, 119))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -186,7 +186,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(jRestadoMat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,19 +259,28 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jTanio.setText("");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         try {
 
             MateriaData materiaData = new MateriaData();
-            jtNombre.setText(materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).getNombre());
-           // materiaData.buscarMateria(Integer.parseInt("1"));
-            jTanio.setText(materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).getAnioMateria() +"");
-            if (materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText())).isActivo() == true) {
+            Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
+            if (materia != null) {
+
+                jtNombre.setText(materia.getNombre());
+                jTanio.setText(materia.getAnioMateria() + "");
+                if (materia.isActivo() == true) {
+                }
                 jRestadoMat.setSelected(true);
 
-            }
+            }else{jtCodigo.setText("");
+        jtNombre.setText("");
+        jTanio.setText("");
+    }                       
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
