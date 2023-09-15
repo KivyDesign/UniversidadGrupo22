@@ -8,6 +8,7 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.Conexion;
 import java.awt.Dimension;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,6 +68,7 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestión para la Universidad de La Punta");
@@ -237,11 +239,6 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
 
         jMenuItem5.setText("Alumnos por Materia");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -254,16 +251,15 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jmSalir.setText("Salir");
-        jmSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmSalirMouseClicked(evt);
-            }
-        });
-        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+
+        jMenuItem6.setText("Salir del Sistema de Gestión");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmSalirActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
+        jmSalir.add(jMenuItem6);
+
         jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
@@ -281,20 +277,6 @@ public class MenuPrincipalView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        // Cierro el "Sistema de Gestión para la Universidad de La Punta"
-
-        // Código para cerrar todo el programa
-        System.exit(0);
-    }//GEN-LAST:event_jmSalirActionPerformed
-
-    private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
-        // Cierro el "Sistema de Gestión para la Universidad de La Punta"
-
-        // Código para cerrar todo el programa
-        System.exit(0);
-    }//GEN-LAST:event_jmSalirMouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         escritorio.removeAll();
@@ -353,10 +335,6 @@ public class MenuPrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         System.out.println("...");
         escritorio.removeAll();
@@ -371,6 +349,15 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         // ---------------------------------------------------------------------
         escritorio.moveToFront(cdapm);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // Cierro el "Sistema de Gestión para la Universidad de La Punta"
+
+        JOptionPane.showMessageDialog(null, "Vuelvan pronto que hay que terminar esto");
+        
+        // Código para cerrar todo el programa
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,6 +415,7 @@ public class MenuPrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
