@@ -23,10 +23,11 @@ public class InscripcionData {
     private AlumnoData aluData;
     private MateriaData matData;
 
+    // Aqui inicializo Connection en el constructor
     public InscripcionData() {
         // Creo el objeto (con) que hereda de la Clase Conexion.java y es el que
         // realiza toda la magia de la conexión
-        con = Conexion.getConexion();
+        this.con = Conexion.getConexion();
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -35,15 +36,21 @@ public class InscripcionData {
     // void guardarInscripcion(Inscripcion insc)
     // /////////////////////////////////////////////////////////////////////////
     public void guardarInscripcion(Inscripcion ins) {
-        // Preparo la consulta a la DB
+        // Preparo la consulta SQL para ser enviada cuando la necesite a la DB
         String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?, ?, ?)";
 
+        // Englobo todo el codigo por si ocurren errores en la conexion
         try {
             // Obtengo la clave del ID generada de la posicion 0 del DB
             // Esto es necesario por que aún no existe el ID que se crea en la DB
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Cargo idAlumno, idMateria y nota de las posiciones 1, 2 y 3 respectivamente
+            // El objeto ins es el que trae los aributos de tipo Nota, Alumno y Materia
+            // A los atributos los seteo al tipo de dato que corresponde para cada caso
+            // el ORDEN de los artibutos es MUY IMPORTANTE, deben coincidir con
+            // el orden en la tabla cuando se los pasemos con VALUES (?, ?, ?)
+            // al ejecutar la consulta SQL
             ps.setDouble(1, ins.getNota());
             ps.setInt(2, ins.getAlumno().getIdAlumno());
             ps.setInt(3, ins.getMateria().getIdMateria());
@@ -51,12 +58,15 @@ public class InscripcionData {
             // Ejecuto el INSERT y almaceno la consulta en la DB
             ps.executeUpdate();
 
-            // Obtengo el ID de la clave primaria y actualizo el rs
+            // Obtengo la lista de claves con el ID de la clave primaria que SQL
+            // genero, y actualizo el rs
             ResultSet rs = ps.getGeneratedKeys();
 
-            // Verifico que exista el ID que insertamos
+            // Verifico que exista el ID que insertamos para saber si se genero
+            // al menos una clave
             if (rs.next()) {
-                // Actualizo el ID de la inscripcion
+                // Actualizo el ID de la inscripcion desde la única columna
+                // que tiene el rs
                 ins.setIdInscripcion(rs.getInt(1));
                 
                 // Hay que ver si le hacemos una barra de status para informar
@@ -310,8 +320,8 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // void actualizarNota(int idAlumno, int idMateria, double nota)
     // /////////////////////////////////////////////////////////////////////////
-    public void actualizarNota(int idAlumno, int idMateria, double nota) {
-        // Preparo la consulta a la DB
+    public void actualizarNota(double nota, int idAlumno, int idMateria) {
+        // Preparo la consulta SQL para ser enviada cuando la necesite a la DB
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
@@ -319,12 +329,17 @@ public class InscripcionData {
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
-            // Para obtener el ID del alumno y el ID de la materia
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            ps.setDouble(3, nota);
+            // Cargo nota, idAlumno y idMateria de las posiciones 1, 2 y 3 respectivamente
+            // El objeto ins es el que trae los aributos de tipo Nota, Alumno y Materia
+            // A los atributos los seteo al tipo de dato que corresponde para cada caso
+            // el ORDEN de los artibutos es MUY IMPORTANTE, deben coincidir con
+            // el orden en la tabla cuando se los pasemos con VALUES (?, ?, ?)
+            // al ejecutar la consulta SQL
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
 
-            // Ejecuto la consulta
+            // Ejecuto el UPDATE y almaceno la consulta en la DB
             int rs = ps.executeUpdate();
 
             // Como la consulta es un executeUpdate que devuelve un entero,
@@ -334,7 +349,7 @@ public class InscripcionData {
                 // Hay que ver si le hacemos una barra de status para informar
                 // de estos casos al operador y no detenerlo a cada rato con
                 // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Nota actualizada");
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido encontrar el alumno para actulizar la nota");
             }
@@ -370,7 +385,7 @@ public class InscripcionData {
                 alu.setApellido(rs.getString("apellido"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno o materia: " + ex.getMessage());
         }
         return listaAlumnoXMateria;
     }

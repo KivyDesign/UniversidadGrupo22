@@ -16,7 +16,7 @@ public class MateriaData {
 
     // Creo los atributos aluData y matData para acceder mas comodamente a
     // los metodos de los paquetes entidades y MateriaData
-    private MateriaData matData;
+//    private MateriaData matData;
     
     public MateriaData() {
         con = Conexion.getConexion();
