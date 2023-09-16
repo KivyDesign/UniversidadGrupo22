@@ -121,12 +121,14 @@ public class UniversidadGrupo22 {
         // DELETE FROM inscripcion (idAlumno, idMateria) VALUES (2, 7)
         
         // Primero convertir los tipos alu y mat a enteros
-        int aluEnt = alu.getIdAlumno();
-        int matEnt = mat.getIdMateria();
+//        int aluEnt = alu.getIdAlumno();
+//        int matEnt = mat.getIdMateria();
 
         // Borro fisicamente la inscipcion con el metodo
         // borrarInscripcionMateriaAlumno de InscripcionData
-        insData.borrarInscripcionMateriaAlumno(aluEnt, matEnt);
+//        insData.borrarInscripcionMateriaAlumno(aluEnt, matEnt);
+
+
     }
 
 }

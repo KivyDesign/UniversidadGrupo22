@@ -20,8 +20,8 @@ public class InscripcionData {
     
     // Creo los atributos aluData y matData para acceder mas comodamente a
     // los metodos de los paquetes entidades AlumnoData y MateriaData
-    private AlumnoData aluData;
-    private MateriaData matData;
+    private AlumnoData aluData = new AlumnoData();
+    private MateriaData matData = new MateriaData();
 
     // Aqui inicializo Connection en el constructor
     public InscripcionData() {
@@ -91,48 +91,55 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerInscripciones()
     // /////////////////////////////////////////////////////////////////////////
-    public Inscripcion obtenerInscripcion(int idAlumno, int idMateria) {
-        // Preparo la consulta a la DB
-        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-
-        // Declaro a (i) y lo inicializo a null por las dudas
-        Inscripcion i = null;
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+    public List<Inscripcion> obtenerInscripciones() {
+        ArrayList<Inscripcion> cursadas = new ArrayList<>();
+        
+        // Preparo la consulta a la DB, se seleccionan todas por que el borrado
+        // es fisico, ergo todas las inscipciones son activas
+        String sql = "SELECT * FROM inscripcion";
+        
+         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno y el ID de la materia
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-
+        
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
-
-            // Como la consulta es un executeQuery que devuelve un objeto,
-            // entonces solo hay que procesarlo, de otra forma (i) se quedaria
-            // null y algo no estaria funcionando bien, para eso recorro el
-            // ResultSet (rs)
+            
+            // Recorremos el ResultSet mientras el mismo tenga elementos y 
+            // recuperamos los datos de las inscripciones
             while (rs.next()) {
-                // Creo el famoso objeto (i)
-                i = new Inscripcion();
-
-                // Le agrego la ID de la inscripcion
-                i.setIdInscripcion(rs.getInt("idInscripcion"));
-
-                // Aqui buscamos el Alumno por su ID
-                Alumno a = aluData.buscarAlumno(idAlumno);
-
-                // Se lo cargo al objeto (i)
-                i.setAlumno(a);
-
-                // Realizo la misma operacion para materia y nota
-                Materia m = matData.buscarMateria(idMateria);
-                i.setMateria(m);
-                i.setNota(rs.getDouble("nota"));
+                // Creo una inscripcion en el objeto ins utilizando el
+                // constructor vacio Inscripcion()
+                Inscripcion ins = new Inscripcion();
+                
+                // Recupero una inscripcion en el objeto ins que obtengo del rs
+                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                
+                // Recupero un alumno en el objeto alu que obtengo del rs
+                // utilizando aluData para poder acceder a su metodo buscarAlumno
+                // que espera un id del tipo int
+                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
+                
+                // Recupero un materia en el objeto mat que obtengo del rs
+                // utilizando matData para poder acceder a su metodo buscarMateria
+                // que espera un id del tipo int
+                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
+                
+                // Ahora seteo los datos que procese a inscripcion (ins)
+                ins.setAlumno(alu);
+                ins.setMateria(mat);
+                
+                // La nota esta en rs y es de tipo double y se encuentra en la
+                // columna nota de la tabla inscripcion
+                ins.setNota(rs.getDouble("nota"));
+                
+                // Una ves armada la inscripcion (ins). Por cada una de las
+                // inscripciones debemos agregarla a la lista de cursadas que
+                // es una ArrayList utilizando el metodo add propio del ArrayList
+                cursadas.add(ins);
             }
-
+        
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
@@ -141,8 +148,62 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
 
-        // Si todo salio bien, entonces retorno la inscripcion que obtuve
-        return i;
+        // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
+        return cursadas;
+
+        
+        
+//        // Preparo la consulta a la DB
+//        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+//
+//        // Declaro a (i) y lo inicializo a null por las dudas
+//        Inscripcion i = null;
+//
+//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+//        try {
+//            // Preparo la consulta
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Para obtener el ID del alumno y el ID de la materia
+//            ps.setInt(1, idAlumno);
+//            ps.setInt(2, idMateria);
+//
+//            // Ejecuto la consulta
+//            ResultSet rs = ps.executeQuery();
+//
+//            // Como la consulta es un executeQuery que devuelve un objeto,
+//            // entonces solo hay que procesarlo, de otra forma (i) se quedaria
+//            // null y algo no estaria funcionando bien, para eso recorro el
+//            // ResultSet (rs)
+//            while (rs.next()) {
+//                // Creo el famoso objeto (i)
+//                i = new Inscripcion();
+//
+//                // Le agrego la ID de la inscripcion
+//                i.setIdInscripcion(rs.getInt("idInscripcion"));
+//
+//                // Aqui buscamos el Alumno por su ID
+//                Alumno a = aluData.buscarAlumno(idAlumno);
+//
+//                // Se lo cargo al objeto (i)
+//                i.setAlumno(a);
+//
+//                // Realizo la misma operacion para materia y nota
+//                Materia m = matData.buscarMateria(idMateria);
+//                i.setMateria(m);
+//                i.setNota(rs.getDouble("nota"));
+//            }
+//
+//            // Cierro la consulta
+//            ps.close();
+//        } catch (SQLException ex) {
+//            // En caso de que explote la consulta se lo informo al pobre
+//            // y desafortunado DataEntry
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+//        }
+//
+//        // Si todo salio bien, entonces retorno la inscripcion que obtuve
+//        return i;
     }
 
     // /////////////////////////////////////////////////////////////////////////
