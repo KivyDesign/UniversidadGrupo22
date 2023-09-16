@@ -37,10 +37,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     public InscripcionesView() {
         initComponents();
 
-        // Quito la barra de titulo del JInternalFrame
-        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        // Quito los bordes de la ventana
-        //this.setBorder(null);
+//        // Quito la barra de titulo del JInternalFrame
+//        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+//        // Quito los bordes de la ventana
+//        //this.setBorder(null);
 //        putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 //        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);

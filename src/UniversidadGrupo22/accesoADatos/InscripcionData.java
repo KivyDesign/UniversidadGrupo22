@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -28,6 +29,11 @@ public class InscripcionData {
         con = Conexion.getConexion();
     }
 
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // void guardarInscripcion(Inscripcion insc)
+    // /////////////////////////////////////////////////////////////////////////
     public void guardarInscripcion(Inscripcion ins) {
         // Preparo la consulta a la DB
         String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?, ?, ?)";
@@ -70,188 +76,11 @@ public class InscripcionData {
         // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
 
-    public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
-        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
-        // en memoria temporalmente para trabajar
-        ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<Materia>();
-
-        // Declaro mat para utilizarlo para crear una nueva materia
-        Materia mat;
-
-        // Preparo la consulta a la DB
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno
-            ps.setInt(1, alumno.getIdAlumno());
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-
-            // Recorro el rs
-            while (rs.next()) {
-                // Creo el nuevo objeto que hereda de Materia
-                mat = new Materia();
-
-                // Le cargo los valores que necesito
-                mat.setIdMateria(rs.getInt("idMateria"));
-                mat.setNombre(rs.getString("nombre"));
-                mat.setAnioMateria(rs.getInt("anio"));
-
-                // Los agrego a los valores a la lista utilizando el metodo
-                // obtenerMateriaPorId que el nuevo objeto matData hereda de Materia
-                listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista con las materias que
-        // posea la tabla materia en la DB universidadulp
-        return listaDeMateriasInscripto;
-    }
-
-    public ArrayList<Materia> obtenerMateriaNoInscriptas(Alumno alumno) {
-        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
-        // en memoria temporalmente para trabajar
-        ArrayList<Materia> listaDeMateriasNoInscripto = new ArrayList<Materia>();
-
-        // Declaro mat para utilizarlo para crear una nueva materia
-        Materia mat;
-
-        // Preparo la consulta a la DB
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno
-            ps.setInt(1, alumno.getIdAlumno());
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-
-            // Recorro el rs
-            while (rs.next()) {
-                // Creo el nuevo objeto que hereda de Materia
-                mat = new Materia();
-
-                // Le cargo los valores que necesito
-                mat.setIdMateria(rs.getInt("idMateria"));
-                mat.setNombre(rs.getString("nombre"));
-                mat.setAnioMateria(rs.getInt("anio"));
-
-                // Los agrego a los valores a la lista utilizando el metodo
-                // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
-//                listaDeMateriasNoInscripto.add(mat.obtenerMateriaPorId(rs.getInt("idMateria")));
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista con las materias que
-        // no posea la tabla materia en la DB universidadulp
-        return listaDeMateriasNoInscripto;
-    }
-
-    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
-        // Este metodo recibe los IDs de alumno y materia, debera encontrarlos
-        // en la tabla para borrar la inscripcion correcta
-
-        // Preparo la consulta a la DB
-        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno y el ID de la materia
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-
-            // Ejecuto la consulta
-            int rs = ps.executeUpdate();
-
-            // Como la consulta es un executeUpdate que devuelve un entero,
-            // entonces solo hay que verificar si es mayor a 0, de otra forma
-            // algo no esta funcionando bien
-            if (rs > 0) {
-                // Hay que ver si le hacemos una barra de status para informar
-                // de estos casos al operador y no detenerlo a cada rato con
-                // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Inscripción borrada");
-            } else {
-                JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces no retorno nada por que es un metodo void
-    }
-
-    public void actualizarNota(int idAlumno, int idMateria, double nota) {
-        // Preparo la consulta a la DB
-        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno y el ID de la materia
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            ps.setDouble(3, nota);
-
-            // Ejecuto la consulta
-            int rs = ps.executeUpdate();
-
-            // Como la consulta es un executeUpdate que devuelve un entero,
-            // entonces solo hay que verificar si es mayor a 0, de otra forma
-            // algo no esta funcionando bien
-            if (rs > 0) {
-                // Hay que ver si le hacemos una barra de status para informar
-                // de estos casos al operador y no detenerlo a cada rato con
-                // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Nota actualizada");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido encontrar el alumno para actulizar la nota");
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces no retorno nada por que es un metodo void
-    }
-
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // List<Inscripcion> obtenerInscripciones()
+    // /////////////////////////////////////////////////////////////////////////
     public Inscripcion obtenerInscripcion(int idAlumno, int idMateria) {
         // Preparo la consulta a la DB
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
@@ -305,7 +134,227 @@ public class InscripcionData {
         // Si todo salio bien, entonces retorno la inscripcion que obtuve
         return i;
     }
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // List<Inscripcion> obtenerInscripcionesPorAlumno(int id)
+    // /////////////////////////////////////////////////////////////////////////
+    public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int id) {
+        ArrayList<Inscripcion> inscAlumno = new ArrayList<Inscripcion>();
+        
+        // Desarrollar TODO el código por aquí...
+        
+        return inscAlumno;
+    }
     
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // List<Inscripcion> obtenerMateriasCursadas(int id)
+    // /////////////////////////////////////////////////////////////////////////
+    public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
+        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
+        // en memoria temporalmente para trabajar
+        ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<Materia>();
+
+        // Declaro mat para utilizarlo para crear una nueva materia
+        Materia mat;
+
+        // Preparo la consulta a la DB
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+
+        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+        try {
+            // Preparo la consulta
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Para obtener el ID del alumno
+            ps.setInt(1, alumno.getIdAlumno());
+
+            // Ejecuto la consulta
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el rs
+            while (rs.next()) {
+                // Creo el nuevo objeto que hereda de Materia
+                mat = new Materia();
+
+                // Le cargo los valores que necesito
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("anio"));
+
+                // Los agrego a los valores a la lista utilizando el metodo
+                // obtenerMateriaPorId que el nuevo objeto matData hereda de Materia
+                listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
+            }
+
+            // Cierro la consulta
+            ps.close();
+        } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
+        }
+
+        // Si todo salio bien, entonces retorno la lista con las materias que
+        // posea la tabla materia en la DB universidadulp
+        return listaDeMateriasInscripto;
+    }
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // List<Inscripcion> obtenerMateriasNOCursadas(int id)
+    // /////////////////////////////////////////////////////////////////////////
+    public ArrayList<Materia> obtenerMateriaNoInscriptas(Alumno alumno) {
+        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
+        // en memoria temporalmente para trabajar
+        ArrayList<Materia> listaDeMateriasNoInscripto = new ArrayList<Materia>();
+
+        // Declaro mat para utilizarlo para crear una nueva materia
+        Materia mat;
+
+        // Preparo la consulta a la DB
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+
+        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+        try {
+            // Preparo la consulta
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Para obtener el ID del alumno
+            ps.setInt(1, alumno.getIdAlumno());
+
+            // Ejecuto la consulta
+            ResultSet rs = ps.executeQuery();
+
+            // Recorro el rs
+            while (rs.next()) {
+                // Creo el nuevo objeto que hereda de Materia
+                mat = new Materia();
+
+                // Le cargo los valores que necesito
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("anio"));
+
+                // Los agrego a los valores a la lista utilizando el metodo
+                // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
+//                listaDeMateriasNoInscripto.add(mat.obtenerMateriaPorId(rs.getInt("idMateria")));
+            }
+
+            // Cierro la consulta
+            ps.close();
+        } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
+        }
+
+        // Si todo salio bien, entonces retorno la lista con las materias que
+        // no posea la tabla materia en la DB universidadulp
+        return listaDeMateriasNoInscripto;
+    }
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria)
+    // /////////////////////////////////////////////////////////////////////////
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+        // Este metodo recibe los IDs de alumno y materia, debera encontrarlos
+        // en la tabla para borrar la inscripcion correcta
+
+        // Preparo la consulta a la DB
+        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+
+        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+        try {
+            // Preparo la consulta
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Para obtener el ID del alumno y el ID de la materia
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+
+            // Ejecuto la consulta
+            int rs = ps.executeUpdate();
+
+            // Como la consulta es un executeUpdate que devuelve un entero,
+            // entonces solo hay que verificar si es mayor a 0, de otra forma
+            // algo no esta funcionando bien
+            if (rs > 0) {
+                // Hay que ver si le hacemos una barra de status para informar
+                // de estos casos al operador y no detenerlo a cada rato con
+                // mensajitos de dialogo emergentes que son bastante molestos
+                JOptionPane.showMessageDialog(null, "Inscripción borrada");
+            } else {
+                JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
+            }
+
+            // Cierro la consulta
+            ps.close();
+        } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+        }
+
+        // Si todo salio bien, entonces no retorno nada por que es un metodo void
+    }
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // void actualizarNota(int idAlumno, int idMateria, double nota)
+    // /////////////////////////////////////////////////////////////////////////
+    public void actualizarNota(int idAlumno, int idMateria, double nota) {
+        // Preparo la consulta a la DB
+        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+
+        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+        try {
+            // Preparo la consulta
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Para obtener el ID del alumno y el ID de la materia
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            ps.setDouble(3, nota);
+
+            // Ejecuto la consulta
+            int rs = ps.executeUpdate();
+
+            // Como la consulta es un executeUpdate que devuelve un entero,
+            // entonces solo hay que verificar si es mayor a 0, de otra forma
+            // algo no esta funcionando bien
+            if (rs > 0) {
+                // Hay que ver si le hacemos una barra de status para informar
+                // de estos casos al operador y no detenerlo a cada rato con
+                // mensajitos de dialogo emergentes que son bastante molestos
+                JOptionPane.showMessageDialog(null, "Nota actualizada");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido encontrar el alumno para actulizar la nota");
+            }
+
+            // Cierro la consulta
+            ps.close();
+        } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+        }
+
+        // Si todo salio bien, entonces no retorno nada por que es un metodo void
+    }
+    
+    // /////////////////////////////////////////////////////////////////////////
+    // Declaración sugerida:
+    // -------------------------------------------------------------------------
+    // List<Alumno> obtenerAlumnoXMateria(int idMateria)
+    // /////////////////////////////////////////////////////////////////////////
     public ArrayList<Alumno> obtenerAlumnoXMateria(Materia materia){
         ArrayList<Alumno> listaAlumnoXMateria = new ArrayList<Alumno>();
         Alumno alu;
