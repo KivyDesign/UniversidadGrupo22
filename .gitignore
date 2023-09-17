@@ -52,5 +52,11 @@ nbdist/
 
 # ######################################################
 
+# Correr desde linea de comandos de GIT
+
+# git rm --cached *.properties
+# git rm --cached nbproject/project.properties
+# git rm --cached src/UniversidadGrupo22/accesoADatos/Conexion.java
+
 # Si nada de TODO esto funciona, ignorelo :(
 
