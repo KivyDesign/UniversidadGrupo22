@@ -128,7 +128,38 @@ public class UniversidadGrupo22 {
         // borrarInscripcionMateriaAlumno de InscripcionData
 //        insData.borrarInscripcionMateriaAlumno(aluEnt, matEnt);
 
+        // ---------------------------------------------------------------------
+        // Para el metodo obtenerInscripciones()
+        // ---------------------------------------------------------------------
 
+        // La instruccion en MySQL funciona bien manualmente
+        // SELECT * FROM inscripcion
+        
+        // Realizo la consulta con el metodo obtenerInscripciones()
+        // El resultado es del tipo Inscripcion
+//        for (Inscripcion inscripcion : insData.obtenerInscripciones()) {
+//            System.out.println("ID: " + inscripcion.getIdInscripcion());
+//            System.out.println("Apellido: " + inscripcion.getAlumno().getApellido());
+//            System.out.println("Materia: " + inscripcion.getMateria().getNombre());
+//        }
+
+        // ---------------------------------------------------------------------
+        // Para el metodo obtenerAlumnosXMateria()
+        // ---------------------------------------------------------------------
+        
+        // La instruccion en MySQL funciona bien manualmente
+//        "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
+//                + "FROM inscripcion i, alumno a"
+//                + "WHERE i.idAlumno = a.idAlumno"
+//                + "AND idMateria = ?"
+//                + "AND a.estado = 1";
+        
+        // Recorre todas las materias y las muestra, menos en las que el
+        // alumno este inscripto
+//        for (Materia materia : insData.obtenerMateriasNOCursadas(22)) {
+//            System.out.println("Nombre: " + materia.getNombre());
+//        }
+        
     }
 
 }
