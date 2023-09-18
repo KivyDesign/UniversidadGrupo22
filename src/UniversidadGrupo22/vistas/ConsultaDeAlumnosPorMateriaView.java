@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package UniversidadGrupo22.vistas;
-import UniversidadGrupo22.accesoADatos.AlumnoData;
+
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.accesoADatos.MateriaData;
+import UniversidadGrupo22.entidades.Alumno;
 import UniversidadGrupo22.entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Pc
  */
 public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame {
+
     private MateriaData materiaData;
     private List<Materia> listarMaterias;
     private DefaultTableModel modelo;
+    private InscripcionData inscripcionData;
+
     /**
      * Creates new form ConsultaDeAlumnosPorMateriaView
      */
@@ -30,7 +34,8 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         cargarMaterias();
         modelo = new DefaultTableModel();
         armarCabecera();
-        
+        InscripcionData InscripcionData = new InscripcionData();
+
     }
 
     /**
@@ -195,7 +200,8 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcbMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMateriaItemStateChanged
-        
+        Materia materiaSeleccionada = (Materia) jcbMateria.getSelectedItem();
+        cargarAlumnos(materiaSeleccionada);
     }//GEN-LAST:event_jcbMateriaItemStateChanged
 
 
@@ -212,32 +218,37 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
     private javax.swing.JComboBox<Materia> jcbMateria;
     private javax.swing.JTable jtAlumnos;
     // End of variables declaration//GEN-END:variables
-private void cargarMaterias(){
-    for (Materia listarMaterias : listarMaterias) {
+private void cargarMaterias() {
+        for (Materia listarMaterias : listarMaterias) {
             jcbMateria.addItem(listarMaterias);
         }
-}
- 
-private void armarCabecera(){
-    modelo.addColumn("ID");
-    modelo.addColumn("DNI");
-    modelo.addColumn("Apellido");
-    modelo.addColumn("Nombre");
-    jtAlumnos.setModel(modelo);
-}
+    }
 
-public void cargarAlumnos(){
-//   InscripcionData inscripcionData = new InscripcionData();
-//    Materia seleccionada = (Materia)jcbMateria.getSelectedItem();
-//    
-//    ArrayList<Alumno> alumnos= inscripcionData.obtenerAlumnosXMateria(seleccionada);
-//    
-////LIMPIO LA TABLA 
-//    modelo.setRowCount(0);
-    
-    
-    
-    
-}
+    private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        jtAlumnos.setModel(modelo);
+    }
 
+    private void cargarAlumnos(Materia materia) {
+        //Limpio la tabla aca 
+        modelo.setRowCount(0);
+         // aca estoy verificsndo que la materia no sea nula
+        if (materia != null) {
+            int idMateria = materia.getIdMateria();
+            ArrayList<Alumno> alumnos = inscripcionData.obtenerAlumnosXMateria(idMateria);
+            for (Alumno alumno : alumnos) {
+                modelo.addRow(new Object[]{
+                    alumno.getIdAlumno(),
+                    alumno.getDni(),
+                    alumno.getApellido(),
+                    alumno.getNombre()
+
+                });
+            }
+
+        }
+    }
 }
