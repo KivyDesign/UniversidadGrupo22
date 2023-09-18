@@ -33,9 +33,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private MateriaData materiaData;
     private InscripcionData inscripcionData;
 
-    AlumnoData aluData = new AlumnoData();
-    MateriaData matData = new MateriaData();
-    InscripcionData insData = new InscripcionData();
+//    AlumnoData aluData = new AlumnoData();
+//    MateriaData matData = new MateriaData();
+//    InscripcionData insData = new InscripcionData();
     
     /**
      * Creates new form InscripcionesView
@@ -80,6 +80,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         
         // Cargo los datos en el modelo de la Tabla
 //        cargarDatosEnElModeloDeLatabla();
+
+        // Ejecuto todo en un metodo para mejorar la logica y poder reutilizar
+        // el codigo desde varios eventos
+        RadioButtonNoInscriptos();
     }
 
     /**
@@ -469,7 +473,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
 
             for (Materia mat : lista) {
-                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+                modelo.addRow(new Object[]{
+                    mat.getIdMateria(),
+                    mat.getNombre(),
+                    mat.getAnioMateria()});
             }
         } else {
             // Prueba de concepto StatusBar ----------------------------------------
