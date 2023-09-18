@@ -7,6 +7,7 @@ package UniversidadGrupo22.vistas;
 
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.entidades.Alumno;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -58,7 +59,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        jlStatusBar = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
@@ -159,9 +160,9 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(45, 65, 88));
         jPanel3.setPreferredSize(new java.awt.Dimension(424, 29));
 
-        jLabel8.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 153, 102));
-        jLabel8.setText("Texto de prueba");
+        jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
+        jlStatusBar.setText("Texto de prueba");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -169,14 +170,14 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlStatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
+                .addComponent(jlStatusBar)
                 .addContainerGap())
         );
 
@@ -350,10 +351,16 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
                     alumnoData.guardarAlumno(alumno);
                 } else {
-                    JOptionPane.showMessageDialog(null, "El DNI ya existe");
+                    // Prueba de concepto StatusBar ----------------------------------------
+                    PruebaDeConceptoStatusBar(2, "El DNI ya existe");
+                    // ---------------------------------------------------------------------
+//                    JOptionPane.showMessageDialog(null, "El DNI ya existe");
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
+                // Prueba de concepto StatusBar ----------------------------------------
+                PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
+                // ---------------------------------------------------------------------
+//                JOptionPane.showMessageDialog(this, "El DNI debe ser un número");
             }
         }
         jtDni.setText("");
@@ -404,7 +411,6 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -416,9 +422,29 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdcFechaNacimiento;
+    private javax.swing.JLabel jlStatusBar;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+        // Prueba de concepto StatusBar ----------------------------------------
+        
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlStatusBar.setForeground(new Color(0, 153, 102));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlStatusBar.setForeground(new Color(255, 50, 0));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlStatusBar.setText(mensaje);
+    }
 }
