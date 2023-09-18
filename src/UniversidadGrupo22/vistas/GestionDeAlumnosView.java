@@ -335,12 +335,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdcFechaNacimiento.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "los campos deben ser completados");
+            JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else {
             try {
                 LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Alumno alumno = new Alumno(Integer.parseInt(jtDni.getText()), jtApellido.getText(),
-                        jtNombre.getText(), fechan, true);
+                
+                Alumno alumno = new Alumno(
+                        Integer.parseInt(jtDni.getText()),
+                        jtApellido.getText(),
+                        jtNombre.getText(),
+                        fechan,
+                        true);
+                
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
                     alumnoData.guardarAlumno(alumno);
                 } else {
