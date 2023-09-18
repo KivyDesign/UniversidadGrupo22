@@ -336,6 +336,9 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdcFechaNacimiento.getDate() == null) {
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
+            // ---------------------------------------------------------------------
             JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else {
             try {
