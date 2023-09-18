@@ -33,13 +33,17 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     private MateriaData materiaData;
     private InscripcionData inscripcionData;
 
+    AlumnoData aluData = new AlumnoData();
+    MateriaData matData = new MateriaData();
+    InscripcionData insData = new InscripcionData();
+    
     /**
      * Creates new form InscripcionesView
      */
     public InscripcionesView() {
         initComponents();
 
-// Inicializo el nuevo modelo para acceder a los metodos de
+        // Inicializo el nuevo modelo para acceder a los metodos de
         // DefaultTableModel()
         modelo = new DefaultTableModel();
 
@@ -73,6 +77,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Nombre y Año que necesito mostrarle al usuario para que seleccione
         // una materia asi puede inscribir o desinscribir un alumno
         armarCabeceraDeLaTabla();
+        
+        // Cargo los datos en el modelo de la Tabla
+        cargarDatosEnElModeloDeLatabla();
     }
 
     /**
@@ -481,6 +488,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     }
 
     public void armarCabeceraDeLaTabla() {
+        // =====================================================================
+        // Creación del metodo para modificar las caracteristicas de la Tabla
+        // =====================================================================
+        
         // Al modelo le agregamos las siguientes columnas:
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
@@ -493,6 +504,35 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jtMaterias.getColumnModel().getColumn(0).setPreferredWidth(30);
         jtMaterias.getColumnModel().getColumn(1).setPreferredWidth(220);
         jtMaterias.getColumnModel().getColumn(2).setPreferredWidth(100);
+    }
+    
+    public void cargarDatosEnElModeloDeLatabla() {
+        // Este metodo va ha ser invocado cada ves que el alumno cambie en el
+        // ComboBox o cambie la materia en la que este inscripto o desinscripto
+        // el alumno
+        
+        // 
+        int primerAlumnoDeLaLista = 0;
+        boolean listo = true;
+        for (Alumno listarAlumno : listarAlumnos) {
+            if (listo) {
+                primerAlumnoDeLaLista = listarAlumno.getIdAlumno();
+                // Para que solo se cargue el primer ID del alumno de la lista
+                listo = false;
+            }
+        }
+        Alumno alu = aluData.buscarAlumno(primerAlumnoDeLaLista);
+        
+        ArrayList<Materia> mat = insData.obtenerMateriaNoInscriptas(alu);
+        
+        // Agregamos al alumno la materia como fila de la Tabla con addRow que
+        // utiliza un Object, por lo que hay que pasarle todos los elementos de
+        // la fila en el orden en que deberan aparecer
+//        modelo.addRow(new Object[]{
+//            mat.getIdMateria(),
+//            mat.getNombre(),
+//            mat.getAnioMateria()
+//        });
     }
 
     public void borrarFilasTabla() {
