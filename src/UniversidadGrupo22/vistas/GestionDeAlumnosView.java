@@ -356,7 +356,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                     // Agrego el alumno
                     alumnoData.guardarAlumno(alumno);
                     // Si lo agregue con exito no es null y se lo informo al DataEntry
-                    if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
+                    if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
                         // Prueba de concepto StatusBar ----------------------------------------
                         PruebaDeConceptoStatusBar(1, "Alumno agregado de forma exitosa");
                         // ---------------------------------------------------------------------
