@@ -25,11 +25,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InscripcionesView extends javax.swing.JInternalFrame {
 
-    // Declaro el modelo que hereda de DefaultTableModel
-    private DefaultTableModel modelo;
-    
     private AlumnoData alumnoData;
     private List<Alumno> listarAlumnos;
+    private DefaultTableModel modelo;
     private MateriaData materiaData;
     private InscripcionData inscripcionData;
 
@@ -38,10 +36,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
      */
     public InscripcionesView() {
         initComponents();
-        
-        // Inicializo el nuevo modelo para acceder a los metodos de
-        // DefaultTableModel()
-        modelo = new DefaultTableModel();
 
 //        // Quito la barra de titulo del JInternalFrame
 //        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -51,28 +45,20 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 //        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 //        this.setBorder(null);
-
         // Inicializo el acceso a los datos de las tablas alumno e inscripción
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
         listarAlumnos = alumnoData.listarAlumnos();
-        inscripcionData = new InscripcionData();
-        
-        // Cargo los alumnos que necesito mostrar en el ComboBox
-        // La idea es que por defecto se carguen los alumnos activos con el
-        // flag de estado = 1
         cargarAlumnos();
+        modelo = new DefaultTableModel();
+        armarCabeceraDeLaTabla();
+        inscripcionData = new InscripcionData();
         
         // Defino el jrbMateriasNoInscriptas como seleccionado y cargo los
         // datos de las materias en las que el alumno que este seleccionado en
-        // el ComboBox no este inscripto aún
+        // el ComboBox no es inscripto aún
         //jrbMateriasNoInscriptas.setSelected(true);
         RadioButtonNoInscriptos();
-        
-        // Armo la cabecera de la tabla para que se lean bien los campos ID,
-        // Nombre y Año que necesito mostrarle al usuario para que seleccione
-        // una materia asi puede inscribir o desinscribir un alumno
-        armarCabeceraDeLaTabla();
     }
 
     /**
