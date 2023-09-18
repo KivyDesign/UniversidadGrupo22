@@ -511,7 +511,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // ComboBox o cambie la materia en la que este inscripto o desinscripto
         // el alumno
         
-        // 
+        // Busco el primer alumno de la lista
         int primerAlumnoDeLaLista = 0;
         boolean listo = true;
         for (Alumno listarAlumno : listarAlumnos) {
@@ -521,10 +521,15 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                 listo = false;
             }
         }
+        // Retorno un alumno completo
         Alumno alu = aluData.buscarAlumno(primerAlumnoDeLaLista);
         
+        // Obtengo las materias en las que no esta inscripto aún
         ArrayList<Materia> mat = insData.obtenerMateriaNoInscriptas(alu);
         
+        // Como las materias en las que no esta inscripto aún son de tipo
+        // ArrayList, debemos procesarlas para cargarlas en el modelo de la Tabla
+        //
         // Agregamos al alumno la materia como fila de la Tabla con addRow que
         // utiliza un Object, por lo que hay que pasarle todos los elementos de
         // la fila en el orden en que deberan aparecer
