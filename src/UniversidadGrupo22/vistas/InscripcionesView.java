@@ -472,6 +472,8 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         if (seleccionado != null) {
             ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
 
+            System.out.println("Lista de Materias: " + lista);
+            
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{
                     mat.getIdMateria(),
