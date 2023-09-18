@@ -9,6 +9,7 @@ import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.entidades.Alumno;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -308,7 +309,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setDni(Integer.parseInt(jtDni.getText()));
                 alumno.setApellido(jtApellido.getText());
                 alumno.setNombre(jtNombre.getText());
-                //  alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumnoData.modificarAlumno(alumno);
             }
         } catch (NumberFormatException e) {
@@ -318,6 +319,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jtDni.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
+        jdcFechaNacimiento.setDate(null);
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -332,17 +334,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-       //falta agregar sentencia  jdcFechaNacimiento.getDate() == null
-        if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+        if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdcFechaNacimiento.getDate() == null) {
             JOptionPane.showMessageDialog(null, "los campos deben ser completados");
         } else {
-            try { //     LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
-                /*    Alumno alumno = new Alumno(Integer.parseInt(jtDni.getText()), jtApellido.getText(),
+            try {
+                LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Alumno alumno = new Alumno(Integer.parseInt(jtDni.getText()), jtApellido.getText(),
                         jtNombre.getText(), fechan, true);
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
                     alumnoData.guardarAlumno(alumno);
                 } else {
-                    JOptionPane.showMessageDialog(null, "El DNI ya existe");*/
+                    JOptionPane.showMessageDialog(null, "El DNI ya existe");
+                }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             }
@@ -351,8 +354,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         jtNombre.setText("");
         jrbEstado.setSelected(false);
-        // setear calendario
-        //jdcFechaNacimiento.setDate(null);
+        jdcFechaNacimiento.setDate(null);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -365,7 +367,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 if (alumno != null) {
                     jtApellido.setText(alumno.getApellido());
                     jtNombre.setText(alumno.getNombre());
-                    //   jdcFechaNacimiento.setDate( Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));        
+                    jdcFechaNacimiento.setDate(Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                     if (alumno.isEstado() == true) {
                         jrbEstado.setSelected(true);
                     }
@@ -373,7 +375,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                     jtDni.setText("");
                     jtApellido.setText("");
                     jtNombre.setText("");
-                   // jdcFechaNacimiento.setDate(null);
+                    jdcFechaNacimiento.setDate(null);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "debe Colocar el DNI");
