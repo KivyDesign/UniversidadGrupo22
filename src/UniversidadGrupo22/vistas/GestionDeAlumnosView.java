@@ -170,8 +170,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlStatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlStatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +362,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         // ---------------------------------------------------------------------
                     } else {
                         // Prueba de concepto StatusBar ----------------------------------------
-                        PruebaDeConceptoStatusBar(2, "ERROR: El alumno no se pudo agegar");
+                        PruebaDeConceptoStatusBar(2, "ERROR: El alumno no se pudo agregar");
                         // ---------------------------------------------------------------------
                     }
                     
