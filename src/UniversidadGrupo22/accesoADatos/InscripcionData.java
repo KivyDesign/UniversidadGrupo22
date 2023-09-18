@@ -444,9 +444,13 @@ public class InscripcionData {
 //        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
         // Al ser un producto cartesiano se filtra en el WHERE para que
         // solo queden los que posean un ID igual
-        String sql = "SELECT inscripcion.idMateria, nombre, anio"
+//        SELECT inscripcion.idMateria, inscripcion.nota, nombre, anio
+//        FROM inscripcion, materia
+//        WHERE inscripcion.idMateria = materia.idMateria 
+//        AND inscripcion.idAlumno = 3;
+        String sql = "SELECT inscripcion.idMateria, inscripcion.nota, nombre, anio"
                 + "FROM inscripcion, materia"
-                + "WHERE inscripcion.idMateria = materia.idMateria"
+                + "WHERE inscripcion.idMateria = materia.idMateria "
                 + "AND inscripcion.idAlumno = ?;";
         
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
@@ -456,6 +460,7 @@ public class InscripcionData {
 
             // Para obtener el ID del alumno
             ps.setInt(1, idAlumno);
+            
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
@@ -469,6 +474,7 @@ public class InscripcionData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
+                materia.setActivo(true);
 
                 // Agrego la materia al array materia
                 listaDeMateriasInscripto.add(materia);
