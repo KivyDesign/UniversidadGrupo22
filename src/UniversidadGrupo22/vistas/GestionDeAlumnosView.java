@@ -351,8 +351,21 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         fechan,
                         true);
                 
+                // Primero busco si existe para no agregarlo repetido
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
+                    // Agrego el alumno
                     alumnoData.guardarAlumno(alumno);
+                    // Si lo agregue con exito no es null y se lo informo al DataEntry
+                    if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
+                        // Prueba de concepto StatusBar ----------------------------------------
+                        PruebaDeConceptoStatusBar(1, "Alumno agregado de forma exitosa");
+                        // ---------------------------------------------------------------------
+                    } else {
+                        // Prueba de concepto StatusBar ----------------------------------------
+                        PruebaDeConceptoStatusBar(2, "ERROR: El alumno no se pudo agegar");
+                        // ---------------------------------------------------------------------
+                    }
+                    
                 } else {
                     // Prueba de concepto StatusBar ----------------------------------------
                     PruebaDeConceptoStatusBar(2, "El DNI ya existe");
