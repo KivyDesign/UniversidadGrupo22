@@ -229,11 +229,11 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(173, 173, 173)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -264,9 +264,9 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(14, 14, 14)
+                .addGap(8, 8, 8)
                 .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +308,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setDni(Integer.parseInt(jtDni.getText()));
                 alumno.setApellido(jtApellido.getText());
                 alumno.setNombre(jtNombre.getText());
-                //  alumno.setFechaNacimiento(jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                //  alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumnoData.modificarAlumno(alumno);
             }
         } catch (NumberFormatException e) {
@@ -332,17 +332,17 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-       //falta agregar sentencia  jDateNacimiento.getDate() == null
+       //falta agregar sentencia  jdcFechaNacimiento.getDate() == null
         if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "los campos deben ser completados");
         } else {
-            try { //     LocalDate fechan = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+            try { //     LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
                 /*    Alumno alumno = new Alumno(Integer.parseInt(jtDni.getText()), jtApellido.getText(),
                         jtNombre.getText(), fechan, true);
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
                     alumnoData.guardarAlumno(alumno);
                 } else {
-                    JOptionPane.showMessageDialog(null, "el DNI ya existe");*/
+                    JOptionPane.showMessageDialog(null, "El DNI ya existe");*/
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             }
@@ -352,7 +352,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jrbEstado.setSelected(false);
         // setear calendario
-//jDateNacimiento.setDate(null);
+        //jdcFechaNacimiento.setDate(null);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -361,11 +361,11 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             if (!jtDni.getText().isEmpty()) {
                 // Busco alumno por dni
                 Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
-                // busco si el alumno no esta vacio
+                // Busco si el alumno no esta vacio
                 if (alumno != null) {
                     jtApellido.setText(alumno.getApellido());
                     jtNombre.setText(alumno.getNombre());
-                    //   jDateNacimiento.setDate( Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));        
+                    //   jdcFechaNacimiento.setDate( Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));        
                     if (alumno.isEstado() == true) {
                         jrbEstado.setSelected(true);
                     }
@@ -373,7 +373,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                     jtDni.setText("");
                     jtApellido.setText("");
                     jtNombre.setText("");
-                   // jDateNacimiento.setDate(null);
+                   // jdcFechaNacimiento.setDate(null);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "debe Colocar el DNI");
