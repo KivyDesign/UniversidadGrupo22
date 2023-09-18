@@ -227,13 +227,13 @@ private void armarCabecera(){
 }
 
 public void cargarAlumnos(){
-   InscripcionData inscripcionData = new InscripcionData();
-    Materia seleccionada = (Materia)jcbMateria.getSelectedItem();
-    
-    ArrayList<Alumno> alumnos= inscripcionData.obtenerAlumnosXMateria(seleccionada);
-    
-//LIMPIO LA TABLA 
-    modelo.setRowCount(0);
+//   InscripcionData inscripcionData = new InscripcionData();
+//    Materia seleccionada = (Materia)jcbMateria.getSelectedItem();
+//    
+//    ArrayList<Alumno> alumnos= inscripcionData.obtenerAlumnosXMateria(seleccionada);
+//    
+////LIMPIO LA TABLA 
+//    modelo.setRowCount(0);
     
     
     
