@@ -324,15 +324,14 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        //     LocalDate fechan = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+       //falta agregar sentencia  jDateNacimiento.getDate() == null
         if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "los campos deben ser completados");
         } else {
-            try {
+            try { //     LocalDate fechan = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
                 /*    Alumno alumno = new Alumno(Integer.parseInt(jtDni.getText()), jtApellido.getText(),
                         jtNombre.getText(), fechan, true);
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
-
                     alumnoData.guardarAlumno(alumno);
                 } else {
                     JOptionPane.showMessageDialog(null, "el DNI ya existe");*/
@@ -344,8 +343,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jtApellido.setText("");
         jtNombre.setText("");
         jrbEstado.setSelected(false);
-        //no se como setear calendario
-//jDateNacimiento.setDate(date);
+        // setear calendario
+//jDateNacimiento.setDate(null);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -366,6 +365,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                     jtDni.setText("");
                     jtApellido.setText("");
                     jtNombre.setText("");
+                   // jDateNacimiento.setDate(null);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "debe Colocar el DNI");
