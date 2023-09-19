@@ -433,7 +433,7 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerMateriasCursadas(int id)
     // /////////////////////////////////////////////////////////////////////////
-    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
+    public ArrayList<Materia> obtenerMateriasCursadas(int idAlumno) {
 //    public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
         // Creo una lista listaDeMateriasInscripto para almacenar los resultados
         // en memoria temporalmente para trabajar
@@ -448,10 +448,10 @@ public class InscripcionData {
 //        FROM inscripcion, materia
 //        WHERE inscripcion.idMateria = materia.idMateria 
 //        AND inscripcion.idAlumno = 3;
-        String sql = "SELECT inscripcion.idMateria, inscripcion.nota, nombre, anio"
+        String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio"
                 + "FROM inscripcion, materia"
-                + "WHERE inscripcion.idMateria = materia.idMateria "
-                + "AND inscripcion.idAlumno = ?;";
+                + "WHERE inscripcion.idMateria = materia.idMateria"
+                + "AND inscripcion.idAlumno = ?";
         
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
@@ -460,7 +460,7 @@ public class InscripcionData {
 
             // Para obtener el ID del alumno
             ps.setInt(1, idAlumno);
-            
+            System.out.println("id"+idAlumno);
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
@@ -472,6 +472,7 @@ public class InscripcionData {
 
                 // Le cargo los valores que necesito
                 materia.setIdMateria(rs.getInt("idMateria"));
+                System.out.println("IdMateria: " +rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);

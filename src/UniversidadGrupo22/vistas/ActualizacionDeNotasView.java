@@ -34,7 +34,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) jtNotas.getModel();
         aluData = new AlumnoData();
         listarAlumnos = aluData.listarAlumnos();
-//        insData = new InscripcionData();
+        insData = new InscripcionData();
         cargarAlumnos();
         armarCabeceraDeLaTabla();
 
@@ -68,13 +68,10 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
         jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jtNotas);
@@ -229,13 +226,17 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     public void cargarMaterias() {
 
         Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
+        
         int id = seleccionada.getIdAlumno();
+        
+        System.out.println("ID: "+id);
+        
         if (seleccionada != null) {
             ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriasCursadas(id);
 
-            for (Materia mat : lista) {
-                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
-            }
+//            for (Materia mat : lista) {
+//                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+//            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }
