@@ -154,11 +154,11 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(45, 65, 88));
-        jPanel3.setPreferredSize(new java.awt.Dimension(424, 29));
+        jPanel3.setPreferredSize(new java.awt.Dimension(424, 32));
 
         jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
@@ -189,8 +189,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +202,9 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtApellido)
                                     .addComponent(jtDni)
-                                    .addComponent(jtNombre))
+                                    .addComponent(jtNombre)
+                                    .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(65, 65, 65)
                                 .addComponent(jbBuscar)
                                 .addGap(20, 20, 20))))
@@ -214,7 +214,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap(467, Short.MAX_VALUE))
+                        .addContainerGap(466, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +223,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                                 .addComponent(jbNuevo)
                                 .addGap(64, 64, 64)
                                 .addComponent(jbGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                                 .addComponent(jbEliminar)
                                 .addGap(71, 71, 71)
                                 .addComponent(jbSalir)))

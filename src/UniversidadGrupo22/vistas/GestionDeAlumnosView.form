@@ -45,8 +45,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="0" pref="571" max="32767" attributes="0"/>
-              <Component id="jPanel3" alignment="0" pref="571" max="32767" attributes="0"/>
+              <Component id="jPanel2" alignment="0" pref="570" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" pref="570" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -59,9 +59,9 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jtApellido" max="32767" attributes="0"/>
                                       <Component id="jtDni" max="32767" attributes="0"/>
                                       <Component id="jtNombre" max="32767" attributes="0"/>
+                                      <Component id="jtApellido" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                                   <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                               <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="467" max="32767" attributes="0"/>
+                          <EmptySpace pref="466" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -86,7 +86,7 @@
                                   <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                   <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                                  <EmptySpace pref="140" max="32767" attributes="0"/>
                                   <Component id="jbEliminar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
@@ -306,7 +306,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -339,7 +339,7 @@
               <Color blue="58" green="41" red="2d" type="rgb"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[424, 29]"/>
+              <Dimension value="[424, 32]"/>
             </Property>
           </Properties>
 
