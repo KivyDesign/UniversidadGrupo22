@@ -75,12 +75,13 @@ public class X01FormView extends javax.swing.JFrame {
     public void cargarAlumnos() {
         // Remuevo todos los items del comboBox
         jcbCargarAlumnos.removeAllItems();
-        // Pido que desde aquí se seleccione un alumno
-        jcbCargarAlumnos.addItem("Seleccione un alumno");
+//        // Pido que desde aquí se seleccione un alumno
+//        jcbCargarAlumnos.addItem("Seleccione un alumno");
+//        // Elimina el primer item.
+//        jcbCargarAlumnos.removeItemAt(0);
         // Recorro la lista de alumnos y voy agregando cada item en el ComboBox
         aluData.listarAlumnos().forEach(item -> {
-            //jcbCargarAlumnos.addItem(item.getIdAlumno() + " - " + item.getApellido() + " " + item.getNombre() + " " + item.getDni());
-            jcbCargarAlumnos.addItem(item.getApellido() + " " + item.getNombre());
+            jcbCargarAlumnos.addItem(item.getIdAlumno() + " - " + item.getApellido() + " " + item.getNombre() + " " + item.getDni());
         });
 
 //        // Cargamos los alumnos en el ComboBox
@@ -479,7 +480,8 @@ public class X01FormView extends javax.swing.JFrame {
         // Aqui va el codigo para cuando cambie la seleccion del ComboBox
         // Quiero el alumno seleccionado en el ComboBox
 //        Alumno seleccionado = (Alumno) jcbCargarAlumnos.getSelectedItem();
-//        System.out.println("DNI: " + seleccionado);
+        String seleccionado = (String) jcbCargarAlumnos.getSelectedItem();
+        System.out.println("Alumno: " + seleccionado);
     }//GEN-LAST:event_jcbCargarAlumnosItemStateChanged
 
     /**
