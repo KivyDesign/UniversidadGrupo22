@@ -8,9 +8,11 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.Conexion;
 import UniversidadGrupo22.entidades.Alumno;
+import java.awt.Color;
 import java.sql.Connection;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,25 +27,25 @@ public class X01FormView extends javax.swing.JFrame {
     private AlumnoData aluData;
     // Para el modelo de la tabla
     private DefaultTableModel modelo;
-    
+
     private ArrayList<Alumno> listarAlumnos;
-    
+
     /**
      * Creates new form X01FormView
      */
     public X01FormView() {
         initComponents();
-        
+
         // Aqui los conecto a los metodos
 //        this.aluData = aluData;
         modelo = (DefaultTableModel) jtAlumnos.getModel();
         aluData = new AlumnoData();
         listarAlumnos = aluData.listarAlumnos();
-        
+
         // =====================================================================
         // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
-        
+
         // Si la conexion fue exitosa lo informo como conectado con un (sout)
         // para no tener ese molesto dialogo de conexion
         if (con != null) {
@@ -51,22 +53,21 @@ public class X01FormView extends javax.swing.JFrame {
         } else {
             this.setTitle("Sistema de Gestión para la Universidad de La Punta - Estado: Error");
         }
-        
+
         // Centro la ventana en la pantalla
         this.setLocationRelativeTo(this);
-        
+
         // =====================================================================
-        
         // Cargar alumnos en el ComboBox
         cargarAlumnos();
-        
+
         // Armo la cabecera de la tabla
         armarCabeceraDeLaTabla();
 
         // Cargar alumnos en la tabla
         cargarTabla();
     }
-    
+
     public void cargarAlumnos() {
         // Remuevo todos los items del comboBox
         jcbCargarAlumnos.removeAllItems();
@@ -84,23 +85,21 @@ public class X01FormView extends javax.swing.JFrame {
 ////            jcbCargarAlumnos.addItem(listarAlumno.toString());
 //        }
     }
-    
+
     public void cargarTabla() {
 //        if (!aluData.listarAlumnos().isEmpty()) {
 //            System.out.println(".");
 //        }
-        
+
 //        for (Alumno alumno : aluData.listarAlumnos()) {
 //            System.out.println("DNI: " + alumno.getDni());
 //            System.out.println("Apellido: " + alumno.getApellido());
 //            System.out.println("Nombre: " + alumno.getNombre());
 //            System.out.println("Fecha de Nacimiento: " + alumno.getFechaNacimiento());
 //        }
-        
 //        if (aluData.listarAlumnos().size() > 0) {
 //            System.out.println(aluData.listarAlumnos());
 //        }
-        
         aluData.listarAlumnos().forEach(alumno -> {
             modelo.addRow(new Object[]{
                 alumno.getIdAlumno(),
@@ -117,7 +116,7 @@ public class X01FormView extends javax.swing.JFrame {
         // =====================================================================
         // Creación del metodo para modificar las caracteristicas de la Tabla
         // =====================================================================
-        
+
         // Al modelo le agregamos las siguientes columnas:
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
@@ -131,19 +130,19 @@ public class X01FormView extends javax.swing.JFrame {
 
         // Ajusto el tamaño de las columnas de la tabla
         jtAlumnos.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jtAlumnos.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jtAlumnos.getColumnModel().getColumn(1).setPreferredWidth(80);
         jtAlumnos.getColumnModel().getColumn(2).setPreferredWidth(100);
         jtAlumnos.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jtAlumnos.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jtAlumnos.getColumnModel().getColumn(4).setPreferredWidth(100);
         jtAlumnos.getColumnModel().getColumn(5).setPreferredWidth(50);
     }
-    
+
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
@@ -153,6 +152,25 @@ public class X01FormView extends javax.swing.JFrame {
         }
     }
     
+    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+        // Prueba de concepto StatusBar ----------------------------------------
+        
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlStatusBar.setForeground(new Color(0, 153, 102));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlStatusBar.setForeground(new Color(255, 50, 0));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlStatusBar.setText(mensaje);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,11 +221,17 @@ public class X01FormView extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha de Nacimiento:");
 
-        jrbEstado.setText("Activo");
+        jrbEstado.setForeground(new java.awt.Color(255, 255, 255));
+        jrbEstado.setText("Inactivo");
 
         jbNuevo.setText("Nuevo");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -225,6 +249,7 @@ public class X01FormView extends javax.swing.JFrame {
             }
         });
 
+        jlStatusBar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
         jlStatusBar.setText("Texto de prueba");
 
@@ -290,7 +315,7 @@ public class X01FormView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbCargarAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar)
@@ -346,24 +371,79 @@ public class X01FormView extends javax.swing.JFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
+            // Si jtfDNI no esta vacio
+            if (!jtfDNI.getText().isEmpty()) {
+                // Busco el alumno por el DNI
+                Alumno alumno = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText()));
+
+                // Busco si el alumno no esta vacio
+                if (alumno != null) {
+                    jtfApellido.setText(alumno.getApellido());
+                    jtfNombre.setText(alumno.getNombre());
+                    jdcFechaNacimiento.setDate(Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+                    // En el caso de necesitar una validación
+//                    if (jrbEstado.isSelected() == true) {
+//                        System.out.print("Seleccionó opción 1");
+//                    } else if (jrbEstado.isSelected() == false) {
+//                        System.out.print("Seleccionó opción 2");
+//                    }
+                    if (alumno.isEstado() == true) {
+                        jrbEstado.setSelected(true);
+                        // Existen otras formas tanto de colocar el texto en un
+                        // RadioButton como de configurar si este estará
+                        // seleccionado por defecto o el color del texto
+                        jrbEstado.setText("Activo");
+                        jrbEstado.setForeground(Color.white);
+                    } else if (alumno.isEstado() == false) {
+                        jrbEstado.setSelected(false);
+                        jrbEstado.setText("Inactivo");
+                        jrbEstado.setForeground(Color.white);
+                    }
+                    // Prueba de concepto StatusBar ----------------------------------------
+                    PruebaDeConceptoStatusBar(1, "El DNI del Alumno se ha podido cargar con exito");
+                    // ---------------------------------------------------------------------
+                } else {
+                    jtfDNI.setText("");
+                    jtfApellido.setText("");
+                    jtfNombre.setText("");
+                    jdcFechaNacimiento.setDate(null);
+                    jrbEstado.setSelected(false);
+                    // Prueba de concepto StatusBar ----------------------------------------
+                    PruebaDeConceptoStatusBar(2, "El DNI del Alumno no se ha podido localizar");
+                    // ---------------------------------------------------------------------
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe Colocar un número de DNI");
+                jtfApellido.setText("");
+                jtfNombre.setText("");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El DNI debe ser un número" + ex.getMessage());
+            jtfDNI.setText("");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try {
             Alumno alumno = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText()));
+
             if (alumno != null) {
-                alumno.setDni(Integer.parseInt(jtfDNI.getText()));
                 alumno.setDni(Integer.parseInt(jtfDNI.getText()));
                 alumno.setApellido(jtfApellido.getText());
                 alumno.setNombre(jtfNombre.getText());
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 aluData.modificarAlumno(alumno);
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El DNI debe ser un número" + ex.getMessage());
             jtfDNI.setText("");
         }
         jtfDNI.setText("");
         jtfApellido.setText("");
         jtfNombre.setText("");
         jdcFechaNacimiento.setDate(null);
-    }//GEN-LAST:event_jbBuscarActionPerformed
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
     /**
      * @param args the command line arguments
