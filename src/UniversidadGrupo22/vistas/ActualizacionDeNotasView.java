@@ -19,24 +19,25 @@ import javax.swing.table.DefaultTableModel;
  * @author javier
  */
 public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
-    private AlumnoData alumnoData;
-    private InscripcionData inscripcionData;
-     private List<Alumno> listarAlumnos;
+
+    private AlumnoData aluData;
     private DefaultTableModel modelo;
-     
-     /**
+    private InscripcionData insData;
+    private ArrayList<Alumno> listarAlumnos;
+
+    /**
      * Creates new form ActualizacionDeNotasView
      */
     public ActualizacionDeNotasView() {
         initComponents();
-        modelo = new DefaultTableModel();
-        
-        alumnoData = new AlumnoData();
-        listarAlumnos = alumnoData.listarAlumnos();
-        inscripcionData = new InscripcionData();
+
+        modelo = (DefaultTableModel) jtNotas.getModel();
+        aluData = new AlumnoData();
+        listarAlumnos = aluData.listarAlumnos();
+//        insData = new InscripcionData();
         cargarAlumnos();
         armarCabeceraDeLaTabla();
-        
+
     }
 
     /**
@@ -126,14 +127,14 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jcbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jcbAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
@@ -174,7 +175,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //Aqui tengo que escribir mi codigo para guardar los cambios
-        
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -198,18 +199,20 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Alumno> jcbAlumno;
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
+
     public void cargarAlumnos() {
+        jcbAlumno.removeAllItems();
         // Cargamos los alumnos en el ComboBox
         for (Alumno listar : listarAlumnos) {
-           jcbAlumno.addItem(listar);
+            jcbAlumno.addItem(listar);
         }
     }
-    
+
     public void armarCabeceraDeLaTabla() {
         // =====================================================================
         // Creación del metodo para modificar las caracteristicas de la Tabla
         // =====================================================================
-        
+
         // Al modelo le agregamos las siguientes columnas:
         modelo.addColumn("Código");
         modelo.addColumn("Nombre");
@@ -218,15 +221,17 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         // Y a nuestra Tabla le seteamos el modelo
         jtNotas.setModel(modelo);
 
+        jtNotas.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jtNotas.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jtNotas.getColumnModel().getColumn(2).setPreferredWidth(80);
     }
-    
-    public void cargarMaterias(){
-       
 
-        Alumno seleccionada = (Alumno)jcbAlumno.getSelectedItem();
+    public void cargarMaterias() {
+
+        Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
         int id = seleccionada.getIdAlumno();
         if (seleccionada != null) {
-            ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriasCursadas(id);
+            ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriasCursadas(id);
 
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
