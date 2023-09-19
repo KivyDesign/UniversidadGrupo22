@@ -156,18 +156,21 @@ public class AlumnoData {
         return alumno;
     }
 
-    public List<Alumno> listarAlumnos() {
-        List<Alumno> alumnos = new ArrayList<>();
+    public ArrayList<Alumno> listarAlumnos() {
+        ArrayList<Alumno> alumnos = new ArrayList<>();
 
         try {
+            // La consulta funciona en MySQL
             String sql = "SELECT * FROM alumno WHERE estado = 1 ORDER BY apellido";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
+            // Recorro el ResultSet y lo cargo en el Array alumnos
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+//                System.out.println("ID Alumno: " + rs.getInt("idAlumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
@@ -180,6 +183,7 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "listarAlumnos = Error al acceder a la tabla Alumno: " + ex.getMessage());
         }
+        // Retorno el Array alumnos con los valores de la consulta
         return alumnos;
     }
 
