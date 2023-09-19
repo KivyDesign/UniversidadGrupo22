@@ -34,7 +34,7 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         cargarMaterias();
         modelo = new DefaultTableModel();
         armarCabecera();
-        InscripcionData InscripcionData = new InscripcionData();
+        inscripcionData = new InscripcionData();
 
     }
 
@@ -89,6 +89,11 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         jcbMateria.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbMateriaItemStateChanged(evt);
+            }
+        });
+        jcbMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMateriaActionPerformed(evt);
             }
         });
 
@@ -200,8 +205,13 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcbMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMateriaItemStateChanged
-        Materia materiaSeleccionada = (Materia) jcbMateria.getSelectedItem();
+        //Materia materiaSeleccionada = (Materia) jcbMateria.getSelectedItem();
     }//GEN-LAST:event_jcbMateriaItemStateChanged
+
+    private void jcbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaActionPerformed
+       //cargo la materia seleccionada en el combo box y llamo al metodo  
+        cargarAlumnos((Materia) jcbMateria.getSelectedItem());       
+    }//GEN-LAST:event_jcbMateriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,6 +228,7 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
     private javax.swing.JTable jtAlumnos;
     // End of variables declaration//GEN-END:variables
 private void cargarMaterias() {
+        jcbMateria.removeAllItems(); //Limpio antes de agregar
         for (Materia listarMaterias : listarMaterias) {
             jcbMateria.addItem(listarMaterias);
         }
@@ -232,22 +243,23 @@ private void cargarMaterias() {
     }
 
     private void cargarAlumnos(Materia materia) {
-        //Limpio la tabla aca 
-        modelo.setRowCount(0);
-         // aca estoy verificsndo que la materia no sea nula
-        if (materia != null) {
+        if (materia != null && modelo != null) {
+            //Limpio la tabla aca 
+            modelo.setRowCount(0);            
             int idMateria = materia.getIdMateria();
             ArrayList<Alumno> alumnos = inscripcionData.obtenerAlumnosXMateria(idMateria);
-            for (Alumno alumno : alumnos) {
-                modelo.addRow(new Object[]{
-                    alumno.getIdAlumno(),
-                    alumno.getDni(),
-                    alumno.getApellido(),
-                    alumno.getNombre()
+            if (alumnos != null) {
+                for (Alumno alumno : alumnos) {
+                    modelo.addRow(new Object[]{
+                        alumno.getIdAlumno(),
+                        alumno.getDni(),
+                        alumno.getApellido(),
+                        alumno.getNombre()
 
-                });
+                    });
+                }
+
             }
-
         }
     }
 }
