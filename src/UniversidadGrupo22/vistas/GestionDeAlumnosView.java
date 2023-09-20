@@ -64,7 +64,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
-        setBackground(new java.awt.Color(255, 0, 51));
+        setBackground(new java.awt.Color(204, 204, 255));
+        setClosable(true);
         setTitle("Gestion de Alumno");
 
         jPanel1.setBackground(new java.awt.Color(36, 86, 109));
@@ -312,29 +313,28 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setNombre(jtNombre.getText());
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumnoData.modificarAlumno(alumno);
-                PruebaDeConceptoStatusBar(2,"La modificacion ha sido exitosa");
+                PruebaDeConceptoStatusBar(2, "La modificacion ha sido exitosa");
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(1,"El DNI debe ser un número");
+            PruebaDeConceptoStatusBar(1, "El DNI debe ser un número");
             //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             jtDni.setText("");
         }
-        jtDni.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jdcFechaNacimiento.setDate(null);
+        limpiarcampos();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         try {
             Alumno alum = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
-            if (alum!=null) {
-            alumnoData.eliminarAlumno(alum.getIdAlumno());
-            jrbEstado.setSelected(false);
-            PruebaDeConceptoStatusBar(1,"Alumno eliminado con exito");}
-            else{PruebaDeConceptoStatusBar(1,"El alumno no Existe");}
+            if (alum != null) {
+                alumnoData.eliminarAlumno(alum.getIdAlumno());
+                jrbEstado.setSelected(false);
+                PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito");
+            } else {
+                PruebaDeConceptoStatusBar(1, "El alumno no Existe");
+            }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2,"El DNI debe ser un número");
+            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             jtDni.setText("");
         }
@@ -385,11 +385,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 //                JOptionPane.showMessageDialog(this, "El DNI debe ser un número");
             }
         }
-        jtDni.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jrbEstado.setSelected(false);
-        jdcFechaNacimiento.setDate(null);
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -407,20 +403,17 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         jrbEstado.setSelected(true);
                     }
                 } else {
-                    jtDni.setText("");
-                    jtApellido.setText("");
-                    jtNombre.setText("");
-                    jdcFechaNacimiento.setDate(null);
+                    limpiarcampos();
                 }
             } else {
-                PruebaDeConceptoStatusBar(2,"Debe colocar el DNI");
+                PruebaDeConceptoStatusBar(2, "Debe colocar el DNI");
                 //JOptionPane.showMessageDialog(null, "debe Colocar el DNI");
                 jtApellido.setText("");
                 jtNombre.setText("");
             }
 
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2,"El DNI debe ser un número");
+            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             //JOptionPane.showMessageDialog(this, "El DNI debe ser un número");
             jtDni.setText("");
         }
@@ -452,6 +445,13 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+public void limpiarcampos() {
+        jtDni.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrbEstado.setSelected(false);
+        jdcFechaNacimiento.setDate(null);
+    }
 
     public void PruebaDeConceptoStatusBar(int color, String mensaje) {
         // Prueba de concepto StatusBar ----------------------------------------

@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GestionDeMateriasView
-     */
+    private MateriaData materiaData;
+
     public GestionDeMateriasView() {
         initComponents();
+        materiaData = new MateriaData();
     }
 
     /**
@@ -65,6 +65,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         );
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setClosable(true);
         setTitle("Gestión de Materias");
 
         jPanel1.setBackground(new java.awt.Color(36, 86, 109));
@@ -211,9 +212,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                                     .addComponent(jtCodigo))
                                 .addGap(63, 63, 63)
                                 .addComponent(jBbuscar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTanio, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTanio, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(21, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -291,19 +290,15 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
 
-                MateriaData materiaData = new MateriaData();
                 materiaData.guardarMateria(mat);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero");
             }
         }
-        jtNombre.setText("");
-        jTanio.setText("");
-        jtCodigo.setText("");
+        limpiarcampos();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        MateriaData materiaData = new MateriaData();
         try {
 
             materiaData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
@@ -315,7 +310,6 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        MateriaData materiaData = new MateriaData();
         try {
 
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
@@ -326,9 +320,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
-        jtNombre.setText("");
-        jTanio.setText("");
-        jtCodigo.setText("");
+       limpiarcampos(); 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -338,7 +330,6 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         try {
 
-            MateriaData materiaData = new MateriaData();
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
             if (materia != null) {
                 jtNombre.setText(materia.getNombre());
@@ -348,9 +339,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                     jRestadoMat.setSelected(true);
                 }
             } else {
-                jtNombre.setText("");
-                jTanio.setText("");
-                jtCodigo.setText("");
+                limpiarcampos();
+                
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
@@ -382,4 +372,10 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+public void limpiarcampos() {
+        jtNombre.setText("");
+        jTanio.setText("");
+        jtCodigo.setText("");
+        jRestadoMat.setSelected(false);
+    }
 }
