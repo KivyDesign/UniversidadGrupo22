@@ -34,6 +34,8 @@ public class X01FormView extends javax.swing.JFrame {
 
     private ArrayList<Alumno> listarAlumnos;
 
+    private int seleccionFilaEnLaTabla;
+
     /**
      * Creates new form X01FormView
      */
@@ -326,6 +328,11 @@ public class X01FormView extends javax.swing.JFrame {
 
             }
         ));
+        jtAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtAlumnos);
 
         jcbCargarAlumnos.addItemListener(new java.awt.event.ItemListener() {
@@ -563,8 +570,6 @@ public class X01FormView extends javax.swing.JFrame {
 //                idSeleccionado = listarAlumno.getIdAlumno();
 //            }
 //        }
-
-
         // ---------------------------------------------------------------------
         // Busco el ID en la cadena de texto
         // https://es.stackoverflow.com/questions/123704/c%C3%B3mo-extraer-parte-de-una-cadena-seg%C3%BAn-un-patr%C3%B3n
@@ -593,6 +598,26 @@ public class X01FormView extends javax.swing.JFrame {
             System.out.println("No enontre el ID");
         }
     }//GEN-LAST:event_jcbCargarAlumnosItemStateChanged
+
+    private void jtAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAlumnosMouseClicked
+        // Obtenemos el número de fila seleccionada al realizar un click en la tabla
+        seleccionFilaEnLaTabla = jtAlumnos.rowAtPoint(evt.getPoint());
+        System.out.println("Seleccion Fila En La Tabla: " + seleccionFilaEnLaTabla);
+
+        // Lo convierto de Object a int
+        int valorID = (Integer) jtAlumnos.getValueAt(seleccionFilaEnLaTabla, 0);
+        System.out.println("Valor ID: " + valorID);
+
+        // Aqui intento buscar y cargar los datos segun lo que se seleccione
+        // en la tabla
+        cargarCampos(valorID);
+
+        // Tratare de hacer que se deseleccione la fila de la tabla o en el
+        // mejor de los casos que quede resaltada la fila que corresponda
+        // segun cambien los datos con el ComboBox o el boton Buscar
+        jtAlumnos.setSelectionForeground(Color.black);
+        jtAlumnos.setSelectionBackground(Color.white);
+    }//GEN-LAST:event_jtAlumnosMouseClicked
 
     /**
      * @param args the command line arguments

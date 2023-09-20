@@ -260,6 +260,9 @@
                   <Table columnCount="0" rowCount="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtAlumnosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
