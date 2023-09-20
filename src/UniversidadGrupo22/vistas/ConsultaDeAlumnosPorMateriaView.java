@@ -251,9 +251,12 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
             modelo.setRowCount(0);
 
             int idMateria = materia.getIdMateria();
-            ArrayList<Alumno> alumnos = inscripcionData.obtenerAlumnosXMateria(idMateria);
-            if (alumnos != null) {
-                for (Alumno alumno : alumnos) {
+            System.out.println("idMateria: " + idMateria);
+            
+            ArrayList<Alumno> alu = inscripcionData.obtenerAlumnosXMateria(idMateria);
+            
+            if (alu != null) {
+                for (Alumno alumno : alu) {
                     modelo.addRow(new Object[]{
                         alumno.getIdAlumno(),
                         alumno.getDni(),

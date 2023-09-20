@@ -37,7 +37,6 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         insData = new InscripcionData();
         cargarAlumnos();
         armarCabeceraDeLaTabla();
-
     }
 
     /**
@@ -171,7 +170,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        //Aqui tengo que escribir mi codigo para guardar los cambios
+        // Aqui tengo que escribir mi codigo para guardar los cambios
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -226,17 +225,17 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     public void cargarMaterias() {
 
         Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
-        
+
         int id = seleccionada.getIdAlumno();
-        
-        System.out.println("ID: "+id);
-        
+
+        System.out.println("ID: " + id);
+
         if (seleccionada != null) {
             ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriasCursadas(id);
 
-//            for (Materia mat : lista) {
-//                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
-//            }
+            for (Materia mat : lista) {
+                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
         }

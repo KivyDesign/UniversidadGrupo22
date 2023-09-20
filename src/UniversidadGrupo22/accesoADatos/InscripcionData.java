@@ -644,6 +644,12 @@ public class InscripcionData {
         try {
             // Consulta para filtrar alumnos que esten inscriptos en una determinada
             // materia
+            // La consulta SQL funciona
+            // SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado
+            // FROM inscripcion i, alumno a
+            // WHERE i.idAlumno = a.idAlumno
+            // AND idMateria = 3
+            // AND a.estado = 1
             String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
                     + "FROM inscripcion i, alumno a"
                     + "WHERE i.idAlumno = a.idAlumno"
@@ -658,6 +664,7 @@ public class InscripcionData {
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
+            System.out.println("Paso algo por AQUÍ >>> SQL");
 
             // Recorro el rs mientras tenga filas para recorrer
             while (rs.next()) {
