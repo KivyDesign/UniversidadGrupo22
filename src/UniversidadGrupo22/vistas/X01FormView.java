@@ -81,6 +81,7 @@ public class X01FormView extends javax.swing.JFrame {
     public void cargarAlumnos() {
         // Remuevo todos los items del comboBox
         jcbCargarAlumnos.removeAllItems();
+
 //        // Pido que desde aquí se seleccione un alumno
 //        jcbCargarAlumnos.addItem("Seleccione un alumno");
 //        // Elimina el primer item.
@@ -236,6 +237,36 @@ public class X01FormView extends javax.swing.JFrame {
         // Si el texto del mensaje esta vacio entonces no muestro texto en
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlStatusBar.setText(mensaje);
+    }
+
+    public void seleccionarItemComboBox(int DNI) {
+        // Aqui recibo un DNI, lo busco en la lista de alumnos agregados al
+        // ComboBox y averigua su numero de item para marcarlo como
+        // seleccionado
+        System.out.println("DNI: " + DNI);
+
+        // Cuantos items hay en el ComboBox?
+//        int itemsEnElComboBox = jcbCargarAlumnos.getItemCount();
+//        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
+
+        // Recorro la lista de alumnos y voy leyendo cada item en el ComboBox
+        aluData.listarAlumnos().forEach(item -> {
+            if (DNI == item.getDni()) {
+//                int obtengoID = item.getIdAlumno();
+//                System.out.println(item.getIdAlumno());
+                // Aqui intento buscar y cargar los datos segun lo que se seleccione
+                // en el ComboBox
+//                cargarCampos(obtengoID);
+                
+                // ERROR: getSelectedIndex() solo devuelve la opcion que este
+                // seleccionada
+                seleccionFilaEnLaTabla = jcbCargarAlumnos.getSelectedIndex();
+//                return;
+            }
+        });
+        
+        // Pero como ejemplo, lo asignamos a:
+        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }
 
     /**
@@ -512,6 +543,10 @@ public class X01FormView extends javax.swing.JFrame {
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             // ---------------------------------------------------------------------
         }
+
+        // Aqui según lo que encuentre, Llamo al metodo con el DNI para que
+        // busque y actualice el ComboBox
+        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -617,6 +652,9 @@ public class X01FormView extends javax.swing.JFrame {
         // segun cambien los datos con el ComboBox o el boton Buscar
         jtAlumnos.setSelectionForeground(Color.black);
         jtAlumnos.setSelectionBackground(Color.white);
+
+        // Pero como ejemplo, lo asignamos a:
+        jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }//GEN-LAST:event_jtAlumnosMouseClicked
 
     /**
