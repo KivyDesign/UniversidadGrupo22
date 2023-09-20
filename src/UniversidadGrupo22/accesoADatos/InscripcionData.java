@@ -457,7 +457,7 @@ public class InscripcionData {
 
             // Para obtener el ID del alumno
             ps.setInt(1, idAlumno);
-            System.out.println("id" + idAlumno);
+            System.out.println("ID: " + idAlumno);
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
@@ -650,6 +650,9 @@ public class InscripcionData {
             // WHERE i.idAlumno = a.idAlumno
             // AND idMateria = 3
             // AND a.estado = 1
+//            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio"
+//                    + "FROM inscripcion AS i"
+//                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
             String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
                     + "FROM inscripcion i, alumno a"
                     + "WHERE i.idAlumno = a.idAlumno"
@@ -661,6 +664,7 @@ public class InscripcionData {
 
             // Para obtener el ID del materia
             ps.setInt(1, idMateria);
+            System.out.println("ID: " + idMateria);
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
