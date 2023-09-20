@@ -16,6 +16,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+//Las 2 clases necesarias para usar regex
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author javier
@@ -82,13 +86,67 @@ public class X01FormView extends javax.swing.JFrame {
         // Recorro la lista de alumnos y voy agregando cada item en el ComboBox
         aluData.listarAlumnos().forEach(item -> {
             jcbCargarAlumnos.addItem(item.getIdAlumno() + " - " + item.getApellido() + " " + item.getNombre() + " " + item.getDni());
+//            System.out.println(item.getIdAlumno());
         });
+        // ---------------------------------------------------------------------
+        // Busco el ID en la cadena de texto
+        // https://es.stackoverflow.com/questions/123704/c%C3%B3mo-extraer-parte-de-una-cadena-seg%C3%BAn-un-patr%C3%B3n
+        // 
+//        System.out.println("String seleccionada: " + jcbCargarAlumnos.getSelectedItem());
+//        System.out.println(jcbCargarAlumnos.getSelectedItem().toString());
+        // En tu código sería:
+        //     String cadena = JTextField.getText();
+        // Pero como ejemplo, lo asignamos a:
+        String cadena = jcbCargarAlumnos.getSelectedItem().toString();
 
+        // Compilamos el regex y el matcher al texto, ignorando mayúsculas/minúsculas (esto es estándar)
+        Pattern pattern = Pattern.compile("([0-9]+) - ", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(cadena);
+
+        // Ahora sí, vemos si coincide el patrón con el texto
+        if (matcher.find()) {
+            // Coincidió => obtener el valor del grupo 1
+            String obtengoID = matcher.group(1);
+//            System.out.println("ID: " + obtengoID);
+            // Aqui intento buscar y cargar los datos segun lo que se seleccione
+            // en el ComboBox
+            cargarCampos(Integer.parseInt(obtengoID));
+        } else {
+            // No coincidió
+            System.out.println("No enontre el ID");
+        }
+        // ---------------------------------------------------------------------
 //        // Cargamos los alumnos en el ComboBox
 //        for (Alumno listarAlumno : listarAlumnos) {
 //            System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
-////            jcbCargarAlumnos.addItem(listarAlumno.toString());
+//            jcbCargarAlumnos.addItem(listarAlumno.toString());
 //        }
+    }
+
+    public void cargarCampos(int obtengoID) {
+        // Aqui recibo el ID para buscar el alumno y cargar los campos de texto
+        // Busco el alumno por el DNI
+        Alumno alumno = aluData.buscarAlumnoPorID(obtengoID);
+
+        // Busco si el alumno no esta vacio
+        if (alumno != null) {
+            jtfDNI.setText(String.valueOf(alumno.getDni()));
+            jtfApellido.setText(alumno.getApellido());
+            jtfNombre.setText(alumno.getNombre());
+            jdcFechaNacimiento.setDate(Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            if (alumno.isEstado() == true) {
+                jrbEstado.setSelected(true);
+                // Existen otras formas tanto de colocar el texto en un
+                // RadioButton como de configurar si este estará
+                // seleccionado por defecto o el color del texto
+                jrbEstado.setText("Activo");
+                jrbEstado.setForeground(Color.white);
+            } else if (alumno.isEstado() == false) {
+                jrbEstado.setSelected(false);
+                jrbEstado.setText("Inactivo");
+                jrbEstado.setForeground(Color.gray);
+            }
+        }
     }
 
     public void cargarTabla() {
@@ -153,7 +211,6 @@ public class X01FormView extends javax.swing.JFrame {
                     modelo.removeRow(i);
                 }
             }
-
         }
     }
 
@@ -271,7 +328,6 @@ public class X01FormView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtAlumnos);
 
-        jcbCargarAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbCargarAlumnos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbCargarAlumnosItemStateChanged(evt);
@@ -475,14 +531,67 @@ public class X01FormView extends javax.swing.JFrame {
         jtfApellido.setText("");
         jtfNombre.setText("");
         jdcFechaNacimiento.setDate(null);
+
+        // Cargar alumnos en el ComboBox
+        cargarAlumnos();
+
+        // Limpio las filas de la tabla
+        borrarFilasTabla();
+
+        // Cargar alumnos en la tabla
+        cargarTabla();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jcbCargarAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCargarAlumnosItemStateChanged
         // Aqui va el codigo para cuando cambie la seleccion del ComboBox
         // Quiero el alumno seleccionado en el ComboBox
-//        Alumno seleccionado = (Alumno) jcbCargarAlumnos.getSelectedItem();
-        String seleccionado = (String) jcbCargarAlumnos.getSelectedItem();
-        System.out.println("Alumno: " + seleccionado);
+//        String seleccionado = (String) jcbCargarAlumnos.getSelectedItem();
+//        System.out.println("Alumno: " + seleccionado);
+
+        // Recorro la lista de alumnos y voy agregando cada item en el ComboBox
+//        aluData.listarAlumnos().forEach(item -> {
+//            jcbCargarAlumnos.addItem(item.getIdAlumno() + " - " + item.getApellido() + " " + item.getNombre() + " " + item.getDni());
+//            System.out.println(item.getIdAlumno());
+//        });
+        // Cargamos los alumnos en el ComboBox
+        //System.out.println("INDEX: " + jcbCargarAlumnos.getSelectedIndex());
+        //boolean idSeleccionado = false;
+//        for (Alumno listarAlumno : listarAlumnos) {
+////            System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
+////            jcbCargarAlumnos.addItem(listarAlumno.toString());
+//            if (idSeleccionado == jcbCargarAlumnos) {
+//                idSeleccionado = listarAlumno.getIdAlumno();
+//            }
+//        }
+
+
+        // ---------------------------------------------------------------------
+        // Busco el ID en la cadena de texto
+        // https://es.stackoverflow.com/questions/123704/c%C3%B3mo-extraer-parte-de-una-cadena-seg%C3%BAn-un-patr%C3%B3n
+        // 
+//        System.out.println("String seleccionada: " + jcbCargarAlumnos.getSelectedItem());
+//        System.out.println(jcbCargarAlumnos.getSelectedItem().toString());
+        // En tu código sería:
+        //     String cadena = JTextField.getText();
+        // Pero como ejemplo, lo asignamos a:
+        String cadena = jcbCargarAlumnos.getSelectedItem().toString();
+
+        // Compilamos el regex y el matcher al texto, ignorando mayúsculas/minúsculas (esto es estándar)
+        Pattern pattern = Pattern.compile("([0-9]+) - ", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(cadena);
+
+        // Ahora sí, vemos si coincide el patrón con el texto
+        if (matcher.find()) {
+            // Coincidió => obtener el valor del grupo 1
+            String obtengoID = matcher.group(1);
+//            System.out.println("ID: " + obtengoID);
+            // Aqui intento buscar y cargar los datos segun lo que se seleccione
+            // en el ComboBox
+            cargarCampos(Integer.parseInt(obtengoID));
+        } else {
+            // No coincidió
+            System.out.println("No enontre el ID");
+        }
     }//GEN-LAST:event_jcbCargarAlumnosItemStateChanged
 
     /**
