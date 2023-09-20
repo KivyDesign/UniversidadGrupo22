@@ -254,8 +254,8 @@ public class X01FormView extends javax.swing.JFrame {
             if (DNI == item.getDni()) {
 //                int obtengoID = item.getIdAlumno();
 //                System.out.println(item.getIdAlumno());
-                // Aqui intento buscar y cargar los datos segun lo que se seleccione
-                // en el ComboBox
+                // Aqui intento buscar y cargar los datos segun lo que se
+                // seleccione en el ComboBox
 //                cargarCampos(obtengoID);
                 
                 // ERROR: getSelectedIndex() solo devuelve la opcion que este
