@@ -448,7 +448,6 @@ public class InscripcionData {
 //        WHERE inscripcion.idMateria = materia.idMateria 
 //        AND inscripcion.idAlumno = 3;
         //String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
-        
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
             String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio FROM inscripcion AS i JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
@@ -641,16 +640,16 @@ public class InscripcionData {
     public ArrayList<Alumno> obtenerAlumnosXMateria(int idMateria) {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
 
-        // Consulta para filtrar alumnos que esten inscriptos en una determinada
-        // materia
-        String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
-                + "FROM inscripcion i, alumno a"
-                + "WHERE i.idAlumno = a.idAlumno"
-                + "AND idMateria = ?"
-                + "AND a.estado = 1";
-
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
+            // Consulta para filtrar alumnos que esten inscriptos en una determinada
+            // materia
+            String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
+                    + "FROM inscripcion i, alumno a"
+                    + "WHERE i.idAlumno = a.idAlumno"
+                    + "AND idMateria = ?"
+                    + "AND a.estado = 1";
+
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
