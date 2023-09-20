@@ -313,10 +313,10 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setNombre(jtNombre.getText());
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumnoData.modificarAlumno(alumno);
-                PruebaDeConceptoStatusBar(2, "La modificacion ha sido exitosa");
+                PruebaDeConceptoStatusBar(1, "La modificacion ha sido exitosa");
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(1, "El DNI debe ser un número");
+            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             jtDni.setText("");
         }
@@ -331,7 +331,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 jrbEstado.setSelected(false);
                 PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito");
             } else {
-                PruebaDeConceptoStatusBar(1, "El alumno no Existe");
+                PruebaDeConceptoStatusBar(2, "El alumno no Existe");
             }
         } catch (NumberFormatException e) {
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
