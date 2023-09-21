@@ -253,7 +253,7 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
             int idMateria = materia.getIdMateria();
             System.out.println("idMateria: " + idMateria);
             
-            ArrayList<Alumno> alu = inscripcionData.obtenerAlumnosXMateria(idMateria);
+            ArrayList<Alumno> alu = (ArrayList<Alumno>) inscripcionData.obtenerAlumnosPorMateriaEnzo(idMateria);
             
             if (alu != null) {
                 for (Alumno alumno : alu) {
