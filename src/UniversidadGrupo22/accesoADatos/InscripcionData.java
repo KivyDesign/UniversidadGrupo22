@@ -653,12 +653,9 @@ public class InscripcionData {
 //            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio"
 //                    + "FROM inscripcion AS i"
 //                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
-            String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
-                    + "FROM inscripcion i"
-                    + "JOIN alumno a ON (i.idAlumno = a.idAlumno)"
-                    + "AND idMateria = ?"
-                    + "AND a.estado = 1";
-
+            String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado FROM inscripcion i JOIN alumno a ON (i.idAlumno = a.idAlumno) where idMateria = ? AND a.estado = 1";
+                    
+                   
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
