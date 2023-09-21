@@ -16,7 +16,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-//Las 2 clases necesarias para usar regex
+// Las 2 clases necesarias para usar regex
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -156,7 +156,6 @@ public class X01FormView extends javax.swing.JFrame {
 //        if (!aluData.listarAlumnos().isEmpty()) {
 //            System.out.println(".");
 //        }
-
 //        for (Alumno alumno : aluData.listarAlumnos()) {
 //            System.out.println("DNI: " + alumno.getDni());
 //            System.out.println("Apellido: " + alumno.getApellido());

@@ -642,8 +642,8 @@ public class InscripcionData {
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
-            // Consulta para filtrar alumnos que esten inscriptos en una determinada
-            // materia
+            // Consulta para filtrar alumnos que esten inscriptos en una
+            // determinada materia
             // La consulta SQL funciona
             // SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado
             // FROM inscripcion i, alumno a
@@ -654,8 +654,7 @@ public class InscripcionData {
 //                    + "FROM inscripcion AS i"
 //                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
             String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado FROM inscripcion i JOIN alumno a ON (i.idAlumno = a.idAlumno) where idMateria = ? AND a.estado = 1";
-                    
-                   
+
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
