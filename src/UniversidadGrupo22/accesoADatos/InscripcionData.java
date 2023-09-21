@@ -695,4 +695,36 @@ public class InscripcionData {
         // no posea la tabla materia en la DB universidadulp
         return listaAlumnosXMateria;
     }
+        public List<Alumno> obtenerAlumnosPorMateriaEnzo(int idMateria) {
+    List<Alumno> listaAlumnosPorMateria = new ArrayList<>();
+
+    String sql = "SELECT a.idAlumno, a.dni, a.nombre, a.apellido, a.fechaNacimiento, a.estado "
+            + "FROM inscripcion i, alumno a "
+            + "WHERE i.idAlumno = a.idAlumno "
+            + "AND i.idMateria = ? "
+            + "AND a.estado = 1";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idMateria);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+                listaAlumnosPorMateria.add(alumno);
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a una de las tablas: " + ex.getMessage());
+    }
+
+    return listaAlumnosPorMateria;
 }
+
+}
+
