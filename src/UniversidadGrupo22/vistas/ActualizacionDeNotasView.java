@@ -223,7 +223,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }
 
     public void cargarMaterias() {
-
+         // Limpio las filas de la tabla
+        borrarFilasTabla();
+        
         Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
 
         int id = seleccionada.getIdAlumno();
@@ -238,6 +240,20 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+        }
+    }
+    
+    public void borrarFilasTabla() {
+        // Con este metodo puedo borrar una fila especifica al recorrer el modelo
+        // Controlar que no este vacio o cargarlo desde el comienzo
+        if (modelo != null) {
+            int a = modelo.getRowCount() - 1;
+
+            if (modelo.getRowCount() > 0) {
+                for (int i = a; i >= 0; i--) {
+                    modelo.removeRow(i);
+                }
+            }
         }
     }
 }
