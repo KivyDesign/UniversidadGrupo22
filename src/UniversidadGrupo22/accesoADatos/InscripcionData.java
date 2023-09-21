@@ -211,7 +211,7 @@ public class InscripcionData {
                 Inscripcion ins = new Inscripcion();
 
                 // Recupero una inscripcion en el objeto ins que obtengo del rs
-                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.setIdInscripcion(rs.getInt("idInscripto"));
 
                 // Recupero un alumno en el objeto alu que obtengo del rs
                 // utilizando aluData para poder acceder a su metodo buscarAlumno
@@ -276,7 +276,7 @@ public class InscripcionData {
 //                i = new Inscripcion();
 //
 //                // Le agrego la ID de la inscripcion
-//                i.setIdInscripcion(rs.getInt("idInscripcion"));
+//                i.setIdInscripcion(rs.getInt("idInscripto"));
 //
 //                // Aqui buscamos el Alumno por su ID
 //                Alumno a = aluData.buscarAlumno(idAlumno);
@@ -334,7 +334,7 @@ public class InscripcionData {
                 Inscripcion ins = new Inscripcion();
 
                 // Recupero una inscripcion en el objeto ins que obtengo del rs
-                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.setIdInscripcion(rs.getInt("idInscripto"));
 
                 // Recupero un alumno en el objeto alu que obtengo del rs
                 // utilizando aluData para poder acceder a su metodo buscarAlumno
@@ -386,7 +386,8 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+//        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        String sql = "SELECT m.idMateria,m.nombre,m.anio,m.estado from materia m join inscripcion i on(m.idMateria=i.idMateria) join alumno a on (i.idAlumno=a.idAlumno) where a.idAlumno=?;";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
@@ -506,7 +507,7 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        String sql = "SELECT m.idMateria,m.nombre,m.anio,m.estado from materia m join inscripcion i on(m.idMateria!=i.idMateria) join alumno a on (i.idAlumno=a.idAlumno) where a.idAlumno=3;";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
