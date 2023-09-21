@@ -654,8 +654,8 @@ public class InscripcionData {
 //                    + "FROM inscripcion AS i"
 //                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
             String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
-                    + "FROM inscripcion i, alumno a"
-                    + "WHERE i.idAlumno = a.idAlumno"
+                    + "FROM inscripcion i"
+                    + "JOIN alumno a ON (i.idAlumno = a.idAlumno)"
                     + "AND idMateria = ?"
                     + "AND a.estado = 1";
 
