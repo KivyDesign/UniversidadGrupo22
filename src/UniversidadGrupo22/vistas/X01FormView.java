@@ -10,6 +10,7 @@ import UniversidadGrupo22.accesoADatos.Conexion;
 import UniversidadGrupo22.entidades.Alumno;
 import java.awt.Color;
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class X01FormView extends javax.swing.JFrame {
     // Declaro los atributos para acceder a los metodos que necesito
     // Para alumno
     private AlumnoData aluData;
+
     // Para el modelo de la tabla
     private DefaultTableModel modelo;
 
@@ -247,7 +249,6 @@ public class X01FormView extends javax.swing.JFrame {
         // Cuantos items hay en el ComboBox?
 //        int itemsEnElComboBox = jcbCargarAlumnos.getItemCount();
 //        System.out.println("Items en el ComboBox: " + itemsEnElComboBox);
-
         // Recorro la lista de alumnos y voy leyendo cada item en el ComboBox
         aluData.listarAlumnos().forEach(item -> {
             if (DNI == item.getDni()) {
@@ -256,14 +257,14 @@ public class X01FormView extends javax.swing.JFrame {
                 // Aqui intento buscar y cargar los datos segun lo que se
                 // seleccione en el ComboBox
 //                cargarCampos(obtengoID);
-                
+
                 // ERROR: getSelectedIndex() solo devuelve la opcion que este
                 // seleccionada
                 seleccionFilaEnLaTabla = jcbCargarAlumnos.getSelectedIndex();
 //                return;
             }
         });
-        
+
         // Pero como ejemplo, lo asignamos a:
         jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }
@@ -322,6 +323,11 @@ public class X01FormView extends javax.swing.JFrame {
         jrbEstado.setText("Inactivo");
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -331,6 +337,11 @@ public class X01FormView extends javax.swing.JFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -655,6 +666,70 @@ public class X01FormView extends javax.swing.JFrame {
         // Pero como ejemplo, lo asignamos a:
         jcbCargarAlumnos.setSelectedIndex(seleccionFilaEnLaTabla);
     }//GEN-LAST:event_jtAlumnosMouseClicked
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try {
+            Alumno alum = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText()));
+            if (alum != null) {
+                aluData.eliminarAlumno(alum.getIdAlumno());
+                jrbEstado.setSelected(false);
+                PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito");
+            } else {
+                PruebaDeConceptoStatusBar(2, "El alumno no Existe");
+            }
+        } catch (NumberFormatException e) {
+            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
+            //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
+            jtfDNI.setText("");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        if (jtfDNI.getText().isEmpty() || jtfApellido.getText().isEmpty() || jtfNombre.getText().isEmpty() || jdcFechaNacimiento.getDate() == null) {
+            // Prueba de concepto StatusBar ----------------------------------------
+            PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
+            // ---------------------------------------------------------------------
+            // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
+        } else {
+            try {
+                LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                Alumno alumno = new Alumno(
+                        Integer.parseInt(jtfDNI.getText()),
+                        jtfApellido.getText(),
+                        jtfNombre.getText(),
+                        fechan,
+                        true);
+
+                // Primero busco si existe para no agregarlo repetido
+                if (aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText())) == null) {
+                    // Agrego el alumno
+                    aluData.guardarAlumno(alumno);
+                    // Si lo agregue con exito no es null y se lo informo al DataEntry
+                    if (aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText())) != null) {
+                        // Prueba de concepto StatusBar ----------------------------------------
+                        PruebaDeConceptoStatusBar(1, "Alumno agregado de forma exitosa");
+                        // ---------------------------------------------------------------------
+                    } else {
+                        // Prueba de concepto StatusBar ----------------------------------------
+                        PruebaDeConceptoStatusBar(2, "ERROR: El alumno no se pudo agregar");
+                        // ---------------------------------------------------------------------
+                    }
+
+                } else {
+                    // Prueba de concepto StatusBar ----------------------------------------
+                    PruebaDeConceptoStatusBar(2, "Ya existe alumno con ese DNI");
+                    // ---------------------------------------------------------------------
+//                    JOptionPane.showMessageDialog(null, "El DNI ya existe");
+                }
+            } catch (NumberFormatException e) {
+                // Prueba de concepto StatusBar ----------------------------------------
+                PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
+                // ---------------------------------------------------------------------
+//                JOptionPane.showMessageDialog(this, "El DNI debe ser un número");
+            }
+        }
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
     /**
      * @param args the command line arguments
