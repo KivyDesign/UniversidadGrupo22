@@ -450,7 +450,7 @@ public class InscripcionData {
         //String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
-            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio FROM inscripcion AS i JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
+            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio FROM inscripcion AS i JOIN materia AS m ON (i.idMateria = m.idMateria) WHERE i.idAlumno = ?";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
