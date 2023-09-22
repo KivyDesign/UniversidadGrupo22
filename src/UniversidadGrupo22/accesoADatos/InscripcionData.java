@@ -613,16 +613,17 @@ public class InscripcionData {
     public ArrayList<Alumno> obtenerAlumnoXMateria(Materia materia) {
         ArrayList<Alumno> listaAlumnoXMateria = new ArrayList<Alumno>();
         Alumno alu;
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        String sql = "SELECT idAlumno FROM inscripcion WHERE idMateria = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, materia.getIdMateria());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                alu = new Alumno();
-                alu.setNombre(rs.getString("nombre"));
-                alu.setApellido(rs.getString("apellido"));
+//                alu = new Alumno();
+//                alu.setNombre(rs.getString("nombre"));
+//                alu.setApellido(rs.getString("apellido"));
+                listaAlumnoXMateria.add(aluData.buscarAlumno(rs.getInt("idAlumno")));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno o materia: " + ex.getMessage());
@@ -633,7 +634,7 @@ public class InscripcionData {
     // /////////////////////////////////////////////////////////////////////////
     // Declaración sugerida:
     // -------------------------------------------------------------------------
-    // List<Alumno> obtenerAlumnosXMateria(int idMateria)
+    // List<Alumno> obtenerAlumnosXMateria(int idMateria)metodo sobrecargado tiene mismo nombre que el de arriba
     // /////////////////////////////////////////////////////////////////////////
     public ArrayList<Alumno> obtenerAlumnosXMateria(int idMateria) {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
@@ -651,19 +652,15 @@ public class InscripcionData {
 //            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio"
 //                    + "FROM inscripcion AS i"
 //                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
-            String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado FROM inscripcion i JOIN alumno a ON (i.idAlumno = a.idAlumno) where idMateria = ? AND a.estado = 1";
+            String sql = "SELECT a.idAlumno FROM inscripcion i ,alumno a  where i.idAlumno = a.idAlumno and idMateria = ? AND a.estado = 1";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
             // Para obtener el ID del materia
             ps.setInt(1, idMateria);
-            System.out.println("ID: " + idMateria);
-
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
-            System.out.println("Paso algo por AQUÍ >>> SQL");
-
             // Recorro el rs mientras tenga filas para recorrer
             while (rs.next()) {
                 // Creo el nuevo objeto que hereda de Materia

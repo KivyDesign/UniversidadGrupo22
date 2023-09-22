@@ -156,5 +156,9 @@ public class UniversidadGrupo22 {
         for (Alumno alumno : insData.obtenerAlumnosXMateria(3)) {
             System.out.println("Alumno " + alumno.getNombre());
         }
+        //probar metodo obtenerAlumnoXMateria(Materia materia)
+         for (Alumno alumno : insData.obtenerAlumnoXMateria(matData.buscarMateria(3))) {
+            System.out.println("Alumno " + alumno.getNombre());
+        }
     }
 }
