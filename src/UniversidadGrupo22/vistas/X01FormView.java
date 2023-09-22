@@ -68,6 +68,9 @@ public class X01FormView extends javax.swing.JFrame {
         // Cargar alumnos en el ComboBox
         cargarAlumnos();
 
+        // Cargo el alumno en los TextFiels
+        cargarAlumnoTF();
+
         // Armo la cabecera de la tabla
         armarCabeceraDeLaTabla();
 
@@ -83,9 +86,9 @@ public class X01FormView extends javax.swing.JFrame {
         // Remuevo todos los items del comboBox
         jcbCargarAlumnos.removeAllItems();
 
-//        // Pido que desde aquí se seleccione un alumno
+        // Pido que desde aquí se seleccione un alumno
 //        jcbCargarAlumnos.addItem("Seleccione un alumno");
-//        // Elimina el primer item.
+        // Elimina el primer item.
 //        jcbCargarAlumnos.removeItemAt(0);
         // Recorro la lista de alumnos y voy agregando cada item en el ComboBox
         aluData.listarAlumnos().forEach(item -> {
@@ -125,6 +128,36 @@ public class X01FormView extends javax.swing.JFrame {
 //            System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
 //            jcbCargarAlumnos.addItem(listarAlumno.toString());
 //        }
+    }
+
+    public void cargarAlumnoTF() {
+        // Aqui según lo que encuentre, llamo al metodo con el DNI para que
+        // busque y actualice los TextFields
+        
+        // Busco el alumno por el DNI
+        Alumno alumno = aluData.buscarAlumnoPorDni(Integer.parseInt(jtfDNI.getText()));
+
+        // Busco si el alumno no esta vacio
+        jtfApellido.setText(alumno.getApellido());
+        jtfNombre.setText(alumno.getNombre());
+        jdcFechaNacimiento.setDate(Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        if (alumno.isEstado() == true) {
+            jrbEstado.setSelected(true);
+            // Existen otras formas tanto de colocar el texto en un RadioButton
+            // como de configurar si este estará seleccionado por defecto
+            // o el color del texto
+            jrbEstado.setText("Activo");
+            jrbEstado.setForeground(Color.white);
+        } else if (alumno.isEstado() == false) {
+            jrbEstado.setSelected(false);
+            jrbEstado.setText("Inactivo");
+            jrbEstado.setForeground(Color.gray);
+        }
+        seleccionarItemComboBox(Integer.parseInt(jtfDNI.getText()));
+        
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(1, "El DNI del Alumno se ha podido cargar con exito");
+        // ---------------------------------------------------------------------
     }
 
     public void cargarCampos(int obtengoID) {
@@ -595,7 +628,6 @@ public class X01FormView extends javax.swing.JFrame {
                 jtfNombre.setText("");
                 jdcFechaNacimiento.setDate(null);
                 jrbEstado.setSelected(false);
-//                JOptionPane.showMessageDialog(null, "Debe Colocar un número de DNI");
                 // Prueba de concepto StatusBar ----------------------------------------
                 PruebaDeConceptoStatusBar(2, "Debe Colocar un número de DNI");
                 // ---------------------------------------------------------------------
@@ -606,7 +638,6 @@ public class X01FormView extends javax.swing.JFrame {
             jtfNombre.setText("");
             jdcFechaNacimiento.setDate(null);
             jrbEstado.setSelected(false);
-//            JOptionPane.showMessageDialog(this, "El DNI debe ser un número" + ex.getMessage());
             // Prueba de concepto StatusBar ----------------------------------------
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             // ---------------------------------------------------------------------
@@ -631,7 +662,6 @@ public class X01FormView extends javax.swing.JFrame {
                 aluData.modificarAlumno(alumno);
             }
         } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(this, "El DNI debe ser un número" + ex.getMessage());
             // Prueba de concepto StatusBar ----------------------------------------
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             // ---------------------------------------------------------------------
@@ -735,9 +765,8 @@ public class X01FormView extends javax.swing.JFrame {
             } else {
                 PruebaDeConceptoStatusBar(2, "El alumno no Existe");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ex) {
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
-            //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
             jtfDNI.setText("");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
@@ -747,7 +776,6 @@ public class X01FormView extends javax.swing.JFrame {
             // Prueba de concepto StatusBar ----------------------------------------
             PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
             // ---------------------------------------------------------------------
-            // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else {
             try {
                 LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -776,15 +804,13 @@ public class X01FormView extends javax.swing.JFrame {
 
                 } else {
                     // Prueba de concepto StatusBar ----------------------------------------
-                    PruebaDeConceptoStatusBar(2, "Ya existe alumno con ese DNI");
+                    PruebaDeConceptoStatusBar(2, "Ya existe un alumno con ese DNI");
                     // ---------------------------------------------------------------------
-//                    JOptionPane.showMessageDialog(null, "El DNI ya existe");
                 }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ex) {
                 // Prueba de concepto StatusBar ----------------------------------------
                 PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
                 // ---------------------------------------------------------------------
-//                JOptionPane.showMessageDialog(this, "El DNI debe ser un número");
             }
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
