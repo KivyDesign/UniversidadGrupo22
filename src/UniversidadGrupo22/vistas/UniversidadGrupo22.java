@@ -16,7 +16,7 @@ public class UniversidadGrupo22 {
     public static void main(String[] args) {
         // Realizo la coneccion a la DB
         Connection con = Conexion.getConexion();
-        
+
         // Si la conexion fue exitosa lo informo como conectado con un (sout)
         // para no tener ese molesto dialogo de conexion
         if (con != null) {
@@ -24,7 +24,7 @@ public class UniversidadGrupo22 {
         } else {
             System.out.println("Sistema de Gestión para la Universidad de La Punta - Estado: Error");
         }
-        
+
         // Pruebas para Form Alumno
         //
         // Creo los atributos aluData, matData e insData para acceder mas
@@ -52,7 +52,6 @@ public class UniversidadGrupo22 {
 //            System.out.println("Nombre: " + alumno.getNombre());
 //            System.out.println("Fecha de Nacimiento: " + alumno.getFechaNacimiento());
 //        }
-        
         // =====================================================================
         // Pruebas para Form Inscripcion
         // =====================================================================
@@ -63,7 +62,7 @@ public class UniversidadGrupo22 {
         AlumnoData aluData = new AlumnoData();
         MateriaData matData = new MateriaData();
         InscripcionData insData = new InscripcionData();
-        
+
         // Busco el alumno por su ID
         Alumno alu = aluData.buscarAlumno(2);
 
@@ -73,7 +72,6 @@ public class UniversidadGrupo22 {
         // ---------------------------------------------------------------------
         // Para el metodo guardarInscripcion()
         // ---------------------------------------------------------------------
-
         // Preparo la actualizacion con los datos de la nota 9, el alumno y la
         // materia
         // NOTA: Recordar el ORDEN de los parametros que son MUY IMPORTANTES
@@ -84,15 +82,12 @@ public class UniversidadGrupo22 {
         // Resolver: Parece ser mala idea por que carga duplicados los datos
         // Resolveeremos desde codigo verificando si ya existe primero
 //        Inscripcion ins = new Inscripcion(9, alu, mat);
-
         // Guardo la inscipcion con el metodo guardarInscripcion
         // de InscripcionData
 //        insData.guardarInscripcion(ins);
-        
         // ---------------------------------------------------------------------
         // Para el metodo actualizarNota()
         // ---------------------------------------------------------------------
-
         // Preparo la actualizacion con los datos de la nota 7, el alumno y la
         // materia
         // NOTA: Recordar el ORDEN de los parametros que son MUY IMPORTANTES
@@ -102,39 +97,30 @@ public class UniversidadGrupo22 {
         // UPDATE inscripcion (nota, idAlumno, idMateria) VALUES (7, 2, 7)
         // Resolveremos desde codigo verificando si ya existe primero
 //        Inscripcion ins = new Inscripcion(7, alu, mat);
-        
         // Primero convertir los tipos alu y mat a enteros
 //        int aluEnt = alu.getIdAlumno();
 //        int matEnt = mat.getIdMateria();
-        
         // Actualizo la inscipcion con el metodo actualizarNota de InscripcionData
 //        insData.actualizarNota(7, aluEnt, matEnt);
-
         // ---------------------------------------------------------------------
         // Para el metodo borrarInscripcion()
         // ---------------------------------------------------------------------
-
         // Preparo el borrado con los datos del alumno y la
         // materia
         // NOTA: Recordar el ORDEN de los parametros que son MUY IMPORTANTES
         // La instruccion en MySQL funciona bien manualmente
         // DELETE FROM inscripcion (idAlumno, idMateria) VALUES (2, 7)
-        
         // Primero convertir los tipos alu y mat a enteros
 //        int aluEnt = alu.getIdAlumno();
 //        int matEnt = mat.getIdMateria();
-
         // Borro fisicamente la inscipcion con el metodo
         // borrarInscripcionMateriaAlumno de InscripcionData
 //        insData.borrarInscripcionMateriaAlumno(aluEnt, matEnt);
-
         // ---------------------------------------------------------------------
         // Para el metodo obtenerInscripciones()
         // ---------------------------------------------------------------------
-
         // La instruccion en MySQL funciona bien manualmente
         // SELECT * FROM inscripcion
-        
         // Realizo la consulta con el metodo obtenerInscripciones()
         // El resultado es del tipo Inscripcion
 //        for (Inscripcion inscripcion : insData.obtenerInscripciones()) {
@@ -142,28 +128,30 @@ public class UniversidadGrupo22 {
 //            System.out.println("Apellido: " + inscripcion.getAlumno().getApellido());
 //            System.out.println("Materia: " + inscripcion.getMateria().getNombre());
 //        }
-
         // ---------------------------------------------------------------------
         // Para el metodo obtenerAlumnosXMateria()
         // ---------------------------------------------------------------------
-        
         // La instruccion en MySQL funciona bien manualmente
 //        "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
 //                + "FROM inscripcion i, alumno a"
 //                + "WHERE i.idAlumno = a.idAlumno"
 //                + "AND idMateria = ?"
 //                + "AND a.estado = 1";
-        
         // Recorre todas las materias y las muestra, menos en las que el
         // alumno este inscripto
 //        for (Materia materia : insData.obtenerMateriasNOCursadas(22)) {
 //            System.out.println("Nombre: " + materia.getNombre());
 //        }
-    //probar metodo inscripcion data    obtenerMateriasInscriptas(Alumno alumno)
-    for(Materia materia:insData.obtenerMateriasInscriptas(aluData.buscarAlumno(2))){
-        System.out.println("materia"+ materia.getNombre());
-    }
-    
+//--------------------------------------------------------------------------------
+        //probar metodo inscripcion data    obtenerMateriasInscriptas(Alumno alumno)
+        //-----------------------------------------------------------------------------
+//        for (Materia materia : insData.obtenerMateriasInscriptas(aluData.buscarAlumno(2))) {
+//            System.out.println("materia " + materia.getNombre());
+//        }
+//probar metodo obtenerMateriasCursadas(int idAlumno)
+        for (Materia materia : insData.obtenerMateriasCursadas(aluData.buscarAlumno(2).getIdAlumno())) {
+            System.out.println("materia " + materia.getNombre());
+        }
     }
 
 }

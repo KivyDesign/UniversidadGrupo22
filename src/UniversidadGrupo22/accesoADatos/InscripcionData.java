@@ -403,6 +403,7 @@ public class InscripcionData {
             // Recorro el rs
             while (rs.next()) {
                 // Creo el nuevo objeto que hereda de Materia
+                //¡¡¡¡¡¡¡¡¡¡¡agregado!!!!!!!!!
                 //parece que esta de mas con el id materia y el buscar materia por id basta
 //                mat = new Materia();
 //
@@ -452,33 +453,31 @@ public class InscripcionData {
         //String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
-            String sql = "SELECT m.idMateria,nombre,anio,estado from materia m, inscripcion i where i.idMateria=m.idMateria and idAlumno=?;";
+            String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria=m.idMateria and idAlumno=?;";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
             // Para obtener el ID del alumno
             ps.setInt(1, idAlumno);
-            System.out.println("ID: " + idAlumno);
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
-            System.out.println("paso algo por aca");
-
             // Recorro el rs mientras tenga elementos
             while (rs.next()) {
-                // Creo el nuevo objeto que hereda de Materia
-                Materia materia = new Materia();
-
-                // Le cargo los valores que necesito
-                materia.setIdMateria(rs.getInt("idMateria"));
-                System.out.println("IdMateria: " + rs.getInt("idMateria"));
-                materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("anio"));
-                materia.setActivo(true);
+                //parece que esta de mas con el id materia y el buscar materia por id basta
+//                // Creo el nuevo objeto que hereda de Materia
+//                Materia materia = new Materia();
+//
+//                // Le cargo los valores que necesito
+//                materia.setIdMateria(rs.getInt("idMateria"));
+//                System.out.println("IdMateria: " + rs.getInt("idMateria"));
+//                materia.setNombre(rs.getString("nombre"));
+//                materia.setAnioMateria(rs.getInt("anio"));
+//                materia.setActivo(true);
 
                 // Agrego la materia al array materia
-                listaDeMateriasInscripto.add(materia);
+                listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
             }
 
             // Cierro la consulta
