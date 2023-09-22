@@ -128,20 +128,6 @@ public class UniversidadGrupo22 {
 //            System.out.println("Apellido: " + inscripcion.getAlumno().getApellido());
 //            System.out.println("Materia: " + inscripcion.getMateria().getNombre());
 //        }
-        // ---------------------------------------------------------------------
-        // Para el metodo obtenerAlumnosXMateria()
-        // ---------------------------------------------------------------------
-        // La instruccion en MySQL funciona bien manualmente
-//        "SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado"
-//                + "FROM inscripcion i, alumno a"
-//                + "WHERE i.idAlumno = a.idAlumno"
-//                + "AND idMateria = ?"
-//                + "AND a.estado = 1";
-        // Recorre todas las materias y las muestra, menos en las que el
-        // alumno este inscripto
-//        for (Materia materia : insData.obtenerMateriasNOCursadas(22)) {
-//            System.out.println("Nombre: " + materia.getNombre());
-//        }
 //--------------------------------------------------------------------------------
         //probar metodo inscripcion data    obtenerMateriasInscriptas(Alumno alumno)
         //-----------------------------------------------------------------------------
@@ -149,9 +135,30 @@ public class UniversidadGrupo22 {
 //            System.out.println("materia " + materia.getNombre());
 //        }
 //probar metodo obtenerMateriasCursadas(int idAlumno)
-        for (Materia materia : insData.obtenerMateriasCursadas(aluData.buscarAlumno(2).getIdAlumno())) {
-            System.out.println("materia " + materia.getNombre());
+//        for (Materia materia : insData.obtenerMateriasCursadas(aluData.buscarAlumno(2).getIdAlumno())) {
+//            System.out.println("materia " + materia.getNombre());
+        //      }
+        //---------------------------------------------------------------------------
+        //probar metodo obtenerMateriaNoInscriptas(Alumno alumno)
+        //---------------------------------------------------------------------------
+//        for (Materia materia : insData.obtenerMateriaNoInscriptas(aluData.buscarAlumno(2))) {
+//            System.out.println("materia " + materia.getNombre());
+//        }
+        //-------------------------------------------------------------------
+        //probar metodo obtenerMateriasNOCursadas(int idAlumno)
+        //-------------------------------------------------------------------
+//        for (Materia materia : insData.obtenerMateriasNOCursadas(aluData.buscarAlumno(2).getIdAlumno())) {
+//            System.out.println("materia " + materia.getNombre());
+//        }
+        //---------------------------------------------------------------
+        //probar obtenerAlumnosXMateria(int idMateria)
+        //--------------------------------------------------
+        for (Alumno alumno : insData.obtenerAlumnosXMateria(3)) {
+            System.out.println("Alumno " + alumno.getNombre());
+        }
+        //probar metodo obtenerAlumnoXMateria(Materia materia)
+         for (Alumno alumno : insData.obtenerAlumnoXMateria(matData.buscarMateria(3))) {
+            System.out.println("Alumno " + alumno.getNombre());
         }
     }
-
 }
