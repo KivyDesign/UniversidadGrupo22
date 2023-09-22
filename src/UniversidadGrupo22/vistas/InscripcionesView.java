@@ -162,6 +162,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
         jbInscribir.setBackground(new java.awt.Color(194, 165, 121));
+        jbInscribir.setForeground(new java.awt.Color(255, 255, 255));
         jbInscribir.setText("Inscribir");
         jbInscribir.setEnabled(false);
         jbInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +172,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         });
 
         jbAnularInscripcion.setBackground(new java.awt.Color(194, 165, 121));
+        jbAnularInscripcion.setForeground(new java.awt.Color(255, 255, 255));
         jbAnularInscripcion.setText("Anular Inscripción");
         jbAnularInscripcion.setEnabled(false);
         jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +182,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setBackground(new java.awt.Color(194, 165, 121));
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +228,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -233,12 +236,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));

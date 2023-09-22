@@ -82,7 +82,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Codigo:");
+        jLabel2.setText("ID:");
 
         jLabel3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,6 +96,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estado:");
 
+        jbSalir.setBackground(new java.awt.Color(194, 165, 121));
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +105,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbGuardar.setBackground(new java.awt.Color(194, 165, 121));
+        jbGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +114,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbEliminar.setBackground(new java.awt.Color(194, 165, 121));
+        jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +123,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbNuevo.setBackground(new java.awt.Color(194, 165, 121));
+        jbNuevo.setForeground(new java.awt.Color(255, 255, 255));
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +149,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel1))
@@ -149,12 +157,12 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(45, 65, 88));
@@ -225,7 +233,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                                 .addComponent(jbEliminar)
                                 .addGap(85, 85, 85)
                                 .addComponent(jbSalir)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
