@@ -636,6 +636,7 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Alumno> obtenerAlumnosXMateria(int idMateria)metodo sobrecargado tiene mismo nombre que el de arriba
     // /////////////////////////////////////////////////////////////////////////
+    //ESTE METODO ES IGUAL AL DE ENZO ESTA PROBADO Y FUNCIONANDO
     public ArrayList<Alumno> obtenerAlumnosXMateria(int idMateria) {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
 
