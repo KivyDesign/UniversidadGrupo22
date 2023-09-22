@@ -65,6 +65,11 @@ public class X01FormView extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
 
         // =====================================================================
+        
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(3, "Mensaje");
+        // ---------------------------------------------------------------------
+        
         // Cargar alumnos en el ComboBox
         cargarAlumnos();
 
@@ -76,10 +81,6 @@ public class X01FormView extends javax.swing.JFrame {
 
         // Cargar alumnos en la tabla
         cargarTabla();
-
-        // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(3, "Mensaje");
-        // ---------------------------------------------------------------------
     }
 
     public void cargarAlumnos() {
