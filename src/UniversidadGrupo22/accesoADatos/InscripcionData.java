@@ -722,4 +722,53 @@ public class InscripcionData {
         return listaAlumnosPorMateria;
     }
 
+    public ArrayList<Object[]> obtenerMateriasCursadasAriel(int idAlumno) {
+
+        ArrayList<Object[]> listaDeMateriasInscripto = new ArrayList<>();
+
+        try {
+            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio FROM inscripcion AS i JOIN materia AS m ON (i.idMateria = m.idMateria) WHERE i.idAlumno = ?";
+
+            // Preparo la consulta
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Para obtener el ID del alumno
+            ps.setInt(1, idAlumno);
+            System.out.println("ID: " + idAlumno);
+
+            // Ejecuto la consulta
+            ResultSet rs = ps.executeQuery();
+            System.out.println("paso algo por aca");
+
+            // Recorro el rs mientras tenga elementos
+            while (rs.next()) {
+                // Creo el nuevo objeto que hereda de Materia
+                Materia materia = new Materia();
+                Inscripcion ins = new Inscripcion();
+
+                // Le cargo los valores que necesito
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                ins.setNota(rs.getInt("nota"));
+               // materia.setActivo(true);
+
+                // Agrego la materia al array materia
+                Object[] fila ={materia.getIdMateria(),materia.getNombre(),ins.getNota()};
+                listaDeMateriasInscripto.add(fila);
+                
+            }
+
+            // Cierro la consulta
+            ps.close();
+        } catch (SQLException ex) {
+            // En caso de que explote la consulta se lo informo al pobre
+            // y desafortunado DataEntry
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
+        }
+
+        // Si todo salio bien, entonces retorno la lista con las materias que
+        // posea la tabla materia en la DB universidadulp
+        return listaDeMateriasInscripto;
+    }
+    
 }

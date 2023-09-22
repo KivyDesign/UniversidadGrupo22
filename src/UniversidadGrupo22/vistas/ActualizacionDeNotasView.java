@@ -222,7 +222,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         jtNotas.getColumnModel().getColumn(2).setPreferredWidth(80);
     }
 
-    public void cargarMaterias() {
+public void cargarMaterias() {
          // Limpio las filas de la tabla
         borrarFilasTabla();
         
@@ -233,10 +233,11 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         System.out.println("ID: " + id);
 
         if (seleccionada != null) {
-            ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriasCursadas(id);
+            ArrayList<Object[]> lista = (ArrayList) insData.obtenerMateriasCursadasAriel(id);
 
-            for (Materia mat : lista) {
-                modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
+            for (Object[] fila : lista) {
+                modelo.addRow(fila);
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
