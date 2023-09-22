@@ -159,7 +159,11 @@ public class UniversidadGrupo22 {
 //        for (Materia materia : insData.obtenerMateriasNOCursadas(22)) {
 //            System.out.println("Nombre: " + materia.getNombre());
 //        }
-        
+    //probar metodo inscripcion data    obtenerMateriasInscriptas(Alumno alumno)
+    for(Materia materia:insData.obtenerMateriasInscriptas(aluData.buscarAlumno(2))){
+        System.out.println("materia"+ materia.getNombre());
+    }
+    
     }
 
 }
