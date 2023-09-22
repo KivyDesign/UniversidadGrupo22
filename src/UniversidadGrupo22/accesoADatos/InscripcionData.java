@@ -451,7 +451,7 @@ public class InscripcionData {
         //String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
-            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio FROM inscripcion AS i JOIN materia AS m ON (i.idMateria = m.idMateria) WHERE i.idAlumno = ?";
+            String sql = "SELECT m.idMateria,nombre,anio,estado from materia m, inscripcion i where i.idMateria=m.idMateria and idAlumno=?;";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
@@ -507,7 +507,7 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-        String sql = "SELECT m.idMateria,m.nombre,m.anio,m.estado from materia m join inscripcion i on(m.idMateria!=i.idMateria) join alumno a on (i.idAlumno=a.idAlumno) where a.idAlumno=3;";
+        String sql = "SELECT m.idMateria,m.nombre,m.anio,m.estado from materia m, inscripcion i where i.idMateria=m.idMateria and i.idAlumno=3;";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
