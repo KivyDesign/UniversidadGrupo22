@@ -507,7 +507,7 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-        String sql = "SELECT m.idMateria,m.nombre,m.anio,m.estado from materia m, inscripcion i where i.idMateria=m.idMateria and i.idAlumno=3;";
+        String sql = "SELECT idMateria from materia  where estado=1 and idMateria not in(select idmateria from inscripcion where idAlumno=?);";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
@@ -522,17 +522,19 @@ public class InscripcionData {
 
             // Recorro el rs
             while (rs.next()) {
+                  //¡¡¡¡¡¡¡¡¡¡¡agregado!!!!!!!!!
+                //parece que esta de mas con el id materia y el buscar materia por id basta
                 // Creo el nuevo objeto que hereda de Materia
-                mat = new Materia();
-
-                // Le cargo los valores que necesito
-                mat.setIdMateria(rs.getInt("idMateria"));
-                mat.setNombre(rs.getString("nombre"));
-                mat.setAnioMateria(rs.getInt("anio"));
+//                mat = new Materia();
+//
+//                // Le cargo los valores que necesito
+//                mat.setIdMateria(rs.getInt("idMateria"));
+//                mat.setNombre(rs.getString("nombre"));
+//                mat.setAnioMateria(rs.getInt("anio"));
 
                 // Los agrego a los valores a la lista utilizando el metodo
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
-//                listaDeMateriasNoInscripto.add(mat.obtenerMateriaPorId(rs.getInt("idMateria")));
+                listaDeMateriasNoInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
             }
 
             // Cierro la consulta
