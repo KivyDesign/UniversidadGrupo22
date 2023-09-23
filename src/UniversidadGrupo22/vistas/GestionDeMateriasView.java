@@ -298,7 +298,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
 
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
-
+            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+                jtNombre.setText("");
             } else {
 
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
@@ -332,6 +333,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
                 jTanio.setText("");
+            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+                jtNombre.setText("");
+
             } else if (materia != null) {
                 materia.setNombre(jtNombre.getText());
                 materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
@@ -403,5 +407,24 @@ public void limpiarcampos() {
         jRestadoMat.setSelected(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
+    }
+
+    public boolean pruebaCaracteres(String texto) {
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z')
+                    && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z')
+                    && !(texto.charAt(i) >= '1' && texto.charAt(i) <= '9') && texto.charAt(i) != ' ') {
+                b++;
+            }
+        }
+        if (b > 0) {
+            JOptionPane.showMessageDialog(null, "el campo nombre solo debe tener letras y números");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
