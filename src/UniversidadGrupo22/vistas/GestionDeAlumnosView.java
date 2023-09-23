@@ -322,18 +322,22 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
+        jrbEstado.setEnabled(false);
         try {
 
             Alumno alumno = alumnoData.buscarAlumnoPorID(Integer.parseInt(jtid.getText()));
-
-            if (jtDni.getText().length() != 8) {
+            if (jdcFechaNacimiento.getDate() == null) {
+                // Prueba de concepto StatusBar ----------------------------------------
+                PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
+                // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
+            } else if (jtDni.getText().length() != 8) {
                 JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
-                jtDni.setText("");
-             } else if (pruebaCaracteres(jtApellido.getText()) == false) {
-            jtApellido.setText("");
-             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
-            jtNombre.setText("");   
+                // jtDni.setText("");
+                jtDni.setFocusable(true);
+            } else if (pruebaCaracteres(jtApellido.getText()) == false) {
+                jtApellido.setText("");
+            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+                jtNombre.setText("");
             } else {
                 alumno.setDni(Integer.parseInt(jtDni.getText()));
                 alumno.setApellido(jtApellido.getText());
@@ -372,17 +376,19 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        if (jtDni.getText().isEmpty() || jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdcFechaNacimiento.getDate() == null) {
+        if (jdcFechaNacimiento.getDate() == null) {
             // Prueba de concepto StatusBar ----------------------------------------
             PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
             // ---------------------------------------------------------------------
             // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else if (jtDni.getText().length() != 8) {
             JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
-            jtDni.setText("");
+            //  jtDni.setText("");
+            jtDni.requestFocus();
+            jtDni.selectAll();
         } else if (pruebaCaracteres(jtApellido.getText()) == false) {
             jtApellido.setText("");
-             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+        } else if (pruebaCaracteres(jtNombre.getText()) == false) {
             jtNombre.setText("");
         } else {
             try {
@@ -525,8 +531,8 @@ public void limpiarcampos() {
                 b++;
             }
         }
-        if (b > 0) {
-            JOptionPane.showMessageDialog(null, "los campos nombre y apellido solo deben ser letras");
+        if (b > 0 || texto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "los campos nombre y apellido deben completarse con letras");
             return false;
         } else {
             return true;

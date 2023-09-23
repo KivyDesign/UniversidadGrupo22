@@ -294,7 +294,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "los campos deben ser completados");
             } else if (!jtCodigo.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente");
+                JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente cuando la materia es nueva");
             } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
 
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
@@ -327,15 +327,22 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+       jRestadoMat.setEnabled(false);
         try {
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
-            if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
+            if (materia==null) {JOptionPane.showMessageDialog(this, "El codigo de Materia debe ser valido");
+                jtCodigo.setText("");
+            }
+            else if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "los campos deben ser completados");
+            } 
+            else if  (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
 
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
                 jTanio.setText("");
             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
                 jtNombre.setText("");
-
+                
             } else if (materia != null) {
                 materia.setNombre(jtNombre.getText());
                 materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
@@ -343,8 +350,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 limpiarcampos();
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
-            jtCodigo.setText("");
+            JOptionPane.showMessageDialog(this, "el ID y el año deben ser un numero");
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed

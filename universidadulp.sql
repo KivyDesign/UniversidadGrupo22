@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2023 a las 23:51:04
+-- Tiempo de generación: 24-09-2023 a las 00:27:02
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -43,13 +43,28 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES
-(1, 25678912, 'Martinez', 'Ana', '2000-11-23', 1),
-(2, 25678123, 'Mendez', 'Juan', '2002-01-23', 1),
-(3, 25678321, 'Aguirre', 'Carlos', '2004-12-23', 1),
-(4, 23156477, 'Gomez', 'Diego', '2000-09-12', 1),
+(1, 44444443, 'Martinez', 'Ana', '2000-11-23', 1),
+(2, 66666666, 'Mendez', 'Juan', '2002-01-23', 1),
+(3, 77777777, 'Aguirre', 'Carlos', '2004-12-23', 1),
+(4, 88888888, 'Gomez', 'Diego', '2000-09-12', 1),
 (5, 12365478, 'Soria', 'Eva', '1996-05-25', 1),
-(6, 11258369, 'Paso', 'Julian', '1997-09-30', 0),
-(8, 14587892, 'Funes', 'Aldo', '2011-07-06', 1);
+(6, 33333333, 'Paso', 'Julian', '1997-09-30', 1),
+(8, 99999999, 'Funes', 'Aldo', '2011-07-06', 1),
+(9, 11223344, 'Santos', 'Nahuel', '1996-05-25', 0),
+(12, 22222222, 'Martines', 'Viviana', '2001-12-10', 1),
+(13, 33445566, 'Varela', 'Carlos', '1990-11-23', 1),
+(14, 44556677, 'Paez', 'Diego', '1999-09-06', 1),
+(15, 55667778, 'Salas', 'Benito', '2000-05-16', 1),
+(16, 99887744, 'Coma', 'Victor', '2000-09-02', 1),
+(17, 99999, 'z', 'x', '2023-09-06', 1),
+(18, 87888990, 'Alvarez', 'Valeria', '2023-09-15', 1),
+(19, 55555555, 'Palacios', 'Juliana', '1991-01-16', 1),
+(20, 12131415, 'Diego', 'Fernande', '2012-05-15', 1),
+(21, 14, 'Samuel', 'Rios', '2023-09-12', 1),
+(22, 13141516, 'Sala', 'Hector', '2023-09-05', 1),
+(23, 45464749, 'Ruben', 'Marco', '2023-09-12', 1),
+(24, 47484950, 'Sosa', 'Valeria', '2023-09-20', 1),
+(29, 45678911, 'Salva', 'Tore', '2023-09-13', 1);
 
 -- --------------------------------------------------------
 
@@ -69,11 +84,11 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`idInscripto`, `nota`, `idAlumno`, `idMateria`) VALUES
-(1, 9, 1, 1),
-(2, 10, 1, 2),
-(4, 7, 2, 3),
-(5, 6, 3, 2),
-(6, 7, 3, 3);
+(11, 7, 3, 1),
+(12, 5, 3, 11),
+(13, 9, 3, 3),
+(14, 8, 2, 3),
+(15, 5, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -96,9 +111,16 @@ INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
 (1, 'Matematicas', 1, 1),
 (2, 'Progamacion 1', 1, 1),
 (3, 'Base de Datos 1', 1, 1),
-(4, 'Idioma 1', 1, 1),
-(5, 'Matematicas', 2, 0),
-(6, 'Programacion lll', 3, 1);
+(4, 'Idioma 2.2', 2, 1),
+(5, 'Desarrollo Productivo', 3, 1),
+(6, 'Programacion lll', 3, 1),
+(7, 'Paracaidismo', 5, 1),
+(8, 'Corte y Confeccion', 2, 1),
+(9, 'Laboratorio Prog. 1', 1, 1),
+(10, 'Ingles Tecnico', 1, 1),
+(11, 'Ingles Tecnico 2', 2, 1),
+(14, 'Control de Ansiedad', 3, 1),
+(17, 'Quimica', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -123,7 +145,8 @@ ALTER TABLE `inscripcion`
 -- Indices de la tabla `materia`
 --
 ALTER TABLE `materia`
-  ADD PRIMARY KEY (`idMateria`);
+  ADD PRIMARY KEY (`idMateria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -133,19 +156,19 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
