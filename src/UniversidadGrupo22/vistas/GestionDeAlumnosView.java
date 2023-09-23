@@ -332,8 +332,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
             } else if (jtDni.getText().length() != 8) {
                 JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
-                // jtDni.setText("");
-                jtDni.setFocusable(true);
+                jtDni.requestFocus();
+                jtDni.selectAll();
             } else if (pruebaCaracteres(jtApellido.getText()) == false) {
                 jtApellido.setText("");
             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
@@ -383,7 +383,6 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else if (jtDni.getText().length() != 8) {
             JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
-            //  jtDni.setText("");
             jtDni.requestFocus();
             jtDni.selectAll();
         } else if (pruebaCaracteres(jtApellido.getText()) == false) {
