@@ -73,6 +73,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(36, 86, 109));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        jRestadoMat.setForeground(new java.awt.Color(255, 255, 255));
         jRestadoMat.setText("Activo");
 
         jBbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
