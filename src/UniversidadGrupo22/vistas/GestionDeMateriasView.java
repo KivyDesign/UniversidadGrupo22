@@ -20,6 +20,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     public GestionDeMateriasView() {
         initComponents();
         materiaData = new MateriaData();
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
 
     /**
@@ -288,22 +290,28 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "los campos deben ser completados");
-        } else if (!jtCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente");
+        try {
+            if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "los campos deben ser completados");
+            } else if (!jtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente");
+            } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
 
-        } else {
-            try {
+                JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
+            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+                jtNombre.setText("");
+            } else {
 
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
 
                 materiaData.guardarMateria(mat);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "el año debe ser un numero");
+                limpiarcampos();
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "el año debe ser un numero");
         }
-        limpiarcampos();
+
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -315,20 +323,30 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
+        limpiarcampos();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         try {
-
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
-            if (materia != null) {
+            if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
+
+                JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
+                jTanio.setText("");
+            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+                jtNombre.setText("");
+
+            } else if (materia != null) {
+                materia.setNombre(jtNombre.getText());
+                materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
                 materiaData.modificarMateria(materia);
+                limpiarcampos();
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
-       limpiarcampos(); 
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -345,10 +363,12 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
                 if (materia.isActivo() == true) {
                     jRestadoMat.setSelected(true);
+                    jbGuardar.setEnabled(true);
+                    jbEliminar.setEnabled(true);
                 }
             } else {
                 limpiarcampos();
-                
+
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
@@ -385,5 +405,26 @@ public void limpiarcampos() {
         jTanio.setText("");
         jtCodigo.setText("");
         jRestadoMat.setSelected(false);
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
+    }
+
+    public boolean pruebaCaracteres(String texto) {
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z')
+                    && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z')
+                    && !(texto.charAt(i) >= '1' && texto.charAt(i) <= '9') && texto.charAt(i) != ' ') {
+                b++;
+            }
+        }
+        if (b > 0) {
+            JOptionPane.showMessageDialog(null, "el campo nombre solo debe tener letras y números");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
