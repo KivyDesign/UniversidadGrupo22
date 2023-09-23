@@ -162,7 +162,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
         jbInscribir.setBackground(new java.awt.Color(194, 165, 121));
-        jbInscribir.setForeground(new java.awt.Color(255, 255, 255));
+        jbInscribir.setForeground(new java.awt.Color(0, 0, 0));
         jbInscribir.setText("Inscribir");
         jbInscribir.setEnabled(false);
         jbInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +172,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         });
 
         jbAnularInscripcion.setBackground(new java.awt.Color(194, 165, 121));
-        jbAnularInscripcion.setForeground(new java.awt.Color(255, 255, 255));
+        jbAnularInscripcion.setForeground(new java.awt.Color(0, 0, 0));
         jbAnularInscripcion.setText("Anular Inscripción");
         jbAnularInscripcion.setEnabled(false);
         jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +182,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setBackground(new java.awt.Color(194, 165, 121));
-        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
