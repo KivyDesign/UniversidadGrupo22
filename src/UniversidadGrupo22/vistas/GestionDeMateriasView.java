@@ -20,6 +20,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     public GestionDeMateriasView() {
         initComponents();
         materiaData = new MateriaData();
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
 
     /**
@@ -308,7 +310,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el año debe ser un numero");
         }
 
-        
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -330,9 +332,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
                 jTanio.setText("");
-            }
-            
-            else if (materia != null) {
+            } else if (materia != null) {
                 materia.setNombre(jtNombre.getText());
                 materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
                 materiaData.modificarMateria(materia);
@@ -342,7 +342,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
-        
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -359,6 +359,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
                 if (materia.isActivo() == true) {
                     jRestadoMat.setSelected(true);
+                    jbGuardar.setEnabled(true);
+                    jbEliminar.setEnabled(true);
                 }
             } else {
                 limpiarcampos();
@@ -399,5 +401,7 @@ public void limpiarcampos() {
         jTanio.setText("");
         jtCodigo.setText("");
         jRestadoMat.setSelected(false);
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
 }
