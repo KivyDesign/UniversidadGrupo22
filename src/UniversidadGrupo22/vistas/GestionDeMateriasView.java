@@ -288,22 +288,27 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "los campos deben ser completados");
-        } else if (!jtCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente");
+        try {
+            if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "los campos deben ser completados");
+            } else if (!jtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente");
+            } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
 
-        } else {
-            try {
+                JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
+
+            } else {
 
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
 
                 materiaData.guardarMateria(mat);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "el año debe ser un numero");
+                limpiarcampos();
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "el año debe ser un numero");
         }
-        limpiarcampos();
+
+        
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -315,20 +320,29 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
+        limpiarcampos();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         try {
-
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
-            if (materia != null) {
+            if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
+
+                JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 6");
+                jTanio.setText("");
+            }
+            
+            else if (materia != null) {
+                materia.setNombre(jtNombre.getText());
+                materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
                 materiaData.modificarMateria(materia);
+                limpiarcampos();
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             jtCodigo.setText("");
         }
-       limpiarcampos(); 
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -348,7 +362,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 }
             } else {
                 limpiarcampos();
-                
+
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
