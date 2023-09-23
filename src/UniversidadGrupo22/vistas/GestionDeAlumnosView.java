@@ -326,11 +326,15 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         try {
 
             Alumno alumno = alumnoData.buscarAlumnoPorID(Integer.parseInt(jtid.getText()));
-             
-                if (jtDni.getText().length() != 8) {
-                    JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
-                    jtDni.setText("");
-                }else{
+
+            if (jtDni.getText().length() != 8) {
+                JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
+                jtDni.setText("");
+             } else if (pruebaCaracteres(jtApellido.getText()) == false) {
+            jtApellido.setText("");
+             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+            jtNombre.setText("");   
+            } else {
                 alumno.setDni(Integer.parseInt(jtDni.getText()));
                 alumno.setApellido(jtApellido.getText());
                 alumno.setNombre(jtNombre.getText());
@@ -338,12 +342,13 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setEstado(true);
                 alumnoData.modificarAlumno(alumno);
                 PruebaDeConceptoStatusBar(1, "La modificacion ha sido exitosa");
-                limpiarcampos();}
-            
+                limpiarcampos();
+            }
+
         } catch (NumberFormatException ex) {
             PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
             jtDni.setText("");
-            
+
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -375,6 +380,10 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         } else if (jtDni.getText().length() != 8) {
             JOptionPane.showMessageDialog(null, "Debe ser un DNI valido 8 Digitos");
             jtDni.setText("");
+        } else if (pruebaCaracteres(jtApellido.getText()) == false) {
+            jtApellido.setText("");
+             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+            jtNombre.setText("");
         } else {
             try {
                 LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -425,7 +434,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
                 // Busco si el alumno no esta vacio
                 if (alumno != null) {
-                    jtid.setText(alumno.getIdAlumno()+"");
+                    jtid.setText(alumno.getIdAlumno() + "");
                     jtApellido.setText(alumno.getApellido());
                     jtNombre.setText(alumno.getNombre());
                     jdcFechaNacimiento.setDate(Date.from(alumno.getFechaNacimiento().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
@@ -506,5 +515,22 @@ public void limpiarcampos() {
         // Si el texto del mensaje esta vacio entonces no muestro texto en
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlStatusBar.setText(mensaje);
+    }
+
+    public boolean pruebaCaracteres(String texto) {
+        int b = 0;
+        int i = 0;
+        for (i = 0; i < texto.length(); i++) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z')) {
+                b++;
+            }
+        }
+        if (b > 0) {
+            JOptionPane.showMessageDialog(null, "los campos nombre y apellido solo deben ser letras");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
