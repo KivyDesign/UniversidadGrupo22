@@ -396,6 +396,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(1, "Inscripción agregada de forma exitosa");
+        // ---------------------------------------------------------------------
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
@@ -436,6 +439,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
+        // Prueba de concepto StatusBar ----------------------------------------
+        PruebaDeConceptoStatusBar(1, "Inscripción borrada");
+        // ---------------------------------------------------------------------
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed

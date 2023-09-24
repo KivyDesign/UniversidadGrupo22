@@ -72,7 +72,7 @@ public class InscripcionData {
                 // Hay que ver si le hacemos una barra de status para informar
                 // de estos casos al operador y no detenerlo a cada rato con
                 // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Inscripción agregada de forma exitosa");
+//                JOptionPane.showMessageDialog(null, "Inscripción agregada de forma exitosa");
             }
 
             // Cierro la consulta
@@ -167,7 +167,7 @@ public class InscripcionData {
                 // Hay que ver si le hacemos una barra de status para informar
                 // de estos casos al operador y no detenerlo a cada rato con
                 // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Inscripción borrada");
+//                JOptionPane.showMessageDialog(null, "Inscripción borrada");
             } else {
                 JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
             }
