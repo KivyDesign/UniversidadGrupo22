@@ -12,6 +12,8 @@ import UniversidadGrupo22.entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +40,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private InscripcionData insData;
     private ArrayList<Alumno> listarAlumnos;
+    int idAlu;
+    double nuevaNota = 0;
+    int idMat;
 
     /**
      * Creates new form ActualizacionDeNotasView
@@ -52,6 +57,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         cargarAlumnos();
         armarCabeceraDeLaTabla();
         cargarMaterias();
+        anadeListenerAlModelo();
     }
 
     /**
@@ -217,7 +223,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // Aqui tengo que escribir mi codigo para guardar los cambios
+        insData.actualizarNota(nuevaNota, idAlu, idMat);
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -276,12 +282,12 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
         Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
 
-        int id = seleccionada.getIdAlumno();
+        idAlu = seleccionada.getIdAlumno();
 
-        System.out.println("ID: " + id);
+        System.out.println("ID: " + idAlu);
 
         if (seleccionada != null) {
-            ArrayList<Object[]> lista = (ArrayList) insData.obtenerMateriasCursadasAriel(id);
+            ArrayList<Object[]> lista = (ArrayList) insData.obtenerMateriasCursadasAriel(idAlu);
 
             for (Object[] fila : lista) {
                 modelo.addRow(fila);
@@ -303,6 +309,39 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                     modelo.removeRow(i);
                 }
             }
+        }
+    }
+
+    public void anadeListenerAlModelo() {
+        System.out.println("entró al anadelistener");
+        jtNotas.getModel().addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent evento) {
+                System.out.println("entro al tableChanged");
+                cambioNota(evento);
+            }
+        });
+    }
+
+    public void cambioNota(TableModelEvent evento) {
+        System.out.println("entro al cambioNota");
+        // Solo se trata el evento UPDATE, correspondiente al cambio de valor
+        // de una celda.
+        if (evento.getType() == TableModelEvent.UPDATE) {
+
+            // Se obtiene el modelo de la tabla y la fila/columna que han cambiado.
+            //TableModel modelo = ((TableModel) (evento.getSource()));
+            int fila = evento.getFirstRow();
+            int columna = evento.getColumn();
+            
+            Object nuevaNot = jtNotas.getValueAt(fila, columna);
+            try{
+                nuevaNota = Double.parseDouble(nuevaNot.toString());
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
+            }
+            idMat = (int) jtNotas.getValueAt(fila, 0);
         }
     }
 }
