@@ -245,6 +245,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbAlumnoItemStateChanged
         cargarMaterias();
+        
     }//GEN-LAST:event_jcbAlumnoItemStateChanged
 
 
@@ -373,11 +374,15 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
             @Override
             public void valueChanged(ListSelectionEvent evento) {
+                
                 int filaSeleccionada = jtNotas.getSelectedRow();
                 int columnaSeleccionada = jtNotas.getSelectedColumn();
+                
+                if(jtNotas.isCellEditable(filaSeleccionada,columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0){
                 Object valor = jtNotas.getValueAt(filaSeleccionada, columnaSeleccionada);
                 nuevaNota = Double.parseDouble(valor.toString());
- 
+                }
+                
             }
         });
     }
