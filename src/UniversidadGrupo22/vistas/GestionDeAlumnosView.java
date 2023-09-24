@@ -171,7 +171,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
         jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
-        jlStatusBar.setText("Texto de prueba");
+        jlStatusBar.setText("Ingrese DNI a buscar o Complete datos para ingreso nuevo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -527,7 +527,6 @@ public void limpiarcampos() {
         }
         if (b > 0 || texto.isEmpty()) {
             PruebaDeConceptoStatusBar(2, "los campos nombre y apellido deben completarse con letras");
-            //JOptionPane.showMessageDialog(null, "");
             return false;
         } else {
             return true;

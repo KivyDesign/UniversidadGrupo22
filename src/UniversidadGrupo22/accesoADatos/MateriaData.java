@@ -35,7 +35,7 @@ public class MateriaData {
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Materia añadida con exito");
+               // JOptionPane.showMessageDialog(null, "Materia añadida con exito");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -60,7 +60,7 @@ public class MateriaData {
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la Materia");
+//                JOptionPane.showMessageDialog(null, "No existe la Materia");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -106,9 +106,9 @@ public class MateriaData {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificada Exitosamente");
+//                JOptionPane.showMessageDialog(null, "Modificada Exitosamente");
             } else {
-                JOptionPane.showMessageDialog(null, "La Materia no existe");
+               // JOptionPane.showMessageDialog(null, "La Materia no existe");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia: " + ex.getMessage());
@@ -123,7 +123,7 @@ public class MateriaData {
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, "Se eliminó la Materia");
+//                JOptionPane.showMessageDialog(null, "Se eliminó la Materia");
             }
             ps.close();
         } catch (SQLException ex) {
