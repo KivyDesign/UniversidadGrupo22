@@ -19,6 +19,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame {
 
+    // Declaro e Inicializo el modelo que hereda de DefaultTableModel
+    // para acceder a sus metodos
+//    private DefaultTableModel modelo = new DefaultTableModel() {
+//
+//        // Clase Interna Anónima
+//        public boolean isCellEditable(int fila, int columna) {
+//
+//            // Si retorno true las celdas son todas editables, con false
+//            // ninguna celda es editable
+//            return false;
+//        }
+//    };
+    
     private MateriaData materiaData;
     private List<Materia> listarMaterias;
     private DefaultTableModel modelo;
@@ -242,9 +255,9 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
 
             int idMateria = materia.getIdMateria();
             System.out.println("idMateria: " + idMateria);
-            
+
             ArrayList<Alumno> alu = (ArrayList<Alumno>) inscripcionData.obtenerAlumnosPorMateriaEnzo(idMateria);
-            
+
             if (alu != null) {
                 for (Alumno alumno : alu) {
                     modelo.addRow(new Object[]{
