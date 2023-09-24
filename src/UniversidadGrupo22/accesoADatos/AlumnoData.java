@@ -58,7 +58,7 @@ public class AlumnoData {
             // Cierro la consulta
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Alumno: " + ex.getMessage());
+           // JOptionPane.showMessageDialog(null, "Error al insertar en la tabla Alumno: " + ex.getMessage());
         }
     }
 
@@ -114,12 +114,12 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                 
-                System.out.println("\n------------------------------------------");
-                System.out.println("Buscar en AlumnoData por ID");
-                System.out.println(rs.getInt("idAlumno") + " - " + rs.getInt("dni") + " - " + rs.getString("apellido") + " - " + rs.getString("nombre") + " - " + rs.getDate("fechaNacimiento").toLocalDate());
-                System.out.println("\n------------------------------------------");
+//                System.out.println("\n------------------------------------------");
+//                System.out.println("Buscar en AlumnoData por ID");
+//                System.out.println(rs.getInt("idAlumno") + " - " + rs.getInt("dni") + " - " + rs.getString("apellido") + " - " + rs.getString("nombre") + " - " + rs.getDate("fechaNacimiento").toLocalDate());
+//                System.out.println("\n------------------------------------------");
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+              //  JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -147,7 +147,7 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+//                JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -204,9 +204,9 @@ public class AlumnoData {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado Exitosamente");
+//                JOptionPane.showMessageDialog(null, "Modificado Exitosamente");
             } else {
-                JOptionPane.showMessageDialog(null, "El alumno no existe");
+//                JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
 
             ps.close();
