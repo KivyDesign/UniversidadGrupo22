@@ -25,8 +25,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InscripcionesView extends javax.swing.JInternalFrame {
 
-    // Declaro el modelo que hereda de DefaultTableModel
-    private DefaultTableModel modelo;
+    // Declaro e Inicializo el modelo que hereda de DefaultTableModel
+    // para acceder a sus metodos
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        // Clase Interna Anónima
+        public boolean isCellEditable(int fila, int columna) {
+
+            // Si retorno true las celdas son todas editables, con false
+            // ninguna celda es editable
+//            if (columna == 2) {
+//                return true;
+//            }
+            return false;
+        }
+    };
     
     private AlumnoData alumnoData;
     private List<Alumno> listarAlumnos;
@@ -42,10 +55,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
      */
     public InscripcionesView() {
         initComponents();
-
-        // Inicializo el nuevo modelo para acceder a los metodos de
-        // DefaultTableModel()
-        modelo = new DefaultTableModel();
 
 //        // Quito la barra de titulo del JInternalFrame
 //        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -127,6 +136,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de Materias");
 
+        jcbSeleccioneAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSeleccioneAlumnoActionPerformed(evt);
+            }
+        });
+
         jrbMateriasInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jrbMateriasInscriptas.setText("Materias Inscriptas");
         jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
@@ -145,16 +160,10 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ID", "Nombre", "Año"
+
             }
         ));
         jScrollPane1.setViewportView(jtMaterias);
@@ -387,6 +396,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
             // ---------------------------------------------------------------------
         }
+        
+        // Recreo el modelo para que refleje los cambios
+        RefrescarModeloMateriasInscriptasAnulada();
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
@@ -424,7 +436,14 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
             // ---------------------------------------------------------------------
         }
+        
+        // Recreo el modelo para que refleje los cambios
+        RefrescarModeloMateriasInscriptasAnulada();
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
+
+    private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed
+        RefrescarModeloMateriasInscriptasAnulada();
+    }//GEN-LAST:event_jcbSeleccioneAlumnoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -606,5 +625,15 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Si el texto del mensaje esta vacio entonces no muestro texto en
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlStatusBar.setText(mensaje);
+    }
+    
+    public void RefrescarModeloMateriasInscriptasAnulada() {
+        // Actualizo el modelo con las materias que correspondan a la seleccion
+        // que este seleccionada en el Radiobutton
+        if (jrbMateriasNoInscriptas.isSelected()) {
+            RadioButtonNoInscriptos();
+        } else {
+            RadioButtonInscriptos();
+        }
     }
 }
