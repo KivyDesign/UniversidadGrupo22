@@ -12,6 +12,10 @@ import UniversidadGrupo22.entidades.Materia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +45,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private InscripcionData insData;
     private ArrayList<Alumno> listarAlumnos;
     int idAlu;
-    double nuevaNota = 0;
+    double nuevaNota;
+    double nueva;
     int idMat;
 
     /**
@@ -57,7 +62,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         cargarAlumnos();
         armarCabeceraDeLaTabla();
         cargarMaterias();
+        listSelectionListener();
         anadeListenerAlModelo();
+
     }
 
     /**
@@ -223,7 +230,12 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        insData.actualizarNota(nuevaNota, idAlu, idMat);
+
+        if (nuevaNota >= 0 && nuevaNota <= 10) {
+            insData.actualizarNota(nuevaNota, idAlu, idMat);
+        } else {
+            JOptionPane.showMessageDialog(null, "el valor ingresado no es válido");
+        }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -315,7 +327,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     public void anadeListenerAlModelo() {
         System.out.println("entró al anadelistener");
         jtNotas.getModel().addTableModelListener(new TableModelListener() {
-
+            //Object valorViejo = jtNotas.getValueAt(jtNotas.getSelectedRow(), jtNotas.getSelectedColumn());
             @Override
             public void tableChanged(TableModelEvent evento) {
                 System.out.println("entro al tableChanged");
@@ -334,14 +346,40 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             //TableModel modelo = ((TableModel) (evento.getSource()));
             int fila = evento.getFirstRow();
             int columna = evento.getColumn();
-            
-            Object nuevaNot = jtNotas.getValueAt(fila, columna);
-            try{
-                nuevaNota = Double.parseDouble(nuevaNot.toString());
-            }catch(NumberFormatException e){
+
+            try {
+                Object nueva = jtNotas.getValueAt(fila, columna);
+                double pars = Double.parseDouble(nueva.toString());
+                if (pars >= 0 && pars <= 10) {
+                    nuevaNota = pars;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor ingresado no es válido(0-10)");
+                    jtNotas.setValueAt(nuevaNota, fila, columna);
+                }
+
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
+
+                jtNotas.setValueAt(nuevaNota, fila, columna);
             }
             idMat = (int) jtNotas.getValueAt(fila, 0);
         }
     }
+
+    public void listSelectionListener() {
+        //JTable tabla = jtNotas;
+        ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
+        modeloSeleccion.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent evento) {
+                int filaSeleccionada = jtNotas.getSelectedRow();
+                int columnaSeleccionada = jtNotas.getSelectedColumn();
+                Object valor = jtNotas.getValueAt(filaSeleccionada, columnaSeleccionada);
+                nuevaNota = Double.parseDouble(valor.toString());
+ 
+            }
+        });
+    }
+
 }
