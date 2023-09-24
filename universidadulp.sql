@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2023 a las 00:27:02
+-- Tiempo de generación: 24-09-2023 a las 19:08:45
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -74,7 +74,7 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 
 CREATE TABLE `inscripcion` (
   `idInscripto` int(11) NOT NULL,
-  `nota` int(11) NOT NULL,
+  `nota` double NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `idMateria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -84,11 +84,12 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`idInscripto`, `nota`, `idAlumno`, `idMateria`) VALUES
-(11, 7, 3, 1),
-(12, 5, 3, 11),
-(13, 9, 3, 3),
-(14, 8, 2, 3),
-(15, 5, 2, 7);
+(1, 7.5, 3, 1),
+(2, 5.25, 3, 11),
+(3, 9.25, 3, 3),
+(4, 8.75, 2, 3),
+(5, 5.5, 2, 7),
+(6, 7.75, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
