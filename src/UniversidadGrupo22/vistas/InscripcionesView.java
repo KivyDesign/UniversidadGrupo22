@@ -40,7 +40,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    
+
     private AlumnoData alumnoData;
     private List<Alumno> listarAlumnos;
     private MateriaData materiaData;
@@ -49,7 +49,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 //    AlumnoData aluData = new AlumnoData();
 //    MateriaData matData = new MateriaData();
 //    InscripcionData insData = new InscripcionData();
-    
     /**
      * Creates new form InscripcionesView
      */
@@ -64,32 +63,30 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 //        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 //        this.setBorder(null);
-
         // Inicializo el acceso a los datos de las tablas alumno e inscripción
         // que se utilizan en este Frame interno
         alumnoData = new AlumnoData();
         listarAlumnos = alumnoData.listarAlumnos();
         inscripcionData = new InscripcionData();
-        
+
         // Cargo los alumnos que necesito mostrar en el ComboBox
         // La idea es que por defecto se carguen los alumnos activos con el
         // flag de estado = 1
         cargarAlumnos();
-        
+
         // Defino el jrbMateriasNoInscriptas como seleccionado y cargo los
         // datos de las materias en las que el alumno que este seleccionado en
         // el ComboBox no este inscripto aún
         //jrbMateriasNoInscriptas.setSelected(true);
         RadioButtonNoInscriptos();
-        
+
         // Armo la cabecera de la tabla para que se lean bien los campos ID,
         // Nombre y Año que necesito mostrarle al usuario para que seleccione
         // una materia asi puede inscribir o desinscribir un alumno
         armarCabeceraDeLaTabla();
-        
+
         // Cargo los datos en el modelo de la Tabla
 //        cargarDatosEnElModeloDeLatabla();
-
         // Ejecuto todo en un metodo para mejorar la logica y poder reutilizar
         // el codigo desde varios eventos
         RadioButtonNoInscriptos();
@@ -386,7 +383,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
             // Limpio el desastre
             borrarFilasTabla();
-            
+
             // Aqui seria buen idea recargar el modelo y con el la jTable
             // jtMaterias para que refleje al usuario las materias en las que
             // aún no se inscribio
@@ -396,7 +393,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
             // ---------------------------------------------------------------------
         }
-        
+
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
     }//GEN-LAST:event_jbInscribirActionPerformed
@@ -436,7 +433,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
             // ---------------------------------------------------------------------
         }
-        
+
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
@@ -495,7 +492,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
 
             System.out.println("Lista de Materias: " + lista);
-            
+
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{
                     mat.getIdMateria(),
@@ -522,7 +519,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // =====================================================================
         // Creación del metodo para modificar las caracteristicas de la Tabla
         // =====================================================================
-        
+
         // Al modelo le agregamos las siguientes columnas:
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
@@ -536,13 +533,13 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jtMaterias.getColumnModel().getColumn(1).setPreferredWidth(220);
         jtMaterias.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
-    
+
     public void borrarFilasTabla() {
         // Con este metodo puedo borrar una fila especifica al recorrer el modelo
         // Controlar que no este vacio o cargarlo desde el comienzo
         if (modelo != null) {
             int a = modelo.getRowCount() - 1;
-            
+
             if (modelo.getRowCount() > 0) {
                 for (int i = a; i >= 0; i--) {
                     modelo.removeRow(i);
@@ -559,7 +556,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
-    
+
     // /////////////////////////////////////////////////////////////////////////
     // Aqui centralizo el manejo de los botones de radio, bien lejos de los
     // ActionPerformed
@@ -567,7 +564,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
     public void RadioButtonNoInscriptos() {
         // Deselecciono el jrbMateriasInscriptas
         jrbMateriasInscriptas.setSelected(false);
-        
+
         // Selecciono el jrbMateriasNoInscriptas
         jrbMateriasNoInscriptas.setSelected(true);
 
@@ -578,18 +575,18 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jbAnularInscripcion.setEnabled(false);
 
         // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(2,"Se selecciono jrbMateriasNoInscriptasActionPerformed");
+        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para (Des)inscribir");
         // ---------------------------------------------------------------------
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
         cargarNoInscriptos();
     }
-    
+
     public void RadioButtonInscriptos() {
         // Deselecciono el jrbMateriasNoInscriptas
         jrbMateriasNoInscriptas.setSelected(false);
-        
+
         // Selecciono el jrbMateriasInscriptas
         jrbMateriasInscriptas.setSelected(true);
 
@@ -600,17 +597,17 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jbAnularInscripcion.setEnabled(true);
 
         // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Se selecciono jrbMateriasInscriptasActionPerformed");
+        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para (Des)inscribir");
         // ---------------------------------------------------------------------
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
         cargarInscriptos();
     }
-    
+
     public void PruebaDeConceptoStatusBar(int color, String mensaje) {
         // Prueba de concepto StatusBar ----------------------------------------
-        
+
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -626,7 +623,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlStatusBar.setText(mensaje);
     }
-    
+
     public void RefrescarModeloMateriasInscriptasAnulada() {
         // Actualizo el modelo con las materias que correspondan a la seleccion
         // que este seleccionada en el Radiobutton
