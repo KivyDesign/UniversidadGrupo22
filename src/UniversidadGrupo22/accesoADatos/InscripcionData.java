@@ -750,7 +750,7 @@ public class InscripcionData {
                 // Le cargo los valores que necesito
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                ins.setNota(rs.getInt("nota"));
+                ins.setNota(rs.getDouble("nota"));
                // materia.setActivo(true);
 
                 // Agrego la materia al array materia
