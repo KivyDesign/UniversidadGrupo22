@@ -581,7 +581,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jbAnularInscripcion.setEnabled(false);
 
         // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para anular la inscripción");
+        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para registrar la inscripción");
         // ---------------------------------------------------------------------
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
@@ -603,7 +603,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         jbAnularInscripcion.setEnabled(true);
 
         // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para registrar la inscripción");
+        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para anular la inscripción");
         // ---------------------------------------------------------------------
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
