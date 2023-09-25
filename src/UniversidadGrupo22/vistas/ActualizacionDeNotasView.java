@@ -9,6 +9,7 @@ import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.entidades.Alumno;
 import UniversidadGrupo22.entidades.Materia;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -66,9 +67,14 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         // Nombre y Nota que necesito mostrarle al usuario
         armarCabeceraDeLaTabla();
 
-        // Se cargan las materias por defecto en el jTable
+        // En el jTable se cargan las materias por defecto
         cargarMaterias();
+        
+        // Al modelo de nuestra jTable le agrego un ListSelectionListener para 
+        // operar sobre la celda seleccionada
         listSelectionListener();
+        
+        
         anadeListenerAlModelo();
 
     }
@@ -91,8 +97,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jbSalir = new javax.swing.JButton();
+        jlStatusBar = new javax.swing.JLabel();
         jbGuardar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 155, 255));
         setTitle("Carga de Notas");
@@ -152,14 +159,26 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(45, 65, 88));
 
-        jbSalir.setBackground(new java.awt.Color(194, 165, 121));
-        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
-            }
-        });
+        jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
+        jlStatusBar.setText("Mensaje de prueba");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jlStatusBar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jlStatusBar)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         jbGuardar.setBackground(new java.awt.Color(194, 165, 121));
         jbGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,26 +189,14 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jbGuardar)
-                .addGap(82, 82, 82)
-                .addComponent(jbSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar)
-                    .addComponent(jbSalir))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        jbSalir.setBackground(new java.awt.Color(194, 165, 121));
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,26 +205,37 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jbGuardar)
+                        .addGap(82, 82, 82)
+                        .addComponent(jbSalir)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbSalir))
+                .addGap(51, 51, 51)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -262,6 +280,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbAlumno;
+    private javax.swing.JLabel jlStatusBar;
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
 
@@ -309,7 +328,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+            PruebaDeConceptoStatusBar(1,"Seleccione primero un alumno");
         }
     }
 
@@ -356,13 +376,14 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                 if (pars >= 0 && pars <= 10) {
                     nuevaNota = pars;
                 } else {
-                    JOptionPane.showMessageDialog(null, "El valor ingresado no es válido(0-10)");
+//                    JOptionPane.showMessageDialog(null, "El valor ingresado no es válido(0-10)");
+                    PruebaDeConceptoStatusBar(1,"El valor ingresado no es válido(0-10)");
                     jtNotas.setValueAt(nuevaNota, fila, columna);
                 }
 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
-
+//                JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
+                PruebaDeConceptoStatusBar(1,"El valor ingresado no es válido");
                 jtNotas.setValueAt(nuevaNota, fila, columna);
             }
             idMat = (int) jtNotas.getValueAt(fila, 0);
@@ -370,8 +391,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }
 
     public void listSelectionListener() {
-        //JTable tabla = jtNotas;
-        //ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
+//        JTable tabla = jtNotas;
+//        ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
         jtNotas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -389,4 +410,27 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         });
     }
 
+    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+        // Prueba de concepto StatusBar ----------------------------------------
+
+        // Los valores pueden variar de 0 a 255
+        if (color == 1) {
+            // Si el color es igual a 1 entonces es = a verde
+            // En este caso Red = 0, Green = 153, Blue = 102.
+            jlStatusBar.setForeground(new Color(0, 153, 102));
+        } else if (color == 2) {
+            // Si el color es igual a 2 entonces es = a rojo
+            // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
+            jlStatusBar.setForeground(new Color(255, 50, 0));
+        } else if (color == 3) {
+            // Usado al iniciar el Form para que no se vea el texto dummy 45,65,88
+            jlStatusBar.setForeground(new Color(45, 65, 88));
+        }
+        // Aquí cargo el texto del mensaje en el Label
+        // Si el texto del mensaje esta vacio entonces no muestro texto en
+        // el Label pero limpio el texto anterior que pueda haber quedado
+        jlStatusBar.setText(mensaje);
+    }
+
+    
 }
