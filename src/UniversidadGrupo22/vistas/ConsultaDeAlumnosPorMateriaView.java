@@ -135,7 +135,6 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         jPanel3.setBackground(new java.awt.Color(45, 65, 88));
 
         jButton1.setBackground(new java.awt.Color(194, 165, 121));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,11 +193,11 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         pack();
@@ -249,12 +248,13 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
     }
 
     private void cargarAlumnos(Materia materia) {
+        //verifico que no sean nulos 
         if (materia != null && modelo != null) {
             // Limpio la tabla aqui
             modelo.setRowCount(0);
 
             int idMateria = materia.getIdMateria();
-            System.out.println("idMateria: " + idMateria);
+            //System.out.println("idMateria: " + idMateria);
 
             ArrayList<Alumno> alu = (ArrayList<Alumno>) inscripcionData.obtenerAlumnosPorMateriaEnzo(idMateria);
 
