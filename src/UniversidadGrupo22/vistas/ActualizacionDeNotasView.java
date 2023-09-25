@@ -12,7 +12,6 @@ import UniversidadGrupo22.entidades.Materia;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -329,7 +328,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             }
         } else {
 //            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
-            PruebaDeConceptoStatusBar(1,"Seleccione primero un alumno");
+            MensajeSB(1,"Seleccione primero un alumno");
         }
     }
 
@@ -377,13 +376,13 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                     nuevaNota = pars;
                 } else {
 //                    JOptionPane.showMessageDialog(null, "El valor ingresado no es válido(0-10)");
-                    PruebaDeConceptoStatusBar(1,"El valor ingresado no es válido(0-10)");
+                    MensajeSB(1,"El valor ingresado no es válido(0-10)");
                     jtNotas.setValueAt(nuevaNota, fila, columna);
                 }
 
             } catch (NumberFormatException e) {
 //                JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
-                PruebaDeConceptoStatusBar(1,"El valor ingresado no es válido");
+                MensajeSB(1,"El valor ingresado no es válido");
                 jtNotas.setValueAt(nuevaNota, fila, columna);
             }
             idMat = (int) jtNotas.getValueAt(fila, 0);
@@ -410,7 +409,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         });
     }
 
-    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+    public void MensajeSB(int color, String mensaje) {
         // Prueba de concepto StatusBar ----------------------------------------
 
         // Los valores pueden variar de 0 a 255
