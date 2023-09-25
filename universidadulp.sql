@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.9.5deb2ubuntu0.1~esm1
 -- https://www.phpmyadmin.net/
 --
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `universidadulp`
 --
-CREATE DATABASE IF NOT EXISTS `universidadulp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `universidadulp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `universidadulp`;
 
 -- --------------------------------------------------------
