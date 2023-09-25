@@ -276,29 +276,25 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         try {
             if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-                // JOptionPane.showMessageDialog(null, "los campos deben ser completados");
                 PruebaDeConceptoStatusBar(2, "Los campos deben ser completados");
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else if (!jtCodigo.getText().isEmpty()) {
-                //JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente cuando la materia es nueva");
-                PruebaDeConceptoStatusBar(2, "el campo ID se asigna automaticamente cuando la materia es nueva");
+                PruebaDeConceptoStatusBar(2, "El campo ID se asigna automaticamente cuando la materia es nueva");
                 jtCodigo.setText("");
             } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
-                //JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 7");
-                PruebaDeConceptoStatusBar(2, "el año debe ser un numero entre 1 y 7");
+                PruebaDeConceptoStatusBar(2, "El año debe ser un numero entre 1 y 7");
             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else {
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
                 materiaData.guardarMateria(mat);
-                PruebaDeConceptoStatusBar(1, "Materia agregada con exito,busque por ID o ingrese datos de una nueva");
+                PruebaDeConceptoStatusBar(1, "Materia agregada con exito, busque por ID o ingrese datos de una nueva");
                 limpiarcampos();
             }
         } catch (NumberFormatException e) {
-            //JOptionPane.showMessageDialog(this, "el año debe ser un numero");
-            PruebaDeConceptoStatusBar(2, "el año debe ser un numero entre 1 y 7");
+            PruebaDeConceptoStatusBar(2, "El año debe ser un número entre 1 y 7");
         }
 
 
@@ -313,8 +309,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             jbNuevo.setEnabled(true);
             jtCodigo.setEditable(true);
         } catch (NumberFormatException e) {
-            //JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
-            PruebaDeConceptoStatusBar(2, "el id debe ser un numero");
+            PruebaDeConceptoStatusBar(2, "El id debe ser un número");
             jtCodigo.requestFocus();
             jtCodigo.selectAll();
         }
@@ -326,16 +321,15 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         try {
             Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
             if (materia == null) {
-                // JOptionPane.showMessageDialog(this, "El codigo de Materia debe ser valido");
-                PruebaDeConceptoStatusBar(2, "el id debe ser de una Materia activa");
+                PruebaDeConceptoStatusBar(2, "El ID debe ser de una Materia activa");
                 jtCodigo.requestFocus();
                 jtCodigo.selectAll();
             } else if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-                // JOptionPane.showMessageDialog(null, "los campos deben ser completados");
-                PruebaDeConceptoStatusBar(2, "los campos deben ser completados");
+                PruebaDeConceptoStatusBar(2, "Los campos deben ser completados");
+                jtNombre.requestFocus();
+                jtNombre.selectAll();
             } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
-//                JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 7");
-                PruebaDeConceptoStatusBar(2, "el año debe ser un numero entre 1 y 7");
+                PruebaDeConceptoStatusBar(2, "El año debe ser un número entre 1 y 7");
                 jTanio.requestFocus();
                 jTanio.selectAll();
             } else if (pruebaCaracteres(jtNombre.getText()) == false) {
@@ -352,8 +346,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 jtCodigo.setEditable(true);
             }
         } catch (NumberFormatException e) {
-            //  JOptionPane.showMessageDialog(this, "el ID y el año deben ser un numero");
-            PruebaDeConceptoStatusBar(2, "el ID y el año deben ser un numero");
+            PruebaDeConceptoStatusBar(2, "El ID y el año deben ser un numero");
         }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -376,14 +369,13 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 jtCodigo.setEditable(false);
                 jbNuevo.setEnabled(false);
             } else {
-                PruebaDeConceptoStatusBar(2, "el id debe ser de una Materia activa");
+                PruebaDeConceptoStatusBar(2, "El id debe ser de una Materia activa");
                 jtCodigo.requestFocus();
                 jtCodigo.selectAll();
 
             }
         } catch (NumberFormatException e) {
-            // JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
-            PruebaDeConceptoStatusBar(2, "el id debe ser un numero");
+            PruebaDeConceptoStatusBar(2, "El id debe ser un numero");
             jtCodigo.requestFocus();
             jtCodigo.selectAll();
         }
@@ -433,8 +425,7 @@ public void limpiarcampos() {
             }
         }
         if (b > 0) {
-            //   JOptionPane.showMessageDialog(null, "el campo nombre solo debe tener letras y números");
-            PruebaDeConceptoStatusBar(2, "el campo nombre solo debe tener letras y números");
+            PruebaDeConceptoStatusBar(2, "El campo nombre solo debe tener letras y números");
             return false;
         } else {
             return true;

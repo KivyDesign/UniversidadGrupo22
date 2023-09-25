@@ -535,7 +535,7 @@ public void limpiarcampos() {
             }
         }
         if (b > 0 || texto.isEmpty()) {
-            PruebaDeConceptoStatusBar(2, "los campos nombre y apellido deben completarse con letras");
+            PruebaDeConceptoStatusBar(2, "Los campos nombre y apellido deben completarse con letras");
             return false;
         } else {
             return true;
