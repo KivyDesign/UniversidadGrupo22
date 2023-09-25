@@ -382,6 +382,10 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
             jtDni.requestFocus();
             jtDni.selectAll();
+        } else if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
+            PruebaDeConceptoStatusBar(2, "El DNI ya esta utilizado en otro alumno");
+            jtDni.requestFocus();
+            jtDni.selectAll();
         } else if (pruebaCaracteres(jtApellido.getText()) == false) {
             jtApellido.requestFocus();
             jtApellido.selectAll();
@@ -427,8 +431,11 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            //si jtDni no esta vacio
-            if (!jtDni.getText().isEmpty()) {
+            if (jtDni.getText().length() != 8) {
+                PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
+                jtDni.requestFocus();
+                jtDni.selectAll();
+            } else {
                 // Busco alumno por dni
                 Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
                 // Busco si el alumno no esta vacio
@@ -441,15 +448,13 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         jrbEstado.setSelected(true);
                         jbGuardar.setEnabled(true);
                         jbEliminar.setEnabled(true);
-                    }
-                } else {
-                    jtDni.setText("");
-                }
-            } else {
-                PruebaDeConceptoStatusBar(2, "Debe colocar el DNI");
-                //JOptionPane.showMessageDialog(null, "debe Colocar el DNI");
-                jtDni.requestFocus();
-                jtDni.selectAll();
+                        PruebaDeConceptoStatusBar(1, "Alumno encontrado");
+                    } else {
+                        PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
+                    }}
+                    else {PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
+            jtDni.requestFocus();
+            jtDni.selectAll();}
             }
 
         } catch (NumberFormatException e) {
