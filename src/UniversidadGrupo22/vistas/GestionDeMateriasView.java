@@ -7,6 +7,7 @@ package UniversidadGrupo22.vistas;
 
 import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Materia;
+import com.sun.corba.se.impl.orbutil.CorbaResourceUtil;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -274,9 +275,11 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         try {
-            if (jTanio.getText().isEmpty()) {
+            if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
                 // JOptionPane.showMessageDialog(null, "los campos deben ser completados");
-                PruebaDeConceptoStatusBar(2, "El año debe ser completado");
+                PruebaDeConceptoStatusBar(2, "Los campos deben ser completados");
+                jtNombre.requestFocus();
+                jtNombre.selectAll();
             } else if (!jtCodigo.getText().isEmpty()) {
                 //JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente cuando la materia es nueva");
                 PruebaDeConceptoStatusBar(2, "el campo ID se asigna automaticamente cuando la materia es nueva");
