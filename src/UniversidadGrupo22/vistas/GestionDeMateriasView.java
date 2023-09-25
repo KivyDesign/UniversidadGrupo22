@@ -280,7 +280,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             } else if (!jtCodigo.getText().isEmpty()) {
                 //JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente cuando la materia es nueva");
                 PruebaDeConceptoStatusBar(2, "el campo ID se asigna automaticamente cuando la materia es nueva");
-           jtCodigo.setText("");
+                jtCodigo.setText("");
             } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
                 //JOptionPane.showMessageDialog(this, "el año debe ser un numero entre 1 y 7");
                 PruebaDeConceptoStatusBar(2, "el año debe ser un numero entre 1 y 7");
@@ -307,8 +307,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         try {
 
             materiaData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
-            PruebaDeConceptoStatusBar(1,"Materia eliminada con exito");
-            jRestadoMat.setSelected(false);
+            PruebaDeConceptoStatusBar(1, "Materia eliminada con exito, busque por ID o ingrese datos de una nueva");
+            jRestadoMat.setSelected(false);jbNuevo.setEnabled(true);jtCodigo.setEditable(true);
         } catch (NumberFormatException e) {
             //JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             PruebaDeConceptoStatusBar(2, "el id debe ser un numero");
@@ -343,8 +343,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 materia.setNombre(jtNombre.getText());
                 materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
                 materiaData.modificarMateria(materia);
-                 PruebaDeConceptoStatusBar(1,"Materia guardada con exito");
+                PruebaDeConceptoStatusBar(1, "Materia guardada con exito, busque por ID o ingrese datos de una nueva");
                 limpiarcampos();
+                jbNuevo.setEnabled(true);jtCodigo.setEditable(true);
             }
         } catch (NumberFormatException e) {
             //  JOptionPane.showMessageDialog(this, "el ID y el año deben ser un numero");
@@ -364,17 +365,16 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
             if (materia != null) {
                 jtNombre.setText(materia.getNombre());
                 jTanio.setText(materia.getAnioMateria() + "");
-                 PruebaDeConceptoStatusBar(1,"Materia Encontrada");
-
-                if (materia.isActivo() == true) {
-                    jRestadoMat.setSelected(true);
-                    jbGuardar.setEnabled(true);
-                    jbEliminar.setEnabled(true);
-                }
-            } else {PruebaDeConceptoStatusBar(2, "el id debe ser de una Materia activa");
-            jtCodigo.requestFocus();
-            jtCodigo.selectAll();
-                
+                PruebaDeConceptoStatusBar(1, "Materia Encontrada");
+                jRestadoMat.setSelected(true);
+                jbGuardar.setEnabled(true);
+                jbEliminar.setEnabled(true);
+                jtCodigo.setEditable(false);
+                jbNuevo.setEnabled(false);
+            } else {
+                PruebaDeConceptoStatusBar(2, "el id debe ser de una Materia activa");
+                jtCodigo.requestFocus();
+                jtCodigo.selectAll();
 
             }
         } catch (NumberFormatException e) {

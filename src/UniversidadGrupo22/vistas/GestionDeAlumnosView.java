@@ -321,7 +321,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             Alumno alumno = alumnoData.buscarAlumnoPorID(Integer.parseInt(jtid.getText()));
             if (jdcFechaNacimiento.getDate() == null) {
                 // Prueba de concepto StatusBar ----------------------------------------
-                PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
+                PruebaDeConceptoStatusBar(2, "Falta completar Fecha de Nacimiento");
                 // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
             } else if (jtDni.getText().length() != 8) {
                 PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
@@ -340,8 +340,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumno.setEstado(true);
                 alumnoData.modificarAlumno(alumno);
-                PruebaDeConceptoStatusBar(1, "La modificacion ha sido exitosa");
-                limpiarcampos();
+                PruebaDeConceptoStatusBar(1, "El alumno ha sido guardado, busque por DNI o cargue un nuevo Alumno");
+                limpiarcampos();jbNuevo.setEnabled(true);
             }
 
         } catch (NumberFormatException ex) {
@@ -359,8 +359,9 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             if (alum != null) {
                 alumnoData.eliminarAlumno(alum.getIdAlumno());
                 jrbEstado.setSelected(false);
-                PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito");
+                PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito! Busque por DNI o cargue un nuevo Alumno");
                 limpiarcampos();
+                jbNuevo.setEnabled(true);
             } else {
                 PruebaDeConceptoStatusBar(2, "El alumno no Existe");
             }
@@ -375,7 +376,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jdcFechaNacimiento.getDate() == null) {
             // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Los campos primero deben estar completos");
+            PruebaDeConceptoStatusBar(2, "Falta completar Fecha de Nacimiento");
             // ---------------------------------------------------------------------
             // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
         } else if (jtDni.getText().length() != 8) {
@@ -410,7 +411,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 // Si lo agregue con exito no es null y se lo informo al DataEntry
                 if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
                     // Prueba de concepto StatusBar ----------------------------------------
-                    PruebaDeConceptoStatusBar(1, "Alumno agregado de forma exitosa");
+                    PruebaDeConceptoStatusBar(1, "Alumno agregado con exito! Busque por DNI o cargue un nuevo Alumno");
                     limpiarcampos();
                     // ---------------------------------------------------------------------
                 } else {
@@ -448,13 +449,16 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         jrbEstado.setSelected(true);
                         jbGuardar.setEnabled(true);
                         jbEliminar.setEnabled(true);
+                        jbNuevo.setEnabled(false);
                         PruebaDeConceptoStatusBar(1, "Alumno encontrado");
                     } else {
                         PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
-                    }}
-                    else {PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
-            jtDni.requestFocus();
-            jtDni.selectAll();}
+                    }
+                } else {
+                    PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
+                    jtDni.requestFocus();
+                    jtDni.selectAll();
+                }
             }
 
         } catch (NumberFormatException e) {
