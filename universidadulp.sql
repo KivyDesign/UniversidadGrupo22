@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.5deb2ubuntu0.1~esm1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2023 a las 19:08:45
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Servidor: localhost
+-- Tiempo de generación: 25-09-2023 a las 18:39:33
+-- Versión del servidor: 8.0.34
+-- Versión de PHP: 7.4.3-4ubuntu2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `universidadulp`
 --
-CREATE DATABASE IF NOT EXISTS `universidadulp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `universidadulp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `universidadulp`;
 
 -- --------------------------------------------------------
@@ -30,12 +31,12 @@ USE `universidadulp`;
 --
 
 CREATE TABLE `alumno` (
-  `idAlumno` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `idAlumno` int NOT NULL,
+  `dni` int NOT NULL,
+  `apellido` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `fechaNacimiento` date NOT NULL,
-  `estado` tinyint(4) NOT NULL
+  `estado` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -50,17 +51,17 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 (5, 12365478, 'Soria', 'Eva', '1996-05-25', 1),
 (6, 33333333, 'Paso', 'Julian', '1997-09-30', 1),
 (8, 99999999, 'Funes', 'Aldo', '2011-07-06', 1),
-(9, 11223344, 'Santos', 'Nahuel', '1996-05-25', 0),
+(9, 11223344, 'Santos', 'Nahuel', '1996-05-25', 1),
 (12, 22222222, 'Martines', 'Viviana', '2001-12-10', 1),
 (13, 33445566, 'Varela', 'Carlos', '1990-11-23', 1),
 (14, 44556677, 'Paez', 'Diego', '1999-09-06', 1),
 (15, 55667778, 'Salas', 'Benito', '2000-05-16', 1),
 (16, 99887744, 'Coma', 'Victor', '2000-09-02', 1),
-(17, 99999, 'z', 'x', '2023-09-06', 1),
+(17, 16654981, 'Zarate', 'Diego', '2023-09-06', 1),
 (18, 87888990, 'Alvarez', 'Valeria', '2023-09-15', 1),
 (19, 55555555, 'Palacios', 'Juliana', '1991-01-16', 1),
 (20, 12131415, 'Diego', 'Fernande', '2012-05-15', 1),
-(21, 14, 'Samuel', 'Rios', '2023-09-12', 1),
+(21, 11354924, 'Samuel', 'Rios', '2023-09-12', 1),
 (22, 13141516, 'Sala', 'Hector', '2023-09-05', 1),
 (23, 45464749, 'Ruben', 'Marco', '2023-09-12', 1),
 (24, 47484950, 'Sosa', 'Valeria', '2023-09-20', 1),
@@ -73,23 +74,11 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 --
 
 CREATE TABLE `inscripcion` (
-  `idInscripto` int(11) NOT NULL,
+  `idInscripto` int NOT NULL,
   `nota` double NOT NULL,
-  `idAlumno` int(11) NOT NULL,
-  `idMateria` int(11) NOT NULL
+  `idAlumno` int NOT NULL,
+  `idMateria` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `inscripcion`
---
-
-INSERT INTO `inscripcion` (`idInscripto`, `nota`, `idAlumno`, `idMateria`) VALUES
-(1, 7.5, 3, 1),
-(2, 5.25, 3, 11),
-(3, 9.25, 3, 3),
-(4, 8.75, 2, 3),
-(5, 5.5, 2, 7),
-(6, 7.75, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -98,10 +87,10 @@ INSERT INTO `inscripcion` (`idInscripto`, `nota`, `idAlumno`, `idMateria`) VALUE
 --
 
 CREATE TABLE `materia` (
-  `idMateria` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `anio` int(11) NOT NULL,
-  `estado` tinyint(4) NOT NULL
+  `idMateria` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `anio` int NOT NULL,
+  `estado` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,18 +99,19 @@ CREATE TABLE `materia` (
 
 INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
 (1, 'Matematicas', 1, 1),
-(2, 'Progamacion 1', 1, 1),
+(2, 'Progamación 1', 1, 1),
 (3, 'Base de Datos 1', 1, 1),
 (4, 'Idioma 2.2', 2, 1),
 (5, 'Desarrollo Productivo', 3, 1),
-(6, 'Programacion lll', 3, 1),
+(6, 'Programación lll', 3, 1),
 (7, 'Paracaidismo', 5, 1),
-(8, 'Corte y Confeccion', 2, 1),
+(8, 'Corte y Confección', 2, 1),
 (9, 'Laboratorio Prog. 1', 1, 1),
 (10, 'Ingles Tecnico', 1, 1),
 (11, 'Ingles Tecnico 2', 2, 1),
 (14, 'Control de Ansiedad', 3, 1),
-(17, 'Quimica', 1, 0);
+(17, 'Quimica', 1, 1),
+(18, 'Metodos Estadisticos', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -157,19 +147,19 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idAlumno` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idInscripto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idMateria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
