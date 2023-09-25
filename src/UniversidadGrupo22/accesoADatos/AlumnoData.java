@@ -86,7 +86,7 @@ public class AlumnoData {
 //                System.out.println(rs.getInt("dni") + " - " + rs.getString("apellido") + " - " + rs.getString("nombre") + " - " + rs.getDate("fechaNacimiento").toLocalDate());
 //                System.out.println("\n------------------------------------------");
             } else {
-                JOptionPane.showMessageDialog(null, "Confirmacion el alumno no existe");
+               // JOptionPane.showMessageDialog(null, "Confirmacion el alumno no existe");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -223,7 +223,7 @@ public class AlumnoData {
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, "Se eliminó el alumno");
+              //  JOptionPane.showMessageDialog(null, "Se eliminó el alumno");
             }
             ps.close();
         } catch (SQLException ex) {

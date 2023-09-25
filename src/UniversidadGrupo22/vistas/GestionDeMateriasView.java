@@ -274,9 +274,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         try {
-            if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+            if (jTanio.getText().isEmpty()) {
                 // JOptionPane.showMessageDialog(null, "los campos deben ser completados");
-                PruebaDeConceptoStatusBar(2, "los campos deben ser completados");
+                PruebaDeConceptoStatusBar(2, "El año debe ser completado");
             } else if (!jtCodigo.getText().isEmpty()) {
                 //JOptionPane.showMessageDialog(null, "el campo codigo se asigna automaticamente cuando la materia es nueva");
                 PruebaDeConceptoStatusBar(2, "el campo ID se asigna automaticamente cuando la materia es nueva");
@@ -288,11 +288,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else {
-
                 Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
-
                 materiaData.guardarMateria(mat);
-                PruebaDeConceptoStatusBar(1, "Materia agregada con exito");
+                PruebaDeConceptoStatusBar(1, "Materia agregada con exito,busque por ID o ingrese datos de una nueva");
                 limpiarcampos();
             }
         } catch (NumberFormatException e) {
@@ -308,7 +306,9 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
             materiaData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
             PruebaDeConceptoStatusBar(1, "Materia eliminada con exito, busque por ID o ingrese datos de una nueva");
-            jRestadoMat.setSelected(false);jbNuevo.setEnabled(true);jtCodigo.setEditable(true);
+            jRestadoMat.setSelected(false);
+            jbNuevo.setEnabled(true);
+            jtCodigo.setEditable(true);
         } catch (NumberFormatException e) {
             //JOptionPane.showMessageDialog(this, "el codigo debe ser un numero");
             PruebaDeConceptoStatusBar(2, "el id debe ser un numero");
@@ -345,7 +345,8 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                 materiaData.modificarMateria(materia);
                 PruebaDeConceptoStatusBar(1, "Materia guardada con exito, busque por ID o ingrese datos de una nueva");
                 limpiarcampos();
-                jbNuevo.setEnabled(true);jtCodigo.setEditable(true);
+                jbNuevo.setEnabled(true);
+                jtCodigo.setEditable(true);
             }
         } catch (NumberFormatException e) {
             //  JOptionPane.showMessageDialog(this, "el ID y el año deben ser un numero");
