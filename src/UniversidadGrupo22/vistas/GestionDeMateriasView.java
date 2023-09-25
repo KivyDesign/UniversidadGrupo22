@@ -425,7 +425,7 @@ public void limpiarcampos() {
         for (i = 0; i < texto.length(); i++) {
             if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z')
                     && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z')
-                    && !(texto.charAt(i) >= '1' && texto.charAt(i) <= '9') && texto.charAt(i) != ' ') {
+                    && !(texto.charAt(i) >= '1' && texto.charAt(i) <= '9') && texto.charAt(i) != ' ' && texto.charAt(i) != '.') {
                 b++;
             }
         }
