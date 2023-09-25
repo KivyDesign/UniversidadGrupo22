@@ -623,6 +623,9 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // Si el color es igual a 2 entonces es = a rojo
             // Los valores pueden variar de 0 a 255. En este caso Red = 153, Green = 51, Blue = 0.
             jlStatusBar.setForeground(new Color(255, 50, 0));
+        } else if (color == 3) {
+            // Usado al iniciar el Form para que no se vea el texto dummy 45,65,88
+            jlStatusBar.setForeground(new Color(45, 65, 88));
         }
         // Aquí cargo el texto del mensaje en el Label
         // Si el texto del mensaje esta vacio entonces no muestro texto en
