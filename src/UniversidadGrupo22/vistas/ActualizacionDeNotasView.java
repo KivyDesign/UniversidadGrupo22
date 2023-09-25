@@ -26,8 +26,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
-    private AlumnoData aluData;
-
+    // Declaro e Inicializo el modelo que hereda de DefaultTableModel
+    // para acceder a sus metodos
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         // Clase Interna Anónima
@@ -41,13 +41,13 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             return false;
         }
     };
-
+    private AlumnoData aluData;
     private InscripcionData insData;
     private ArrayList<Alumno> listarAlumnos;
-    int idAlu;
-    double nuevaNota;
-    double nueva;
-    int idMat;
+    private int idAlu;
+    private double nuevaNota;
+    private double nueva;
+    private int idMat;
 
     /**
      * Creates new form ActualizacionDeNotasView
@@ -55,12 +55,18 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     public ActualizacionDeNotasView() {
         initComponents();
 
-//        modelo = (DefaultTableModel) jtNotas.getModel();
         aluData = new AlumnoData();
         listarAlumnos = aluData.listarAlumnos();
         insData = new InscripcionData();
+
+        // Cargo los alumnos que necesito mostrar en el ComboBox
         cargarAlumnos();
+
+        // Armo la cabecera de la tabla para que se lean bien los campos ID,
+        // Nombre y Nota que necesito mostrarle al usuario
         armarCabeceraDeLaTabla();
+
+        // Se cargan las materias por defecto en el jTable
         cargarMaterias();
         listSelectionListener();
         anadeListenerAlModelo();
@@ -231,11 +237,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        if (nuevaNota >= 0 && nuevaNota <= 10) {
-            insData.actualizarNota(nuevaNota, idAlu, idMat);
-        } else {
-            JOptionPane.showMessageDialog(null, "el valor ingresado no es válido");
-        }
+        insData.actualizarNota(nuevaNota, idAlu, idMat);
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -245,7 +247,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbAlumnoItemStateChanged
         cargarMaterias();
-        
+
     }//GEN-LAST:event_jcbAlumnoItemStateChanged
 
 
@@ -369,20 +371,20 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     public void listSelectionListener() {
         //JTable tabla = jtNotas;
-        ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
-        modeloSeleccion.addListSelectionListener(new ListSelectionListener() {
+        //ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
+        jtNotas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
             public void valueChanged(ListSelectionEvent evento) {
-                
+
                 int filaSeleccionada = jtNotas.getSelectedRow();
                 int columnaSeleccionada = jtNotas.getSelectedColumn();
-                
-                if(jtNotas.isCellEditable(filaSeleccionada,columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0){
-                Object valor = jtNotas.getValueAt(filaSeleccionada, columnaSeleccionada);
-                nuevaNota = Double.parseDouble(valor.toString());
+
+                if (jtNotas.isCellEditable(filaSeleccionada, columnaSeleccionada) && filaSeleccionada >= 0 && columnaSeleccionada >= 0) {
+                    Object valor = jtNotas.getValueAt(filaSeleccionada, columnaSeleccionada);
+                    nuevaNota = Double.parseDouble(valor.toString());
                 }
-                
+
             }
         });
     }
