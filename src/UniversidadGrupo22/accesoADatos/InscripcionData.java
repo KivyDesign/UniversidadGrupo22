@@ -176,136 +176,136 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerInscripciones()
     // /////////////////////////////////////////////////////////////////////////
-    public List<Inscripcion> obtenerInscripciones() {
-        ArrayList<Inscripcion> cursadas = new ArrayList<>();
-
-        // Preparo la consulta a la DB, se seleccionan todas por que el borrado
-        // es fisico, ergo todas las inscipciones son activas
-        String sql = "SELECT * FROM inscripcion";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-
-            // Recorremos el ResultSet mientras el mismo tenga elementos y 
-            // recuperamos los datos de las inscripciones
-            while (rs.next()) {
-                // Creo una inscripcion en el objeto ins utilizando el
-                // constructor vacio Inscripcion()
-                Inscripcion ins = new Inscripcion();
-
-                // Recupero una inscripcion en el objeto ins que obtengo del rs
-                ins.setIdInscripcion(rs.getInt("idInscripto"));
-
-                // Recupero un alumno en el objeto alu que obtengo del rs
-                // utilizando aluData para poder acceder a su metodo buscarAlumno
-                // que espera un id del tipo int
-                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
-
-                // Recupero un materia en el objeto mat que obtengo del rs
-                // utilizando matData para poder acceder a su metodo buscarMateria
-                // que espera un id del tipo int
-                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
-
-                // Ahora seteo los datos que procese a inscripcion (ins)
-                ins.setAlumno(alu);
-                ins.setMateria(mat);
-
-                // La nota esta en rs y es de tipo double y se encuentra en la
-                // columna nota de la tabla inscripcion
-                ins.setNota(rs.getDouble("nota"));
-
-                // Una ves armada la inscripcion (ins). Por cada una de las
-                // inscripciones debemos agregarla a la lista de cursadas que
-                // es una ArrayList utilizando el metodo add propio del ArrayList
-                cursadas.add(ins);
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
-        return cursadas;
-    }
+//    public List<Inscripcion> obtenerInscripciones() {
+//        ArrayList<Inscripcion> cursadas = new ArrayList<>();
+//
+//        // Preparo la consulta a la DB, se seleccionan todas por que el borrado
+//        // es fisico, ergo todas las inscipciones son activas
+//        String sql = "SELECT * FROM inscripcion";
+//
+//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+//        try {
+//            // Preparo la consulta
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Ejecuto la consulta
+//            ResultSet rs = ps.executeQuery();
+//
+//            // Recorremos el ResultSet mientras el mismo tenga elementos y 
+//            // recuperamos los datos de las inscripciones
+//            while (rs.next()) {
+//                // Creo una inscripcion en el objeto ins utilizando el
+//                // constructor vacio Inscripcion()
+//                Inscripcion ins = new Inscripcion();
+//
+//                // Recupero una inscripcion en el objeto ins que obtengo del rs
+//                ins.setIdInscripcion(rs.getInt("idInscripto"));
+//
+//                // Recupero un alumno en el objeto alu que obtengo del rs
+//                // utilizando aluData para poder acceder a su metodo buscarAlumno
+//                // que espera un id del tipo int
+//                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
+//
+//                // Recupero un materia en el objeto mat que obtengo del rs
+//                // utilizando matData para poder acceder a su metodo buscarMateria
+//                // que espera un id del tipo int
+//                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
+//
+//                // Ahora seteo los datos que procese a inscripcion (ins)
+//                ins.setAlumno(alu);
+//                ins.setMateria(mat);
+//
+//                // La nota esta en rs y es de tipo double y se encuentra en la
+//                // columna nota de la tabla inscripcion
+//                ins.setNota(rs.getDouble("nota"));
+//
+//                // Una ves armada la inscripcion (ins). Por cada una de las
+//                // inscripciones debemos agregarla a la lista de cursadas que
+//                // es una ArrayList utilizando el metodo add propio del ArrayList
+//                cursadas.add(ins);
+//            }
+//
+//            // Cierro la consulta
+//            ps.close();
+//        } catch (SQLException ex) {
+//            // En caso de que explote la consulta se lo informo al pobre
+//            // y desafortunado DataEntry
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+//        }
+//
+//        // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
+//        return cursadas;
+//    }
 
     // /////////////////////////////////////////////////////////////////////////
     // Declaración sugerida:
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerInscripcionesPorAlumno(int id)
     // /////////////////////////////////////////////////////////////////////////
-    public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
-        ArrayList<Inscripcion> cursadasPorAlumno = new ArrayList<>();
-
-        // Preparo la consulta a la DB, se seleccionan todas por que el borrado
-        // es fisico, ergo todas las inscipciones son activas
-        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Seteo el parametro que corresponde al int idAlumno que requiere
-            // la consulta a traves del ps para filtrarlo por ID
-            ps.setInt(1, idAlumno);
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-
-            // Recorremos el ResultSet mientras el mismo tenga elementos y 
-            // recuperamos los datos de las inscripciones
-            while (rs.next()) {
-                // Creo una inscripcion en el objeto ins utilizando el
-                // constructor vacio Inscripcion()
-                Inscripcion ins = new Inscripcion();
-
-                // Recupero una inscripcion en el objeto ins que obtengo del rs
-                ins.setIdInscripcion(rs.getInt("idInscripto"));
-
-                // Recupero un alumno en el objeto alu que obtengo del rs
-                // utilizando aluData para poder acceder a su metodo buscarAlumno
-                // que espera un id del tipo int
-                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
-
-                // Recupero un materia en el objeto mat que obtengo del rs
-                // utilizando matData para poder acceder a su metodo buscarMateria
-                // que espera un id del tipo int
-                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
-
-                // Ahora seteo los datos que procese a inscripcion (ins)
-                ins.setAlumno(alu);
-                ins.setMateria(mat);
-
-                // La nota esta en rs y es de tipo double y se encuentra en la
-                // columna nota de la tabla inscripcion
-                ins.setNota(rs.getDouble("nota"));
-
-                // Una ves armada la inscripcion (ins). Por cada una de las
-                // inscripciones debemos agregarla a la lista de cursadas que
-                // es una ArrayList utilizando el metodo add propio del ArrayList
-                cursadasPorAlumno.add(ins);
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
-        return cursadasPorAlumno;
-    }
+//    public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
+//        ArrayList<Inscripcion> cursadasPorAlumno = new ArrayList<>();
+//
+//        // Preparo la consulta a la DB, se seleccionan todas por que el borrado
+//        // es fisico, ergo todas las inscipciones son activas
+//        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+//
+//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+//        try {
+//            // Preparo la consulta
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Seteo el parametro que corresponde al int idAlumno que requiere
+//            // la consulta a traves del ps para filtrarlo por ID
+//            ps.setInt(1, idAlumno);
+//
+//            // Ejecuto la consulta
+//            ResultSet rs = ps.executeQuery();
+//
+//            // Recorremos el ResultSet mientras el mismo tenga elementos y 
+//            // recuperamos los datos de las inscripciones
+//            while (rs.next()) {
+//                // Creo una inscripcion en el objeto ins utilizando el
+//                // constructor vacio Inscripcion()
+//                Inscripcion ins = new Inscripcion();
+//
+//                // Recupero una inscripcion en el objeto ins que obtengo del rs
+//                ins.setIdInscripcion(rs.getInt("idInscripto"));
+//
+//                // Recupero un alumno en el objeto alu que obtengo del rs
+//                // utilizando aluData para poder acceder a su metodo buscarAlumno
+//                // que espera un id del tipo int
+//                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
+//
+//                // Recupero un materia en el objeto mat que obtengo del rs
+//                // utilizando matData para poder acceder a su metodo buscarMateria
+//                // que espera un id del tipo int
+//                Materia mat = matData.buscarMateria(rs.getInt("idMateria"));
+//
+//                // Ahora seteo los datos que procese a inscripcion (ins)
+//                ins.setAlumno(alu);
+//                ins.setMateria(mat);
+//
+//                // La nota esta en rs y es de tipo double y se encuentra en la
+//                // columna nota de la tabla inscripcion
+//                ins.setNota(rs.getDouble("nota"));
+//
+//                // Una ves armada la inscripcion (ins). Por cada una de las
+//                // inscripciones debemos agregarla a la lista de cursadas que
+//                // es una ArrayList utilizando el metodo add propio del ArrayList
+//                cursadasPorAlumno.add(ins);
+//            }
+//
+//            // Cierro la consulta
+//            ps.close();
+//        } catch (SQLException ex) {
+//            // En caso de que explote la consulta se lo informo al pobre
+//            // y desafortunado DataEntry
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
+//        }
+//
+//        // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
+//        return cursadasPorAlumno;
+//    }
 
     // /////////////////////////////////////////////////////////////////////////
     // Declaración sugerida:
@@ -357,48 +357,48 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerMateriasCursadas(int id)
     // /////////////////////////////////////////////////////////////////////////
-    public ArrayList<Materia> obtenerMateriasCursadas(int idAlumno) {
-        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
-        // en memoria temporalmente para trabajar
-        ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<>();
-
-        // Preparo la consulta a la DB. Solamente en las materias en las que
-        // el Alumno esta insripto
-        //
-        // Al ser un producto cartesiano se filtra en el WHERE para que
-        // solo queden los que posean un ID igual
-        //
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria = m.idMateria and idAlumno = ?;";
-
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno
-            ps.setInt(1, idAlumno);
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-            
-            // Recorro el rs mientras tenga elementos
-            while (rs.next()) {
-                // Agrego la materia al array materia
-                listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista con las materias que
-        // posea la tabla materia en la DB universidadulp
-        return listaDeMateriasInscripto;
-    }
+//    public ArrayList<Materia> obtenerMateriasCursadas(int idAlumno) {
+//        // Creo una lista listaDeMateriasInscripto para almacenar los resultados
+//        // en memoria temporalmente para trabajar
+//        ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<>();
+//
+//        // Preparo la consulta a la DB. Solamente en las materias en las que
+//        // el Alumno esta insripto
+//        //
+//        // Al ser un producto cartesiano se filtra en el WHERE para que
+//        // solo queden los que posean un ID igual
+//        //
+//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+//        try {
+//            String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria = m.idMateria and idAlumno = ?;";
+//
+//            // Preparo la consulta
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Para obtener el ID del alumno
+//            ps.setInt(1, idAlumno);
+//
+//            // Ejecuto la consulta
+//            ResultSet rs = ps.executeQuery();
+//            
+//            // Recorro el rs mientras tenga elementos
+//            while (rs.next()) {
+//                // Agrego la materia al array materia
+//                listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
+//            }
+//
+//            // Cierro la consulta
+//            ps.close();
+//        } catch (SQLException ex) {
+//            // En caso de que explote la consulta se lo informo al pobre
+//            // y desafortunado DataEntry
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
+//        }
+//
+//        // Si todo salio bien, entonces retorno la lista con las materias que
+//        // posea la tabla materia en la DB universidadulp
+//        return listaDeMateriasInscripto;
+//    }
 
     // /////////////////////////////////////////////////////////////////////////
     // Declaración sugerida:
@@ -452,46 +452,46 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Inscripcion> obtenerMateriasNOCursadas(int id)
     // /////////////////////////////////////////////////////////////////////////
-    public ArrayList<Materia> obtenerMateriasNOCursadas(int idAlumno) {
-        // Creo una lista listaDeMateriasInscriptos para almacenar los resultados
-        // en memoria temporalmente para trabajar
-        ArrayList<Materia> listaDeMateriasNoInscriptos = new ArrayList<Materia>();
-
-        // Preparo la consulta a la DB utilizando una subconsulta a inscripcion
-        // para que busque todos los ID idMateria en las que NO esta inscripto
-        // un alumno utilizando NOT IN para no incluirlos
-        String sql = "SELECT idMateria FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
-
-        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-        try {
-            // Preparo la consulta
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            // Para obtener el ID del alumno
-            ps.setInt(1, idAlumno);
-
-            // Ejecuto la consulta
-            ResultSet rs = ps.executeQuery();
-
-            // Recorro el rs
-            while (rs.next()) {
-                // Los agrego a los valores a la lista utilizando el metodo
-                // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
-                listaDeMateriasNoInscriptos.add(matData.buscarMateria(rs.getInt("idMateria")));
-            }
-
-            // Cierro la consulta
-            ps.close();
-        } catch (SQLException ex) {
-            // En caso de que explote la consulta se lo informo al pobre
-            // y desafortunado DataEntry
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
-        }
-
-        // Si todo salio bien, entonces retorno la lista con las materias que
-        // no posea la tabla materia en la DB universidadulp
-        return listaDeMateriasNoInscriptos;
-    }
+//    public ArrayList<Materia> obtenerMateriasNOCursadas(int idAlumno) {
+//        // Creo una lista listaDeMateriasInscriptos para almacenar los resultados
+//        // en memoria temporalmente para trabajar
+//        ArrayList<Materia> listaDeMateriasNoInscriptos = new ArrayList<Materia>();
+//
+//        // Preparo la consulta a la DB utilizando una subconsulta a inscripcion
+//        // para que busque todos los ID idMateria en las que NO esta inscripto
+//        // un alumno utilizando NOT IN para no incluirlos
+//        String sql = "SELECT idMateria FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+//
+//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
+//        try {
+//            // Preparo la consulta
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Para obtener el ID del alumno
+//            ps.setInt(1, idAlumno);
+//
+//            // Ejecuto la consulta
+//            ResultSet rs = ps.executeQuery();
+//
+//            // Recorro el rs
+//            while (rs.next()) {
+//                // Los agrego a los valores a la lista utilizando el metodo
+//                // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
+//                listaDeMateriasNoInscriptos.add(matData.buscarMateria(rs.getInt("idMateria")));
+//            }
+//
+//            // Cierro la consulta
+//            ps.close();
+//        } catch (SQLException ex) {
+//            // En caso de que explote la consulta se lo informo al pobre
+//            // y desafortunado DataEntry
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia: " + ex.getMessage());
+//        }
+//
+//        // Si todo salio bien, entonces retorno la lista con las materias que
+//        // no posea la tabla materia en la DB universidadulp
+//        return listaDeMateriasNoInscriptos;
+//    }
 
     // /////////////////////////////////////////////////////////////////////////
     // Declaración sugerida:
@@ -558,36 +558,36 @@ public class InscripcionData {
         return listaAlumnosXMateria;
     }
 
-    public List<Alumno> obtenerAlumnosPorMateriaEnzo(int idMateria) {
-        List<Alumno> listaAlumnosPorMateria = new ArrayList<>();
-
-        String sql = "SELECT a.idAlumno, a.dni, a.nombre, a.apellido, a.fechaNacimiento, a.estado "
-                + "FROM inscripcion i, alumno a "
-                + "WHERE i.idAlumno = a.idAlumno "
-                + "AND i.idMateria = ? "
-                + "AND a.estado = 1";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, idMateria);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Alumno alumno = new Alumno();
-                    alumno.setIdAlumno(rs.getInt("idAlumno"));
-                    alumno.setDni(rs.getInt("dni"));
-                    alumno.setNombre(rs.getString("nombre"));
-                    alumno.setApellido(rs.getString("apellido"));
-                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                    alumno.setEstado(rs.getBoolean("estado"));
-                    listaAlumnosPorMateria.add(alumno);
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a una de las tablas: " + ex.getMessage());
-        }
-
-        return listaAlumnosPorMateria;
-    }
+//    public List<Alumno> obtenerAlumnosPorMateriaEnzo(int idMateria) {
+//        List<Alumno> listaAlumnosPorMateria = new ArrayList<>();
+//
+//        String sql = "SELECT a.idAlumno, a.dni, a.nombre, a.apellido, a.fechaNacimiento, a.estado "
+//                + "FROM inscripcion i, alumno a "
+//                + "WHERE i.idAlumno = a.idAlumno "
+//                + "AND i.idMateria = ? "
+//                + "AND a.estado = 1";
+//
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setInt(1, idMateria);
+//
+//            try (ResultSet rs = ps.executeQuery()) {
+//                while (rs.next()) {
+//                    Alumno alumno = new Alumno();
+//                    alumno.setIdAlumno(rs.getInt("idAlumno"));
+//                    alumno.setDni(rs.getInt("dni"));
+//                    alumno.setNombre(rs.getString("nombre"));
+//                    alumno.setApellido(rs.getString("apellido"));
+//                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+//                    alumno.setEstado(rs.getBoolean("estado"));
+//                    listaAlumnosPorMateria.add(alumno);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a una de las tablas: " + ex.getMessage());
+//        }
+//
+//        return listaAlumnosPorMateria;
+//    }
 
     public ArrayList<Object[]> obtenerMateriasCursadasAriel(int idAlumno) {
 

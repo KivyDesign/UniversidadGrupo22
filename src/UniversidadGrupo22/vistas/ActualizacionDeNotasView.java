@@ -8,6 +8,7 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.entidades.Alumno;
+import UniversidadGrupo22.entidades.Inscripcion;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
@@ -43,7 +44,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private int idAlu;
     private double nuevaNota;
     private int idMat;
-
+//    private ArrayList<Inscripcion> notasModif;
     /**
      * Creates new form ActualizacionDeNotasView
      */
@@ -250,7 +251,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        insData.actualizarNota(nuevaNota, idAlu, idMat);
+//        for (Double nota : notasModif) {
+             insData.actualizarNota(nuevaNota, idAlu, idMat);
+//        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -361,6 +364,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                 double pars = Double.parseDouble(nueva.toString());
                 if (pars >= 0 && pars <= 10) {
                     nuevaNota = pars;
+//                    notasModif.add();
                 } else {
                     MensajeSB(1,"El valor ingresado no es válido(0-10)");
                     jtNotas.setValueAt(nuevaNota, fila, columna);
