@@ -113,7 +113,7 @@ public class InscripcionData {
                 // Hay que ver si le hacemos una barra de status para informar
                 // de estos casos al operador y no detenerlo a cada rato con
                 // mensajitos de dialogo emergentes que son bastante molestos
-                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+//                JOptionPane.showMessageDialog(null, "Nota Actualizada");
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido encontrar el alumno para actulizar la nota");
             }

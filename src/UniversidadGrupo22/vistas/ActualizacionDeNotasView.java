@@ -42,18 +42,16 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private ArrayList<Alumno> listarAlumnos;
     private int idAlu;
     private double nuevaNota;
-    private int idMat;
-//    private ArrayList<Inscripcion> notasModif;
     /**
      * Creates new form ActualizacionDeNotasView
      */
     public ActualizacionDeNotasView() {
         initComponents();
-        
+
         // Inicializo el acceso a los datos de las tablas alumno e inscripción
         aluData = new AlumnoData();
         insData = new InscripcionData();
-        
+
         // Con el aluData inicializado puedo llenar el ArrayList a través del
         // siguiente método:
         listarAlumnos = aluData.listarAlumnos();
@@ -67,14 +65,16 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
         // En el jTable se cargan las materias por defecto
         cargarMaterias();
-        
+
         // Al modelo de nuestra jTable le agrego un ListSelectionListener para 
         // operar sobre la celda seleccionada
         listSelectionListener();
-        
+
         // Al modelo de la jTable le agrego un ListModelListener que me permite
         // operar sobre los cambios realizados en una celda
         anadeListenerAlModelo();
+
+        jbGuardar.setEnabled(false);
     }
 
     /**
@@ -250,9 +250,17 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-//        for (Double nota : notasModif) {
-             insData.actualizarNota(nuevaNota, idAlu, idMat);
-//        }
+        int filas = jtNotas.getRowCount();
+        for (int fila = 0; fila < filas; fila++) {
+            insData.actualizarNota(Double.parseDouble(
+                    jtNotas.getValueAt(fila, 2).toString()),
+                    idAlu,
+                    Integer.parseInt(jtNotas.getValueAt(fila, 0).toString())
+                    );
+            System.out.println(Double.parseDouble(jtNotas.getValueAt(fila, 2).toString()));
+        }
+        jbGuardar.setEnabled(false);
+        MensajeSB(1, "Nota(s) Actualizada(s)");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -281,7 +289,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     public void cargarAlumnos() {
         // Limpio el ComboBox
         jcbAlumno.removeAllItems();
-        
+
         // Cargamos los alumnos en el ComboBox
         for (Alumno listar : listarAlumnos) {
             jcbAlumno.addItem(listar);
@@ -304,7 +312,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         jtNotas.getColumnModel().getColumn(0).setPreferredWidth(100);
         jtNotas.getColumnModel().getColumn(1).setPreferredWidth(150);
         jtNotas.getColumnModel().getColumn(2).setPreferredWidth(80);
-        
+
         MensajeSB(3, "Texto dummy");
     }
 
@@ -343,7 +351,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     public void anadeListenerAlModelo() {
         jtNotas.getModel().addTableModelListener(new TableModelListener() {
-            
+
             @Override
             public void tableChanged(TableModelEvent evento) {
                 cambioNota(evento);
@@ -359,22 +367,25 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             // Se obtiene el modelo de la tabla y la fila/columna que han cambiado.
             int fila = evento.getFirstRow();
             int columna = evento.getColumn();
+            int c = 0;
 
             try {
                 Object nueva = jtNotas.getValueAt(fila, columna);
                 double pars = Double.parseDouble(nueva.toString());
                 if (pars >= 0 && pars <= 10) {
+                    c++;
                     nuevaNota = pars;
-//                    notasModif.add();
+                    if (c == 1) {
+                        jbGuardar.setEnabled(true);
+                    }
                 } else {
-                    MensajeSB(1,"El valor ingresado no es válido(0-10)");
+                    MensajeSB(1, "El valor ingresado no es válido(0-10)");
                     jtNotas.setValueAt(nuevaNota, fila, columna);
                 }
             } catch (NumberFormatException e) {
-                MensajeSB(1,"El valor ingresado no es válido");
+                MensajeSB(1, "El valor ingresado no es válido");
                 jtNotas.setValueAt(nuevaNota, fila, columna);
             }
-            idMat = (int) jtNotas.getValueAt(fila, 0);
         }
     }
 
