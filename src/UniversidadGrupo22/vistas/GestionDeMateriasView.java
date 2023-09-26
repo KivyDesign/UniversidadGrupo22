@@ -7,9 +7,7 @@ package UniversidadGrupo22.vistas;
 
 import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Materia;
-import com.sun.corba.se.impl.orbutil.CorbaResourceUtil;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
-    private MateriaData materiaData;
+    private MateriaData matData;
 
     public GestionDeMateriasView() {
         initComponents();
-        materiaData = new MateriaData();
+        matData = new MateriaData();
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
@@ -41,7 +39,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
         jBbuscar = new javax.swing.JButton();
         jtNombre = new javax.swing.JTextField();
         jtCodigo = new javax.swing.JTextField();
-        jTanio = new javax.swing.JTextField();
+        jtAnio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -207,7 +205,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jtNombre)
-                            .addComponent(jTanio, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(jtAnio, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                             .addComponent(jRestadoMat, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtCodigo))
                         .addGap(35, 35, 35)
@@ -241,7 +239,7 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
                     .addComponent(jBbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -275,80 +273,75 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         try {
-            if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-                PruebaDeConceptoStatusBar(2, "Los campos deben ser completados");
+            if (jtAnio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+                MensajeSB(2, "Los campos deben ser completados");
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else if (!jtCodigo.getText().isEmpty()) {
-                PruebaDeConceptoStatusBar(2, "El campo ID se asigna automaticamente cuando la materia es nueva");
+                MensajeSB(2, "El campo ID se asigna automaticamente cuando la materia es nueva");
                 jtCodigo.setText("");
-            } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
-                PruebaDeConceptoStatusBar(2, "El año debe ser un numero entre 1 y 7");
-            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+            } else if (Integer.parseInt(jtAnio.getText()) > 7 || Integer.parseInt(jtAnio.getText()) < 1) {
+                MensajeSB(2, "El año debe ser un numero entre 1 y 7");
+            } else if (PruebaDeCaracteres(jtNombre.getText()) == false) {
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else {
-                Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jTanio.getText()), true);
-                materiaData.guardarMateria(mat);
-                PruebaDeConceptoStatusBar(1, "Materia agregada con exito, busque por ID o ingrese datos de una nueva");
-                limpiarcampos();
+                Materia mat = new Materia(jtNombre.getText(), Integer.parseInt(jtAnio.getText()), true);
+                matData.guardarMateria(mat);
+                MensajeSB(1, "Materia agregada con exito, busque por ID o ingrese datos de una nueva");
+                LimpiarCampos();
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El año debe ser un número entre 1 y 7");
+            MensajeSB(2, "El año debe ser un número entre 1 y 7");
         }
-
-
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         try {
-
-            materiaData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
-            PruebaDeConceptoStatusBar(1, "Materia eliminada con exito, busque por ID o ingrese datos de una nueva");
+            matData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
+            MensajeSB(1, "Materia eliminada con exito, busque por ID o ingrese datos de una nueva");
             jRestadoMat.setSelected(false);
             jbNuevo.setEnabled(true);
             jtCodigo.setEditable(true);
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El id debe ser un número");
+            MensajeSB(2, "El id debe ser un número");
             jtCodigo.requestFocus();
             jtCodigo.selectAll();
         }
-        limpiarcampos();
+        LimpiarCampos();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         jRestadoMat.setEnabled(false);
         try {
-            Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
+            Materia materia = matData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
             if (materia == null) {
-                PruebaDeConceptoStatusBar(2, "El ID debe ser de una Materia activa");
+                MensajeSB(2, "El ID debe ser de una Materia activa");
                 jtCodigo.requestFocus();
                 jtCodigo.selectAll();
-            } else if (jTanio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
-                PruebaDeConceptoStatusBar(2, "Los campos deben ser completados");
+            } else if (jtAnio.getText().isEmpty() || jtNombre.getText().isEmpty()) {
+                MensajeSB(2, "Los campos deben ser completados");
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
-            } else if (Integer.parseInt(jTanio.getText()) > 7 || Integer.parseInt(jTanio.getText()) < 1) {
-                PruebaDeConceptoStatusBar(2, "El año debe ser un número entre 1 y 7");
-                jTanio.requestFocus();
-                jTanio.selectAll();
-            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+            } else if (Integer.parseInt(jtAnio.getText()) > 7 || Integer.parseInt(jtAnio.getText()) < 1) {
+                MensajeSB(2, "El año debe ser un número entre 1 y 7");
+                jtAnio.requestFocus();
+                jtAnio.selectAll();
+            } else if (PruebaDeCaracteres(jtNombre.getText()) == false) {
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
-
             } else if (materia != null) {
                 materia.setNombre(jtNombre.getText());
-                materia.setAnioMateria(Integer.parseInt(jTanio.getText()));
-                materiaData.modificarMateria(materia);
-                PruebaDeConceptoStatusBar(1, "Materia guardada con exito, busque por ID o ingrese datos de una nueva");
-                limpiarcampos();
+                materia.setAnioMateria(Integer.parseInt(jtAnio.getText()));
+                matData.modificarMateria(materia);
+                MensajeSB(1, "Materia guardada con exito, busque por ID o ingrese datos de una nueva");
+                LimpiarCampos();
                 jbNuevo.setEnabled(true);
                 jtCodigo.setEditable(true);
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El ID y el año deben ser un numero");
+            MensajeSB(2, "El ID y el año deben ser un numero");
         }
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -357,30 +350,28 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         try {
-
-            Materia materia = materiaData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
+            Materia materia = matData.buscarMateria(Integer.parseInt(jtCodigo.getText()));
+            
             if (materia != null) {
                 jtNombre.setText(materia.getNombre());
-                jTanio.setText(materia.getAnioMateria() + "");
-                PruebaDeConceptoStatusBar(1, "Materia Encontrada");
+                jtAnio.setText(materia.getAnioMateria() + "");
+                MensajeSB(1, "Materia Encontrada");
                 jRestadoMat.setSelected(true);
                 jbGuardar.setEnabled(true);
                 jbEliminar.setEnabled(true);
                 jtCodigo.setEditable(false);
                 jbNuevo.setEnabled(false);
             } else {
-                PruebaDeConceptoStatusBar(2, "El id debe ser de una Materia activa");
+                MensajeSB(2, "El id debe ser de una Materia activa");
                 jtCodigo.requestFocus();
                 jtCodigo.selectAll();
-
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El id debe ser un numero");
+            MensajeSB(2, "El id debe ser un numero");
             jtCodigo.requestFocus();
             jtCodigo.selectAll();
         }
     }//GEN-LAST:event_jBbuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
@@ -397,24 +388,25 @@ public class GestionDeMateriasView extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRestadoMat;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel jStatusBar;
-    private javax.swing.JTextField jTanio;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JTextField jtAnio;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
-public void limpiarcampos() {
+
+    public void LimpiarCampos() {
         jtNombre.setText("");
-        jTanio.setText("");
+        jtAnio.setText("");
         jtCodigo.setText("");
         jRestadoMat.setSelected(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
 
-    public boolean pruebaCaracteres(String texto) {
+    public boolean PruebaDeCaracteres(String texto) {
         int b = 0;
         int i = 0;
         for (i = 0; i < texto.length(); i++) {
@@ -425,15 +417,14 @@ public void limpiarcampos() {
             }
         }
         if (b > 0) {
-            PruebaDeConceptoStatusBar(2, "El campo nombre solo debe tener letras y números");
+            MensajeSB(2, "El campo nombre solo debe tener letras y números");
             return false;
         } else {
             return true;
         }
-
     }
 
-    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
+    public void MensajeSB(int color, String mensaje) {
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -443,7 +434,6 @@ public void limpiarcampos() {
             // Si el color es igual a 2 entonces es = a rojo
             jStatusBar.setForeground(new Color(255, 50, 0));
         }
-
         jStatusBar.setText(mensaje);
     }
 }

@@ -14,9 +14,6 @@ import UniversidadGrupo22.entidades.Materia;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,43 +28,26 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         // Clase Interna Anónima
         public boolean isCellEditable(int fila, int columna) {
-
-            // Si retorno true las celdas son todas editables, con false
-            // ninguna celda es editable
-//            if (columna == 2) {
-//                return true;
-//            }
             return false;
         }
     };
 
-    private AlumnoData alumnoData;
+    private AlumnoData aluData;
     private List<Alumno> listarAlumnos;
-    private MateriaData materiaData;
-    private InscripcionData inscripcionData;
+    private MateriaData matData;
+    private InscripcionData insData;
 
-//    AlumnoData aluData = new AlumnoData();
-//    MateriaData matData = new MateriaData();
-//    InscripcionData insData = new InscripcionData();
     /**
      * Creates new form InscripcionesView
      */
     public InscripcionesView() {
         initComponents();
 
-//        // Quito la barra de titulo del JInternalFrame
-//        //((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-//        // Quito los bordes de la ventana
-//        //this.setBorder(null);
-//        putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
-//        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-//        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-//        this.setBorder(null);
         // Inicializo el acceso a los datos de las tablas alumno e inscripción
         // que se utilizan en este Frame interno
-        alumnoData = new AlumnoData();
-        listarAlumnos = alumnoData.listarAlumnos();
-        inscripcionData = new InscripcionData();
+        aluData = new AlumnoData();
+        listarAlumnos = aluData.listarAlumnos();
+        insData = new InscripcionData();
 
         // Cargo los alumnos que necesito mostrar en el ComboBox
         // La idea es que por defecto se carguen los alumnos activos con el
@@ -77,7 +57,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Defino el jrbMateriasNoInscriptas como seleccionado y cargo los
         // datos de las materias en las que el alumno que este seleccionado en
         // el ComboBox no este inscripto aún
-        //jrbMateriasNoInscriptas.setSelected(true);
         RadioButtonNoInscriptos();
 
         // Armo la cabecera de la tabla para que se lean bien los campos ID,
@@ -86,7 +65,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         armarCabeceraDeLaTabla();
 
         // Cargo los datos en el modelo de la Tabla
-//        cargarDatosEnElModeloDeLatabla();
+        //
         // Ejecuto todo en un metodo para mejorar la logica y poder reutilizar
         // el codigo desde varios eventos
         RadioButtonNoInscriptos();
@@ -379,7 +358,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             Inscripcion inscribir = new Inscripcion(-1, alu, mat);
 
             // Por fin lo inscribo al alumno en la materia seleccionada
-            inscripcionData.guardarInscripcion(inscribir);
+            insData.guardarInscripcion(inscribir);
 
             // Limpio el desastre
             borrarFilasTabla();
@@ -388,17 +367,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // jtMaterias para que refleje al usuario las materias en las que
             // aún no se inscribio
         } else {
-//            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
-            // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
-            // ---------------------------------------------------------------------
+            MensajeSB(2, "Primero seleccione un Alumno y una Materia");
         }
 
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
-        // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Inscripción agregada de forma exitosa");
-        // ---------------------------------------------------------------------
+        MensajeSB(1, "Inscripción agregada de forma exitosa");
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
@@ -416,7 +390,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             int idMateria = (Integer) modelo.getValueAt(filaSeleccionada, 0);
 
             // Por fin lo Des(inscribo) al alumno en la materia seleccionada
-            inscripcionData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMateria);
+            insData.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), idMateria);
 
             // Limpio el desastre
             borrarFilasTabla();
@@ -431,17 +405,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             // entonces muestro este molesto dialogo para que se acuerden de
             // nosotros. La idea de una barra de estado seria muy bien apreciada
             // a la altura del desarrollo de este proyecto
-//            JOptionPane.showMessageDialog(null, "Primero seleccione un Alumno y una Materia");
-            // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Primero seleccione un Alumno y una Materia");
-            // ---------------------------------------------------------------------
+            MensajeSB(2, "Primero seleccione un Alumno y una Materia");
         }
 
         // Recreo el modelo para que refleje los cambios
         RefrescarModeloMateriasInscriptasAnulada();
-        // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Inscripción borrada");
-        // ---------------------------------------------------------------------
+        MensajeSB(1, "Inscripción borrada");
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed
@@ -476,16 +445,13 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
         if (seleccionado != null) {
-            ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriasInscriptas(seleccionado);
+            ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriasInscriptas(seleccionado);
 
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAnioMateria()});
             }
         } else {
-            // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Seleccione primero un alumno");
-            // ---------------------------------------------------------------------
-//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+            MensajeSB(2, "Seleccione primero un alumno");
         }
     }
 
@@ -495,9 +461,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
         Alumno seleccionado = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
         if (seleccionado != null) {
-            ArrayList<Materia> lista = (ArrayList) inscripcionData.obtenerMateriaNoInscriptas(seleccionado);
-
-            System.out.println("Lista de Materias: " + lista);
+            ArrayList<Materia> lista = (ArrayList) insData.obtenerMateriaNoInscriptas(seleccionado);
 
             for (Materia mat : lista) {
                 modelo.addRow(new Object[]{
@@ -506,17 +470,13 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                     mat.getAnioMateria()});
             }
         } else {
-            // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Seleccione primero un alumno");
-            // ---------------------------------------------------------------------
-//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
+            MensajeSB(2, "Seleccione primero un alumno");
         }
     }
 
     public void cargarAlumnos() {
         // Cargamos los alumnos en el ComboBox
         for (Alumno listarAlumno : listarAlumnos) {
-            //System.out.println(listarAlumno.getIdAlumno() + " " + listarAlumno.getNombre() + " " + listarAlumno.getApellido());
             jcbSeleccioneAlumno.addItem(listarAlumno);
         }
     }
@@ -551,7 +511,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
                     modelo.removeRow(i);
                 }
             }
-
         }
     }
 
@@ -580,9 +539,7 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Desactivo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(false);
 
-        // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para registrar la inscripción");
-        // ---------------------------------------------------------------------
+        MensajeSB(1, "Seleccione una Materia para registrar la inscripción");
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno no
         // se inscribio utilizando el metodo:
@@ -602,17 +559,14 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
         // Activo el boton Anular Inscripción
         jbAnularInscripcion.setEnabled(true);
 
-        // Prueba de concepto StatusBar ----------------------------------------
-        PruebaDeConceptoStatusBar(1, "Seleccione una Materia para anular la inscripción");
-        // ---------------------------------------------------------------------
+        MensajeSB(1, "Seleccione una Materia para anular la inscripción");
 
         // Cargo la jTable jtMaterias con las materias en las que el alumno se
         // inscribio utilizando el metodo:
         cargarInscriptos();
     }
 
-    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
-        // Prueba de concepto StatusBar ----------------------------------------
+    public void MensajeSB(int color, String mensaje) {
 
         // Los valores pueden variar de 0 a 255
         if (color == 1) {

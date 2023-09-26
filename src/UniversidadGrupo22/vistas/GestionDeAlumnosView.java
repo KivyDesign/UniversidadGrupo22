@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
-    private AlumnoData alumnoData;
+    private AlumnoData aluData;
 
     /**
      * Creates new form GestionDeAlumnosView
@@ -28,8 +28,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         initComponents();
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
-        //creo Alumno
-        alumnoData = new AlumnoData();
+        aluData = new AlumnoData();
     }
 
     /**
@@ -315,22 +314,20 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // Desabilito RadioButon porque el sistema utiliza borrado lógico
         jrbEstado.setEnabled(false);
         try {
-
-            Alumno alumno = alumnoData.buscarAlumnoPorID(Integer.parseInt(jtid.getText()));
+            Alumno alumno = aluData.buscarAlumnoPorID(Integer.parseInt(jtid.getText()));
             if (jdcFechaNacimiento.getDate() == null) {
-                // Prueba de concepto StatusBar ----------------------------------------
-                PruebaDeConceptoStatusBar(2, "Falta completar Fecha de Nacimiento");
-                // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
+                MensajeSB(2, "Falta completar Fecha de Nacimiento");
             } else if (jtDni.getText().length() != 8) {
-                PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
+                MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
                 jtDni.requestFocus();
                 jtDni.selectAll();
-            } else if (pruebaCaracteres(jtApellido.getText()) == false) {
+            } else if (PruebaDeCaracteres(jtApellido.getText()) == false) {
                 jtApellido.requestFocus();
                 jtApellido.selectAll();
-            } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+            } else if (PruebaDeCaracteres(jtNombre.getText()) == false) {
                 jtNombre.requestFocus();
                 jtNombre.selectAll();
             } else {
@@ -339,35 +336,32 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setNombre(jtNombre.getText());
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumno.setEstado(true);
-                alumnoData.modificarAlumno(alumno);
-                PruebaDeConceptoStatusBar(1, "El alumno ha sido guardado, busque por DNI o cargue un nuevo Alumno");
-                limpiarcampos();jbNuevo.setEnabled(true);
+                aluData.modificarAlumno(alumno);
+                MensajeSB(1, "El alumno ha sido guardado, busque por DNI o cargue un nuevo Alumno");
+                LimpiarCampos();
+                jbNuevo.setEnabled(true);
             }
-
         } catch (NumberFormatException ex) {
-            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
+            MensajeSB(2, "El DNI debe ser un número");
             jtDni.requestFocus();
             jtDni.selectAll();
-
         }
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         try {
-            Alumno alum = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
+            Alumno alum = aluData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
             if (alum != null) {
-                alumnoData.eliminarAlumno(alum.getIdAlumno());
+                aluData.eliminarAlumno(alum.getIdAlumno());
                 jrbEstado.setSelected(false);
-                PruebaDeConceptoStatusBar(1, "Alumno eliminado con exito! Busque por DNI o cargue un nuevo Alumno");
-                limpiarcampos();
+                MensajeSB(1, "Alumno eliminado con exito! Busque por DNI o cargue un nuevo Alumno");
+                LimpiarCampos();
                 jbNuevo.setEnabled(true);
             } else {
-                PruebaDeConceptoStatusBar(2, "El alumno no Existe");
+                MensajeSB(2, "El alumno no Existe");
             }
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
-            //JOptionPane.showMessageDialog(this, "el DNI debe ser un numero");
+            MensajeSB(2, "El DNI debe ser un número");
             jtDni.requestFocus();
             jtDni.selectAll();
         }
@@ -375,22 +369,19 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         if (jdcFechaNacimiento.getDate() == null) {
-            // Prueba de concepto StatusBar ----------------------------------------
-            PruebaDeConceptoStatusBar(2, "Falta completar Fecha de Nacimiento");
-            // ---------------------------------------------------------------------
-            // JOptionPane.showMessageDialog(null, "Los campos deben estar completos");
+            MensajeSB(2, "Falta completar Fecha de Nacimiento");
         } else if (jtDni.getText().length() != 8) {
-            PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
+            MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
             jtDni.requestFocus();
             jtDni.selectAll();
-        } else if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
-            PruebaDeConceptoStatusBar(2, "El DNI ya esta utilizado en otro alumno");
+        } else if (aluData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
+            MensajeSB(2, "El DNI ya esta utilizado en otro alumno");
             jtDni.requestFocus();
             jtDni.selectAll();
-        } else if (pruebaCaracteres(jtApellido.getText()) == false) {
+        } else if (PruebaDeCaracteres(jtApellido.getText()) == false) {
             jtApellido.requestFocus();
             jtApellido.selectAll();
-        } else if (pruebaCaracteres(jtNombre.getText()) == false) {
+        } else if (PruebaDeCaracteres(jtNombre.getText()) == false) {
             jtApellido.requestFocus();
             jtApellido.selectAll();
         } else {
@@ -404,26 +395,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         fechan,
                         true);
 
-                // Primero busco si existe para no agregarlo repetido
-                //if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) == null) {
-                // Agrego el alumno
-                alumnoData.guardarAlumno(alumno);
+                // Primero busco si existe para no agregarlo repetido y lo
+                // inserto al alumno
+                aluData.guardarAlumno(alumno);
                 // Si lo agregue con exito no es null y se lo informo al DataEntry
-                if (alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
-                    // Prueba de concepto StatusBar ----------------------------------------
-                    PruebaDeConceptoStatusBar(1, "Alumno agregado con exito! Busque por DNI o cargue un nuevo Alumno");
-                    limpiarcampos();
-                    // ---------------------------------------------------------------------
+                if (aluData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText())) != null) {
+                    MensajeSB(1, "Alumno agregado con exito! Busque por DNI o cargue un nuevo Alumno");
+                    LimpiarCampos();
                 } else {
-                    // Prueba de concepto StatusBar ----------------------------------------
-                    PruebaDeConceptoStatusBar(2, "ERROR: El alumno no se pudo agregar");
-                    // ---------------------------------------------------------------------
+                    MensajeSB(2, "ERROR: El alumno no se pudo agregar");
                 }
-
             } catch (NumberFormatException e) {
-                // Prueba de concepto StatusBar ----------------------------------------
-                PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
-
+                MensajeSB(2, "El DNI debe ser un número");
                 jtDni.requestFocus();
                 jtDni.selectAll();
             }
@@ -433,12 +416,12 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
             if (jtDni.getText().length() != 8) {
-                PruebaDeConceptoStatusBar(2, "Debe ser un DNI valido 8 Digitos");
+                MensajeSB(2, "Debe ser un DNI valido 8 Digitos");
                 jtDni.requestFocus();
                 jtDni.selectAll();
             } else {
-                // Busco alumno por dni
-                Alumno alumno = alumnoData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
+                // Busco alumno por DNI
+                Alumno alumno = aluData.buscarAlumnoPorDni(Integer.parseInt(jtDni.getText()));
                 // Busco si el alumno no esta vacio
                 if (alumno != null) {
                     jtid.setText(alumno.getIdAlumno() + "");
@@ -450,19 +433,18 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                         jbGuardar.setEnabled(true);
                         jbEliminar.setEnabled(true);
                         jbNuevo.setEnabled(false);
-                        PruebaDeConceptoStatusBar(1, "Alumno encontrado");
+                        MensajeSB(1, "Alumno encontrado");
                     } else {
-                        PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
+                        MensajeSB(2, "El DNI no es de un Alumno activo");
                     }
                 } else {
-                    PruebaDeConceptoStatusBar(2, "el DNI no es de un Alumno activo");
+                    MensajeSB(2, "El DNI no es de un Alumno activo");
                     jtDni.requestFocus();
                     jtDni.selectAll();
                 }
             }
-
         } catch (NumberFormatException e) {
-            PruebaDeConceptoStatusBar(2, "El DNI debe ser un número");
+            MensajeSB(2, "El DNI debe ser un número");
             jtDni.requestFocus();
             jtDni.selectAll();
         }
@@ -496,7 +478,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtid;
     // End of variables declaration//GEN-END:variables
-public void limpiarcampos() {
+
+    public void LimpiarCampos() {
         jtDni.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
@@ -507,8 +490,7 @@ public void limpiarcampos() {
         jbEliminar.setEnabled(false);
     }
 
-    public void PruebaDeConceptoStatusBar(int color, String mensaje) {
-        // Prueba de concepto StatusBar ----------------------------------------
+    public void MensajeSB(int color, String mensaje) {
 
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
@@ -526,7 +508,8 @@ public void limpiarcampos() {
         jlStatusBar.setText(mensaje);
     }
 
-    public boolean pruebaCaracteres(String texto) {
+    public boolean PruebaDeCaracteres(String texto) {
+        // Busco si los caracteres ingresados son letras
         int b = 0;
         int i = 0;
         for (i = 0; i < texto.length(); i++) {
@@ -535,7 +518,7 @@ public void limpiarcampos() {
             }
         }
         if (b > 0 || texto.isEmpty()) {
-            PruebaDeConceptoStatusBar(2, "Los campos nombre y apellido deben completarse con letras");
+            MensajeSB(2, "Los campos Nombre y Apellido deben completarse con letras");
             return false;
         } else {
             return true;
