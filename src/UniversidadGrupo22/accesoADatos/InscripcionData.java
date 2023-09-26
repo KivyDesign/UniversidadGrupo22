@@ -601,11 +601,11 @@ public class InscripcionData {
 
             // Para obtener el ID del alumno
             ps.setInt(1, idAlumno);
-            System.out.println("ID: " + idAlumno);
+//            System.out.println("ID: " + idAlumno);
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
-            System.out.println("paso algo por aca");
+//            System.out.println("paso algo por aca");
 
             // Recorro el rs mientras tenga elementos
             while (rs.next()) {

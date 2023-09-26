@@ -8,7 +8,6 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.entidades.Alumno;
-import UniversidadGrupo22.entidades.Inscripcion;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
@@ -173,10 +172,10 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jlStatusBar)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jbGuardar.setBackground(new java.awt.Color(194, 165, 121));
@@ -222,7 +221,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,6 +304,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         jtNotas.getColumnModel().getColumn(0).setPreferredWidth(100);
         jtNotas.getColumnModel().getColumn(1).setPreferredWidth(150);
         jtNotas.getColumnModel().getColumn(2).setPreferredWidth(80);
+        
+        MensajeSB(3, "Texto dummy");
     }
 
     public void cargarMaterias() {
@@ -322,7 +323,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                 modelo.addRow(fila);
             }
         } else {
-            MensajeSB(1,"Seleccione primero un alumno");
+            MensajeSB(1, "Seleccione primero un alumno");
         }
     }
 
