@@ -7,7 +7,6 @@ package UniversidadGrupo22.vistas;
 
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
-import UniversidadGrupo22.accesoADatos.MateriaData;
 import UniversidadGrupo22.entidades.Alumno;
 import UniversidadGrupo22.entidades.Inscripcion;
 import UniversidadGrupo22.entidades.Materia;
