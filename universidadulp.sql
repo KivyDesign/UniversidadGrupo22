@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2023 a las 00:01:55
+-- Tiempo de generación: 27-09-2023 a las 00:09:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -59,12 +59,14 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 (17, 16654981, 'Zarate', 'Diego', '2023-09-06', 1),
 (18, 87888990, 'Alvarez', 'Valeria', '2023-09-15', 1),
 (19, 55555555, 'Palacios', 'Juliana', '1991-01-16', 1),
-(20, 12131415, 'Diego', 'Fernande', '2012-05-15', 1),
+(20, 12131415, 'Fernandez', 'Diego Manuel', '2005-05-17', 1),
 (21, 11354924, 'Samuel', 'Rios', '2023-09-12', 1),
 (22, 13141516, 'Sala', 'Hector', '2023-09-05', 1),
 (23, 45464749, 'Ruben', 'Marco', '2023-09-12', 1),
 (24, 47484950, 'Sosa', 'Valeria', '2023-09-20', 1),
-(29, 45678911, 'Salva', 'Tore', '2023-09-13', 1);
+(29, 45678911, 'Salva', 'Tore', '2023-09-13', 1),
+(30, 1245555, 'Bilardo', 'Carlos', '2023-09-20', 1),
+(31, 19181716, 'Juarez', 'Daniel', '2005-09-10', 1);
 
 -- --------------------------------------------------------
 
@@ -111,7 +113,7 @@ INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
 (14, 'Control de Ansiedad', 3, 1),
 (17, 'Quimica', 1, 1),
 (18, 'Metodos Estadisticos', 2, 1),
-(19, '', 5, 1);
+(19, 'Curiosidades y Dudas', 5, 1);
 
 --
 -- Índices para tablas volcadas
@@ -147,19 +149,19 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
