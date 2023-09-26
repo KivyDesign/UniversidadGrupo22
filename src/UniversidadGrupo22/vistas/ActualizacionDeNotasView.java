@@ -46,7 +46,6 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     private ArrayList<Alumno> listarAlumnos;
     private int idAlu;
     private double nuevaNota;
-    private double nueva;
     private int idMat;
 
     /**
@@ -54,10 +53,14 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
      */
     public ActualizacionDeNotasView() {
         initComponents();
-
+        
+        // Inicializo el acceso a los datos de las tablas alumno e inscripción
         aluData = new AlumnoData();
-        listarAlumnos = aluData.listarAlumnos();
         insData = new InscripcionData();
+        
+        // Con el aluData inicializado puedo llenar el ArrayList a través del
+        // siguiente método:
+        listarAlumnos = aluData.listarAlumnos();
 
         // Cargo los alumnos que necesito mostrar en el ComboBox
         cargarAlumnos();
@@ -73,7 +76,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         // operar sobre la celda seleccionada
         listSelectionListener();
         
-        
+        // Al modelo de la jTable le agrego un ListModelListener que me permite
+        // operar sobre los cambios realizados en una celda
         anadeListenerAlModelo();
 
     }
@@ -316,8 +320,6 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         Alumno seleccionada = (Alumno) jcbAlumno.getSelectedItem();
 
         idAlu = seleccionada.getIdAlumno();
-
-        System.out.println("ID: " + idAlu);
 
         if (seleccionada != null) {
             ArrayList<Object[]> lista = (ArrayList) insData.obtenerMateriasCursadasAriel(idAlu);
