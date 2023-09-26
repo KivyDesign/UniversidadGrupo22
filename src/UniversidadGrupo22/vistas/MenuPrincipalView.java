@@ -367,7 +367,7 @@ public class MenuPrincipalView extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // Cierro el "Sistema de Gestión para la Universidad de La Punta"
 
-        JOptionPane.showMessageDialog(null, "Vuelvan pronto que hay que terminar esto");
+        JOptionPane.showMessageDialog(null, "Buen trabajo: ¡¡¡Felicitaciones Equipo 22!!!");
         
         // Código para cerrar todo el programa
         System.exit(0);
