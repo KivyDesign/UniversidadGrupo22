@@ -192,6 +192,12 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
+        jdcFechaNacimiento.setBackground(new java.awt.Color(255, 255, 255));
+        jdcFechaNacimiento.setForeground(new java.awt.Color(0, 102, 153));
+        jdcFechaNacimiento.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jdcFechaNacimiento.setMaxSelectableDate(new java.util.Date(1199156481000L));
+        jdcFechaNacimiento.setMinSelectableDate(new java.util.Date(-2208969711000L));
+
         jtid.setEditable(false);
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -336,7 +342,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
                 alumno.setFechaNacimiento(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 alumno.setEstado(true);
                 aluData.modificarAlumno(alumno);
-                MensajeSB(1, "El alumno ha sido guardado, busque por DNI o cargue un nuevo Alumno");
+                MensajeSB(1, "El alumno ha sido guardado! Busque por DNI o cargue un nuevo Alumno");
                 LimpiarCampos();
                 jbNuevo.setEnabled(true);
             }
@@ -381,8 +387,8 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
             jtApellido.requestFocus();
             jtApellido.selectAll();
         } else if (PruebaDeCaracteres(jtNombre.getText()) == false) {
-            jtApellido.requestFocus();
-            jtApellido.selectAll();
+            jtNombre.requestFocus();
+            jtNombre.selectAll();
         } else {
             try {
                 LocalDate fechan = jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -512,7 +518,7 @@ public class GestionDeAlumnosView extends javax.swing.JInternalFrame {
         int b = 0;
         int i = 0;
         for (i = 0; i < texto.length(); i++) {
-            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z')) {
+            if (!(texto.charAt(i) >= 'A' && texto.charAt(i) <= 'Z') && !(texto.charAt(i) >= 'a' && texto.charAt(i) <= 'z') && texto.charAt(i) != ' ') {
                 b++;
             }
         }
