@@ -34,7 +34,6 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
     private AlumnoData aluData;
     private List<Alumno> listarAlumnos;
-    private MateriaData matData;
     private InscripcionData insData;
 
     /**

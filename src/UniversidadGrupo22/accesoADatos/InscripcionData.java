@@ -68,11 +68,6 @@ public class InscripcionData {
                 // Actualizo el ID de la inscripcion desde la única columna
                 // que tiene el rs
                 ins.setIdInscripcion(rs.getInt(1));
-
-                // Hay que ver si le hacemos una barra de status para informar
-                // de estos casos al operador y no detenerlo a cada rato con
-                // mensajitos de dialogo emergentes que son bastante molestos
-//                JOptionPane.showMessageDialog(null, "Inscripción agregada de forma exitosa");
             }
 
             // Cierro la consulta
@@ -82,8 +77,6 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción: " + ex.getMessage());
         }
-
-        // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -132,8 +125,6 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
-
-        // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -167,7 +158,6 @@ public class InscripcionData {
                 // Hay que ver si le hacemos una barra de status para informar
                 // de estos casos al operador y no detenerlo a cada rato con
                 // mensajitos de dialogo emergentes que son bastante molestos
-//                JOptionPane.showMessageDialog(null, "Inscripción borrada");
             } else {
                 JOptionPane.showMessageDialog(null, "La inscripción no se pudo encontrar");
             }
@@ -179,8 +169,6 @@ public class InscripcionData {
             // y desafortunado DataEntry
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
         }
-
-        // Si todo salio bien, entonces no retorno nada por que es un metodo void
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -247,59 +235,6 @@ public class InscripcionData {
 
         // Si todo salio bien, entonces retorno la lista de cursadas que obtuve
         return cursadas;
-
-        // ---------------------------------------------------------------------
-//        // Preparo la consulta a la DB
-//        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-//
-//        // Declaro a (i) y lo inicializo a null por las dudas
-//        Inscripcion i = null;
-//
-//        // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
-//        try {
-//            // Preparo la consulta
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            // Para obtener el ID del alumno y el ID de la materia
-//            ps.setInt(1, idAlumno);
-//            ps.setInt(2, idMateria);
-//
-//            // Ejecuto la consulta
-//            ResultSet rs = ps.executeQuery();
-//
-//            // Como la consulta es un executeQuery que devuelve un objeto,
-//            // entonces solo hay que procesarlo, de otra forma (i) se quedaria
-//            // null y algo no estaria funcionando bien, para eso recorro el
-//            // ResultSet (rs)
-//            while (rs.next()) {
-//                // Creo el famoso objeto (i)
-//                i = new Inscripcion();
-//
-//                // Le agrego la ID de la inscripcion
-//                i.setIdInscripcion(rs.getInt("idInscripto"));
-//
-//                // Aqui buscamos el Alumno por su ID
-//                Alumno a = aluData.buscarAlumno(idAlumno);
-//
-//                // Se lo cargo al objeto (i)
-//                i.setAlumno(a);
-//
-//                // Realizo la misma operacion para materia y nota
-//                Materia m = matData.buscarMateria(idMateria);
-//                i.setMateria(m);
-//                i.setNota(rs.getDouble("nota"));
-//            }
-//
-//            // Cierro la consulta
-//            ps.close();
-//        } catch (SQLException ex) {
-//            // En caso de que explote la consulta se lo informo al pobre
-//            // y desafortunado DataEntry
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion: " + ex.getMessage());
-//        }
-//
-//        // Si todo salio bien, entonces retorno la inscripcion que obtuve
-//        return i;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -386,7 +321,6 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-//        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
         String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria=m.idMateria and i.idAlumno=?;";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
@@ -402,18 +336,6 @@ public class InscripcionData {
 
             // Recorro el rs
             while (rs.next()) {
-                // Creo el nuevo objeto que hereda de Materia
-                //¡¡¡¡¡¡¡¡¡¡¡agregado!!!!!!!!!
-                //parece que esta de mas con el id materia y el buscar materia por id basta
-//                mat = new Materia();
-//
-//                // Le cargo los valores que necesito
-//                mat.setIdMateria(rs.getInt("idMateria"));
-//                mat.setNombre(rs.getString("nombre"));
-//                mat.setAnioMateria(rs.getInt("anio"));
-//                mat.setActivo(rs.getBoolean("estado"));
-                // Los agrego a los valores a la lista utilizando el metodo
-                // obtenerMateriaPorId que el nuevo objeto matData hereda de Materia
                 listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
             }
 
@@ -436,24 +358,19 @@ public class InscripcionData {
     // List<Inscripcion> obtenerMateriasCursadas(int id)
     // /////////////////////////////////////////////////////////////////////////
     public ArrayList<Materia> obtenerMateriasCursadas(int idAlumno) {
-//    public ArrayList<Materia> obtenerMateriasInscriptas(Alumno alumno) {
         // Creo una lista listaDeMateriasInscripto para almacenar los resultados
         // en memoria temporalmente para trabajar
         ArrayList<Materia> listaDeMateriasInscripto = new ArrayList<>();
 
         // Preparo la consulta a la DB. Solamente en las materias en las que
         // el Alumno esta insripto
-//        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        //
         // Al ser un producto cartesiano se filtra en el WHERE para que
         // solo queden los que posean un ID igual
-//        SELECT inscripcion.idMateria, inscripcion.nota, nombre, anio
-//        FROM inscripcion, materia
-//        WHERE inscripcion.idMateria = materia.idMateria 
-//        AND inscripcion.idAlumno = 3;
-        //String sql = "SELECT inscripcion.idMateria, inscripcion.nota, materia.nombre, materia.anio FROM inscripcion, materia WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
+        //
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
-            String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria=m.idMateria and idAlumno=?;";
+            String sql = "SELECT m.idMateria from materia m, inscripcion i where i.idMateria = m.idMateria and idAlumno = ?;";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
@@ -463,19 +380,9 @@ public class InscripcionData {
 
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
+            
             // Recorro el rs mientras tenga elementos
             while (rs.next()) {
-                //parece que esta de mas con el id materia y el buscar materia por id basta
-//                // Creo el nuevo objeto que hereda de Materia
-//                Materia materia = new Materia();
-//
-//                // Le cargo los valores que necesito
-//                materia.setIdMateria(rs.getInt("idMateria"));
-//                System.out.println("IdMateria: " + rs.getInt("idMateria"));
-//                materia.setNombre(rs.getString("nombre"));
-//                materia.setAnioMateria(rs.getInt("anio"));
-//                materia.setActivo(true);
-
                 // Agrego la materia al array materia
                 listaDeMateriasInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
             }
@@ -507,7 +414,7 @@ public class InscripcionData {
         Materia mat;
 
         // Preparo la consulta a la DB
-        String sql = "SELECT idMateria from materia  where estado=1 and idMateria not in(select idmateria from inscripcion where idAlumno=?);";
+        String sql = "SELECT idMateria FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT idmateria FROM inscripcion WHERE idAlumno = ?);";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
@@ -522,16 +429,6 @@ public class InscripcionData {
 
             // Recorro el rs
             while (rs.next()) {
-                //¡¡¡¡¡¡¡¡¡¡¡agregado!!!!!!!!!
-                //parece que esta de mas con el id materia y el buscar materia por id basta
-                // Creo el nuevo objeto que hereda de Materia
-//                mat = new Materia();
-//
-//                // Le cargo los valores que necesito
-//                mat.setIdMateria(rs.getInt("idMateria"));
-//                mat.setNombre(rs.getString("nombre"));
-//                mat.setAnioMateria(rs.getInt("anio"));
-
                 // Los agrego a los valores a la lista utilizando el metodo
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
                 listaDeMateriasNoInscripto.add(matData.buscarMateria(rs.getInt("idMateria")));
@@ -563,7 +460,7 @@ public class InscripcionData {
         // Preparo la consulta a la DB utilizando una subconsulta a inscripcion
         // para que busque todos los ID idMateria en las que NO esta inscripto
         // un alumno utilizando NOT IN para no incluirlos
-        String sql = "SELECT idMateria FROM materia WHERE estado=1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+        String sql = "SELECT idMateria FROM materia WHERE estado = 1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
 
         // Por las dudas coloco todo dentro de un try, no vaya ha ser que explote TODO
         try {
@@ -578,15 +475,6 @@ public class InscripcionData {
 
             // Recorro el rs
             while (rs.next()) {
-                //¡¡¡¡¡¡¡¡¡¡¡agregado!!!!!!!!!
-                //parece que esta de mas con el id materia y el buscar materia por id basta
-                // Creo el nuevo objeto que hereda de Materia
-//                Materia materia = new Materia();
-//
-//                // Le cargo los valores que necesito
-//                materia.setIdMateria(rs.getInt("idMateria"));
-//                materia.setNombre(rs.getString("nombre"));
-//                materia.setAnioMateria(rs.getInt("anio"));
                 // Los agrego a los valores a la lista utilizando el metodo
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
                 listaDeMateriasNoInscriptos.add(matData.buscarMateria(rs.getInt("idMateria")));
@@ -620,9 +508,6 @@ public class InscripcionData {
             ps.setInt(1, materia.getIdMateria());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-//                alu = new Alumno();
-//                alu.setNombre(rs.getString("nombre"));
-//                alu.setApellido(rs.getString("apellido"));
                 listaAlumnoXMateria.add(aluData.buscarAlumno(rs.getInt("idAlumno")));
             }
         } catch (SQLException ex) {
@@ -636,7 +521,6 @@ public class InscripcionData {
     // -------------------------------------------------------------------------
     // List<Alumno> obtenerAlumnosXMateria(int idMateria)metodo sobrecargado tiene mismo nombre que el de arriba
     // /////////////////////////////////////////////////////////////////////////
-    //ESTE METODO ES IGUAL AL DE ENZO ESTA PROBADO Y FUNCIONANDO
     public ArrayList<Alumno> obtenerAlumnosXMateria(int idMateria) {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
 
@@ -644,36 +528,18 @@ public class InscripcionData {
         try {
             // Consulta para filtrar alumnos que esten inscriptos en una
             // determinada materia
-            // La consulta SQL funciona
-            // SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado
-            // FROM inscripcion i, alumno a
-            // WHERE i.idAlumno = a.idAlumno
-            // AND idMateria = 3
-            // AND a.estado = 1
-//            String sql = "SELECT i.idMateria, i.nota, m.nombre, m.anio"
-//                    + "FROM inscripcion AS i"
-//                    + "JOIN materia AS m ON (i.idMateria = m.idMateria) AND i.idAlumno = ?";
-            String sql = "SELECT a.idAlumno FROM inscripcion i ,alumno a  where i.idAlumno = a.idAlumno and idMateria = ? AND a.estado = 1";
+            String sql = "SELECT a.idAlumno FROM inscripcion i ,alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND a.estado = 1";
 
             // Preparo la consulta
             PreparedStatement ps = con.prepareStatement(sql);
 
             // Para obtener el ID del materia
             ps.setInt(1, idMateria);
+            
             // Ejecuto la consulta
             ResultSet rs = ps.executeQuery();
             // Recorro el rs mientras tenga filas para recorrer
             while (rs.next()) {
-                // Creo el nuevo objeto que hereda de Materia
-//                Alumno alumno = new Alumno();
-//
-//                // Le cargo los valores que necesito
-//                alumno.setIdAlumno(rs.getInt("idAlumno"));
-//                alumno.setApellido(rs.getString("apellido"));
-//                alumno.setNombre(rs.getString("nombre"));
-//                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-//                alumno.setEstado(rs.getBoolean("estado"));
-
                 // Los agrego a los valores al ArrayList utilizando el metodo
                 // obtenerMateriaPorId que el nuevo objeto mat hereda de Materia
                 listaAlumnosXMateria.add(aluData.buscarAlumno(rs.getInt("idAlumno")));
@@ -751,12 +617,10 @@ public class InscripcionData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 ins.setNota(rs.getDouble("nota"));
-               // materia.setActivo(true);
 
                 // Agrego la materia al array materia
                 Object[] fila ={materia.getIdMateria(),materia.getNombre(),ins.getNota()};
                 listaDeMateriasInscripto.add(fila);
-                
             }
 
             // Cierro la consulta

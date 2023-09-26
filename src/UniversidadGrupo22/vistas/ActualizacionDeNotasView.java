@@ -8,12 +8,8 @@ package UniversidadGrupo22.vistas;
 import UniversidadGrupo22.accesoADatos.AlumnoData;
 import UniversidadGrupo22.accesoADatos.InscripcionData;
 import UniversidadGrupo22.entidades.Alumno;
-import UniversidadGrupo22.entidades.Materia;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -79,7 +75,6 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         // Al modelo de la jTable le agrego un ListModelListener que me permite
         // operar sobre los cambios realizados en una celda
         anadeListenerAlModelo();
-
     }
 
     /**
@@ -257,9 +252,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
         insData.actualizarNota(nuevaNota, idAlu, idMat);
-
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -268,9 +261,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbAlumnoItemStateChanged
         cargarMaterias();
-
     }//GEN-LAST:event_jcbAlumnoItemStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -288,7 +279,9 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarAlumnos() {
+        // Limpio el ComboBox
         jcbAlumno.removeAllItems();
+        
         // Cargamos los alumnos en el ComboBox
         for (Alumno listar : listarAlumnos) {
             jcbAlumno.addItem(listar);
@@ -326,10 +319,8 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
             for (Object[] fila : lista) {
                 modelo.addRow(fila);
-
             }
         } else {
-//            JOptionPane.showMessageDialog(null, "Seleccione primero un alumno");
             MensajeSB(1,"Seleccione primero un alumno");
         }
     }
@@ -349,25 +340,21 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }
 
     public void anadeListenerAlModelo() {
-        System.out.println("entró al anadelistener");
         jtNotas.getModel().addTableModelListener(new TableModelListener() {
-            //Object valorViejo = jtNotas.getValueAt(jtNotas.getSelectedRow(), jtNotas.getSelectedColumn());
+            
             @Override
             public void tableChanged(TableModelEvent evento) {
-                System.out.println("entro al tableChanged");
                 cambioNota(evento);
             }
         });
     }
 
     public void cambioNota(TableModelEvent evento) {
-        System.out.println("entro al cambioNota");
         // Solo se trata el evento UPDATE, correspondiente al cambio de valor
         // de una celda.
         if (evento.getType() == TableModelEvent.UPDATE) {
 
             // Se obtiene el modelo de la tabla y la fila/columna que han cambiado.
-            //TableModel modelo = ((TableModel) (evento.getSource()));
             int fila = evento.getFirstRow();
             int columna = evento.getColumn();
 
@@ -377,13 +364,10 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                 if (pars >= 0 && pars <= 10) {
                     nuevaNota = pars;
                 } else {
-//                    JOptionPane.showMessageDialog(null, "El valor ingresado no es válido(0-10)");
                     MensajeSB(1,"El valor ingresado no es válido(0-10)");
                     jtNotas.setValueAt(nuevaNota, fila, columna);
                 }
-
             } catch (NumberFormatException e) {
-//                JOptionPane.showMessageDialog(null, "El valor ingresado no es válido");
                 MensajeSB(1,"El valor ingresado no es válido");
                 jtNotas.setValueAt(nuevaNota, fila, columna);
             }
@@ -392,13 +376,10 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
     }
 
     public void listSelectionListener() {
-//        JTable tabla = jtNotas;
-//        ListSelectionModel modeloSeleccion = jtNotas.getSelectionModel();
         jtNotas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
             public void valueChanged(ListSelectionEvent evento) {
-
                 int filaSeleccionada = jtNotas.getSelectedRow();
                 int columnaSeleccionada = jtNotas.getSelectedColumn();
 
@@ -406,14 +387,11 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
                     Object valor = jtNotas.getValueAt(filaSeleccionada, columnaSeleccionada);
                     nuevaNota = Double.parseDouble(valor.toString());
                 }
-
             }
         });
     }
 
     public void MensajeSB(int color, String mensaje) {
-        // Prueba de concepto StatusBar ----------------------------------------
-
         // Los valores pueden variar de 0 a 255
         if (color == 1) {
             // Si el color es igual a 1 entonces es = a verde
@@ -432,6 +410,4 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         // el Label pero limpio el texto anterior que pueda haber quedado
         jlStatusBar.setText(mensaje);
     }
-
-    
 }

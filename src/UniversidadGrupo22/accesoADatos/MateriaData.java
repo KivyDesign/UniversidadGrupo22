@@ -16,7 +16,6 @@ public class MateriaData {
 
     // Creo los atributos aluData y matData para acceder mas comodamente a
     // los metodos de los paquetes entidades y MateriaData
-//    private MateriaData matData;
     
     public MateriaData() {
         con = Conexion.getConexion();
@@ -35,7 +34,6 @@ public class MateriaData {
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-               // JOptionPane.showMessageDialog(null, "Materia añadida con exito");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -59,8 +57,6 @@ public class MateriaData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(true);
-            } else {
-//                JOptionPane.showMessageDialog(null, "No existe la Materia");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -82,7 +78,6 @@ public class MateriaData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materia.setNombre(rs.getString("nombre"));
-
                 materia.setActivo(rs.getBoolean("estado"));
                 materias.add(materia);
             }
@@ -106,9 +101,6 @@ public class MateriaData {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-//                JOptionPane.showMessageDialog(null, "Modificada Exitosamente");
-            } else {
-               // JOptionPane.showMessageDialog(null, "La Materia no existe");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia: " + ex.getMessage());
@@ -122,9 +114,6 @@ public class MateriaData {
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
 
-            if (fila == 1) {
-//                JOptionPane.showMessageDialog(null, "Se eliminó la Materia");
-            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia" + ex.getMessage());
