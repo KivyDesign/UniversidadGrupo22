@@ -446,4 +446,5 @@ A continuación se detallan cada una de las vistas y la clase de acceso a datos 
 <p align="center">@https://github.com/germanesalvatierra</p>
 <p align="center">@https://github.com/KivyDesign</p>
 <p align="center">@https://github.com/arielMilton</p>
+<p align="center">@https://github.com/EnzoRey</p>
 
