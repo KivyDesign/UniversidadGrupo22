@@ -296,7 +296,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Barra de estado"/>
+                <Property name="text" type="java.lang.String" value="Seleccione una Materia para registrar la inscripci&#xf3;n"/>
                 <Property name="toolTipText" type="java.lang.String" value="zxy"/>
               </Properties>
             </Component>

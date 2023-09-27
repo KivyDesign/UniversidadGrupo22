@@ -4,6 +4,38 @@
 
 ## Guía V - “Proyecto Transversal: Gestión Universidad”
 
+# Vistas del Form principal Menú y los InternalFrames
+
+Vistas finales de las pantallas que componen todo el Proyecto Transversal de Integración realizado durante la Etapa 5, desarrollado completamente por el Grupo 22
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/20.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/21.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/22.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/23.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/24.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/25.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/26.jpg)
+
+<p align="center">Pantalla de Bienvenida</p>
+
 ## UniversidadGrupo22
 
 En la guía anterior, aprendimos cómo establecer una conexión desde una aplicación Java hacia una base de datos relacional utilizando el framework JDBC, y realizar operaciones sobre ella.

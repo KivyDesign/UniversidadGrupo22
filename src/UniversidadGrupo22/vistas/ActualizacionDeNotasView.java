@@ -159,7 +159,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
 
         jlStatusBar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jlStatusBar.setForeground(new java.awt.Color(0, 153, 102));
-        jlStatusBar.setText("Mensaje de prueba");
+        jlStatusBar.setText("Seleccione un alumno para modificar su nota");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -313,7 +313,7 @@ public class ActualizacionDeNotasView extends javax.swing.JInternalFrame {
         jtNotas.getColumnModel().getColumn(1).setPreferredWidth(150);
         jtNotas.getColumnModel().getColumn(2).setPreferredWidth(80);
 
-        MensajeSB(3, "Texto dummy");
+        MensajeSB(1, "Seleccione un alumno para modificar su nota");
     }
 
     public void cargarMaterias() {
