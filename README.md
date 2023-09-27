@@ -8,31 +8,31 @@
 
 Vistas finales de las pantallas que componen todo el Proyecto Transversal de Integración realizado durante la Etapa 5, desarrollado completamente por el Grupo 22
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/20.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/20.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/21.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/21.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/22.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/22.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/23.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/23.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/24.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/24.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/25.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/25.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/26.jpg)
+![image](https://github.com/KivyDesign/UniversidadGrupo22/IMGs/26.jpg)
 
 <p align="center">Pantalla de Bienvenida</p>
 
