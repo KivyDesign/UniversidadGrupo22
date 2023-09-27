@@ -84,11 +84,6 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         ));
         jScrollPane1.setViewportView(jtAlumnos);
 
-        jcbMateria.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbMateriaItemStateChanged(evt);
-            }
-        });
         jcbMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMateriaActionPerformed(evt);
@@ -197,11 +192,11 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         pack();
@@ -215,10 +210,6 @@ public class ConsultaDeAlumnosPorMateriaView extends javax.swing.JInternalFrame 
         // Cargo la materia seleccionada en el combo box y llamo al metodo
         cargarAlumnos((Materia) jcbMateria.getSelectedItem());
     }//GEN-LAST:event_jcbMateriaActionPerformed
-
-    private void jcbMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMateriaItemStateChanged
-        // Materia materiaSeleccionada = (Materia) jcbMateria.getSelectedItem();
-    }//GEN-LAST:event_jcbMateriaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
