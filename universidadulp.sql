@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2023 a las 00:09:21
+-- Tiempo de generación: 27-09-2023 a las 04:57:16
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -49,23 +49,23 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 (4, 88888888, 'Gomez', 'Diego', '2000-09-12', 1),
 (5, 12365478, 'Soria', 'Eva', '1996-05-25', 1),
 (6, 33333333, 'Paso', 'Julian', '1997-09-30', 1),
-(8, 99999999, 'Funes', 'Aldo', '2011-07-06', 1),
+(8, 99999999, 'Funes', 'Aldo', '2001-07-06', 1),
 (9, 11223344, 'Santos', 'Nahuel', '1996-05-25', 1),
 (12, 22222222, 'Martines', 'Viviana', '2001-12-10', 1),
 (13, 33445566, 'Varela', 'Carlos', '1990-11-23', 1),
 (14, 44556677, 'Paez', 'Diego', '1999-09-06', 1),
 (15, 55667778, 'Salas', 'Benito', '2000-05-16', 1),
 (16, 99887744, 'Coma', 'Victor', '2000-09-02', 1),
-(17, 16654981, 'Zarate', 'Diego', '2023-09-06', 1),
-(18, 87888990, 'Alvarez', 'Valeria', '2023-09-15', 1),
+(17, 16654981, 'Zarate', 'Diego', '2007-09-11', 1),
+(18, 87888990, 'Alvarez', 'Valeria', '2004-09-08', 1),
 (19, 55555555, 'Palacios', 'Juliana', '1991-01-16', 1),
 (20, 12131415, 'Fernandez', 'Diego Manuel', '2005-05-17', 1),
-(21, 11354924, 'Samuel', 'Rios', '2023-09-12', 1),
-(22, 13141516, 'Sala', 'Hector', '2023-09-05', 1),
-(23, 45464749, 'Ruben', 'Marco', '2023-09-12', 1),
-(24, 47484950, 'Sosa', 'Valeria', '2023-09-20', 1),
-(29, 45678911, 'Salva', 'Tore', '2023-09-13', 1),
-(30, 1245555, 'Bilardo', 'Carlos', '2023-09-20', 1),
+(21, 11354924, 'Rios', 'Samuel', '1991-06-03', 1),
+(22, 13141516, 'Sala', 'Hector', '2000-09-05', 1),
+(23, 45464749, 'Ruben', 'Marco', '2003-09-12', 1),
+(24, 47484950, 'Sosa', 'Valeria', '2002-09-20', 1),
+(29, 45678911, 'Salva', 'Tore', '2003-09-13', 1),
+(30, 1245555, 'Bilardo', 'Carlos', '2003-09-20', 1),
 (31, 19181716, 'Juarez', 'Daniel', '2005-09-10', 1);
 
 -- --------------------------------------------------------
@@ -99,8 +99,8 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
-(1, 'Matematicas', 1, 1),
-(2, 'Progamación 1', 1, 1),
+(1, 'Matemáticas', 1, 1),
+(2, 'Programación 1', 1, 1),
 (3, 'Base de Datos 1', 1, 1),
 (4, 'Idioma 2.2', 2, 1),
 (5, 'Desarrollo Productivo', 3, 1),
@@ -108,11 +108,11 @@ INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
 (7, 'Paracaidismo', 5, 1),
 (8, 'Corte y Confección', 2, 1),
 (9, 'Laboratorio Prog. 1', 1, 1),
-(10, 'Ingles Tecnico', 1, 1),
-(11, 'Ingles Tecnico 2', 2, 1),
+(10, 'Ingles Técnico 1', 1, 1),
+(11, 'Ingles Técnico 2', 2, 1),
 (14, 'Control de Ansiedad', 3, 1),
-(17, 'Quimica', 1, 1),
-(18, 'Metodos Estadisticos', 2, 1),
+(17, 'Química', 1, 1),
+(18, 'Métodos Estadísticos', 2, 1),
 (19, 'Curiosidades y Dudas', 5, 1);
 
 --
@@ -155,7 +155,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idInscripto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
