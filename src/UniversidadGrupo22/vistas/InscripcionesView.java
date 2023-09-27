@@ -360,17 +360,16 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
             // Limpio el desastre
             borrarFilasTabla();
-
-            // Aqui seria buen idea recargar el modelo y con el la jTable
-            // jtMaterias para que refleje al usuario las materias en las que
-            // aún no se inscribio
+            
+            MensajeSB(1, "Inscripción agregada de forma exitosa");
         } else {
             MensajeSB(2, "Primero seleccione un Alumno y una Materia");
         }
 
-        // Recreo el modelo para que refleje los cambios
+        // Aqui seria buen idea recargar el modelo y con el la jTable
+        // jtMaterias para que refleje al usuario las materias en las que
+        // aún no se inscribio
         RefrescarModeloMateriasInscriptasAnulada();
-        MensajeSB(1, "Inscripción agregada de forma exitosa");
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
@@ -392,12 +391,8 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
 
             // Limpio el desastre
             borrarFilasTabla();
-
-            // Aqui deberia aprovechar y cargar una nueva lista de matrias en
-            // la que el alumno aún no se Des(inscribo). De esta forma no
-            // quedaria el jTable vacio, que es poco profesional de nuestra
-            // parte obligar al DataEntry a alegir al alumno en el ComboBox
-            // para refrescar las materias en las que sigue inscripto
+            
+            MensajeSB(1, "Inscripción borrada");
         } else {
             // En caso de que no este seleccionado un alumno y una materia,
             // entonces muestro este molesto dialogo para que se acuerden de
@@ -406,9 +401,12 @@ public class InscripcionesView extends javax.swing.JInternalFrame {
             MensajeSB(2, "Primero seleccione un Alumno y una Materia");
         }
 
-        // Recreo el modelo para que refleje los cambios
+        // Aqui deberia aprovechar y cargar una nueva lista de matrias en
+        // la que el alumno aún no se Des(inscribo). De esta forma no
+        // quedaria el jTable vacio, que es poco profesional de nuestra
+        // parte obligar al DataEntry a alegir al alumno en el ComboBox
+        // para refrescar las materias en las que sigue inscripto
         RefrescarModeloMateriasInscriptasAnulada();
-        MensajeSB(1, "Inscripción borrada");
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed
