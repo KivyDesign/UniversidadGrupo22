@@ -8,31 +8,31 @@
 
 Vistas finales de las pantallas que componen todo el Proyecto Transversal de Integración realizado durante la Etapa 5, desarrollado completamente por el Grupo 22
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/20.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/20.png)
 
 <p align="center">Pantalla de Bienvenida</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/21.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/21.png)
 
 <p align="center">Formulario de Alumnos</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/22.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/22.png)
 
 <p align="center">Formulario de Materias</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/23.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/23.png)
 
 <p align="center">Formulario de Inscripciones</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/24.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/24.png)
 
 <p align="center">Modificación de Notas por Alumno y  Materia</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/25.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/25.png)
 
 <p align="center">Listado de Alumnos por Materia</p>
 
-<p align="center">![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/26.png)</p>
+![image](https://github.com/KivyDesign/UniversidadGrupo22/blob/main/IMGs/26.png)
 
 <p align="center">Pantalla de agradecimiento por todo el esfuerzo y la buena predisposición de los integrantes del equipo para salir adelante y completar el Proyecto Transversal de Integración. Gracias !TOTALES¡</p>
 
